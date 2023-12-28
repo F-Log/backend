@@ -1,11 +1,12 @@
 package com.f_log.flog.domain;
 
+import com.f_log.flog.global.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
 @Getter
-public class Food {
+public class Food extends BaseEntity {
 
     @Id
     @GeneratedValue
