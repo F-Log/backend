@@ -1,5 +1,6 @@
 package com.f_log.flog.domain;
 
+import com.f_log.flog.global.domain.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -7,15 +8,21 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import lombok.Getter;
 
 @Entity
 @Getter
-public class Member {
+public class Member extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "member_id")
     private Long id;
+
+    @OneToMany(mappedBy = "member")
+    private List<Inbody> inbody = new ArrayList<>();
 
     @Column(name = "uuid", columnDefinition = "BINARY(16)")
     private UUID uuid;
@@ -34,6 +41,4 @@ public class Member {
 
     @Column(name = "age", length = 11)
     private int age;
-
-
 }
