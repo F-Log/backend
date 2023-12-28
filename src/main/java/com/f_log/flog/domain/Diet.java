@@ -1,5 +1,6 @@
 package com.f_log.flog.domain;
 
+import com.f_log.flog.global.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Diet {
+public class Diet extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -42,5 +43,8 @@ public class Diet {
 
     @Enumerated(EnumType.STRING)
     private MealType mealType;
+
+    @OneToOne(mappedBy = "diet", fetch = FetchType.LAZY)
+    private DietFeedback dietFeedback;
     
 }
