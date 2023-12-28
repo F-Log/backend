@@ -1,9 +1,6 @@
 package com.f_log.flog.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
@@ -14,6 +11,10 @@ public class Food {
     @GeneratedValue
     @Column(name = "food_id")
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "diet_id")
+    private Diet diet;
 
     private String foodName;
 
