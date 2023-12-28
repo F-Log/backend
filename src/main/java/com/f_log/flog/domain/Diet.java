@@ -40,5 +40,7 @@ public class Diet {
     @Column(name = "total_carbohydrate")
     private LocalDateTime mealDate;
 
+    @Enumerated(EnumType.STRING)
+    private MealType mealType;
     
 }
