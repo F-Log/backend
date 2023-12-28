@@ -18,7 +18,7 @@ public class BaseEntity {
     private LocalDateTime updatedAt;
 
     @Column(name = "is_deleted", nullable = false)
-    protected boolean isDeleted;
+    protected boolean isDeleted = false;
 
     public void setDeleted() {
         this.isDeleted = true;
