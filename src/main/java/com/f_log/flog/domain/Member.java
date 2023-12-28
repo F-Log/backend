@@ -21,7 +21,7 @@ public class Member {
     private UUID uuid;
 
     @Column(name = "login_id", length = 45)
-    private String login_id;
+    private String loginId;
 
     @Column(name = "password", length = 45)
     private String password;
