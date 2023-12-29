@@ -25,7 +25,7 @@ public class Inbody extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToOne(mappedBy = "inbody", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "inbody")
     private InbodyFeedback inbodyFeedback;
 
     @Column(name = "body_weight")
