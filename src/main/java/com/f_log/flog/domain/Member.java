@@ -31,6 +31,9 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "health_information_id")
     private HealthInformation healthInformation;
 
+    @OneToMany(mappedBy = "member")
+    private List<Allergy> allergies = new ArrayList<>();
+
     @Column(name = "uuid", columnDefinition = "BINARY(16)")
     private UUID uuid;
 
