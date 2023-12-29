@@ -38,7 +38,7 @@ public class Diet extends BaseEntity {
     @Column(name = "total_cholesterol")
     private int totalCholesterol;
 
-    @Column(name = "total_carbohydrate")
+    @Column(name = "meal_date")
     private LocalDateTime mealDate;
 
     @Enumerated(EnumType.STRING)
