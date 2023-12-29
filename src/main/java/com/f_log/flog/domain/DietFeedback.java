@@ -20,5 +20,5 @@ public class DietFeedback extends BaseEntity{
 
     @OneToOne
     @JoinColumn(name = "diet_id")
-    private Inbody inbody;
+    private Diet diet;
 }
