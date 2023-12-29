@@ -31,6 +31,9 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "health_information_id")
     private HealthInformation healthInformation;
 
+    @OneToOne(mappedBy = "exercise")
+    private Exercise exercise;
+
     @Column(name = "uuid", columnDefinition = "BINARY(16)")
     private UUID uuid;
 
