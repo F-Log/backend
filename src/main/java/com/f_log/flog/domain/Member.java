@@ -31,6 +31,9 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "health_information_id")
     private HealthInformation healthInformation;
 
+    @OneToOne(mappedBy = "exercise")
+    private Exercise exercise;
+  
     @OneToMany(mappedBy = "member")
     private List<Allergy> allergies = new ArrayList<>();
 
