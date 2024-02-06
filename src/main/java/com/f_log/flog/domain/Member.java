@@ -1,5 +1,7 @@
 package com.f_log.flog.domain;
 
+import com.f_log.flog.dto.MemberRequestDto;
+import com.f_log.flog.dto.MemberResponseDto;
 import com.f_log.flog.global.domain.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,10 +17,13 @@ import jakarta.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Member extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "member_id")
@@ -54,4 +59,29 @@ public class Member extends BaseEntity {
 
     @Column(name = "age", length = 11)
     private int age;
+
+    @Builder
+    public Member(String loginId, String password, String name, Gender gender, int age, UUID uuid) {
+        this.loginId = loginId;
+        this.password = password;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.uuid = uuid;
+    }
+
+    public static Member from(MemberRequestDto memberRequestDto) {
+        return Member.builder()
+                .loginId(memberRequestDto.getLoginId())
+                .password(memberRequestDto.getPassword())
+                .name(memberRequestDto.getName())
+                .gender(memberRequestDto.getGender())
+                .age(memberRequestDto.getAge())
+                .uuid(UUID.randomUUID())
+                .build();
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
 }
