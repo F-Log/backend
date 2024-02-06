@@ -16,6 +16,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
@@ -68,6 +69,14 @@ public class Member extends BaseEntity {
         this.gender = gender;
         this.age = age;
         this.uuid = uuid;
+    }
+
+    public void updateMember(String loginId, String password, String name, Gender gender, int age) {
+        this.loginId = loginId;
+        this.password = password;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
     }
 
     public static Member from(MemberRequestDto memberRequestDto) {
