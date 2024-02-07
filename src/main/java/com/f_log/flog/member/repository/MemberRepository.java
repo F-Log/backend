@@ -1,6 +1,6 @@
-package com.f_log.flog.Member.repository;
+package com.f_log.flog.member.repository;
 
-import com.f_log.flog.Member.domain.Member;
+import com.f_log.flog.member.domain.Member;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;

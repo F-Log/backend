@@ -1,4 +1,4 @@
-package com.f_log.flog.Member.dto;
+package com.f_log.flog.member.dto;
 
 import com.f_log.flog.domain.Gender;
 import java.util.UUID;

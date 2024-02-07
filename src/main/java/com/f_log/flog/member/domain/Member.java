@@ -1,6 +1,6 @@
-package com.f_log.flog.Member.domain;
+package com.f_log.flog.member.domain;
 
-import com.f_log.flog.Member.dto.MemberRequestDto;
+import com.f_log.flog.member.dto.MemberRequestDto;
 import com.f_log.flog.domain.Allergy;
 import com.f_log.flog.domain.Exercise;
 import com.f_log.flog.domain.Gender;
