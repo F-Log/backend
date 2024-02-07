@@ -1,4 +1,4 @@
-package com.f_log.flog.dto;
+package com.f_log.flog.Member.dto;
 
 import com.f_log.flog.domain.Gender;
 import lombok.Builder;

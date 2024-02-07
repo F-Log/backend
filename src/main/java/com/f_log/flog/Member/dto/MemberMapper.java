@@ -1,6 +1,6 @@
-package com.f_log.flog.dto;
+package com.f_log.flog.Member.dto;
 
-import com.f_log.flog.domain.Member;
+import com.f_log.flog.Member.domain.Member;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
 
