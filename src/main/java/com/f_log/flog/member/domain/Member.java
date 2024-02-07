@@ -1,7 +1,11 @@
-package com.f_log.flog.domain;
+package com.f_log.flog.member.domain;
 
-import com.f_log.flog.dto.MemberRequestDto;
-import com.f_log.flog.dto.MemberResponseDto;
+import com.f_log.flog.member.dto.MemberRequestDto;
+import com.f_log.flog.domain.Allergy;
+import com.f_log.flog.domain.Exercise;
+import com.f_log.flog.domain.Gender;
+import com.f_log.flog.domain.HealthInformation;
+import com.f_log.flog.domain.Inbody;
 import com.f_log.flog.global.domain.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +20,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;

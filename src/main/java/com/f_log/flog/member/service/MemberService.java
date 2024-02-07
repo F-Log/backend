@@ -1,10 +1,10 @@
-package com.f_log.flog.service;
+package com.f_log.flog.member.service;
 
-import com.f_log.flog.domain.Member;
-import com.f_log.flog.dto.MemberMapper;
-import com.f_log.flog.dto.MemberRequestDto;
-import com.f_log.flog.dto.MemberResponseDto;
-import com.f_log.flog.repository.MemberRepository;
+import com.f_log.flog.member.domain.Member;
+import com.f_log.flog.member.dto.MemberMapper;
+import com.f_log.flog.member.dto.MemberRequestDto;
+import com.f_log.flog.member.dto.MemberResponseDto;
+import com.f_log.flog.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;

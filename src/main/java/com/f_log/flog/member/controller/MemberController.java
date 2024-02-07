@@ -1,8 +1,8 @@
-package com.f_log.flog.controller;
+package com.f_log.flog.member.controller;
 
-import com.f_log.flog.dto.MemberRequestDto;
-import com.f_log.flog.dto.MemberResponseDto;
-import com.f_log.flog.service.MemberService;
+import com.f_log.flog.member.dto.MemberRequestDto;
+import com.f_log.flog.member.dto.MemberResponseDto;
+import com.f_log.flog.member.service.MemberService;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
