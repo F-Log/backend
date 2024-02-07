@@ -46,5 +46,9 @@ public class Diet extends BaseEntity {
 
     @OneToOne(mappedBy = "diet", fetch = FetchType.LAZY)
     private DietFeedback dietFeedback;
-    
+
+    // member와의 N:1 관계
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 }
