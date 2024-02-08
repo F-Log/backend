@@ -1,11 +1,8 @@
 package com.f_log.flog.member.domain;
 
+import com.f_log.flog.diet.domain.Diet;
+import com.f_log.flog.domain.*;
 import com.f_log.flog.member.dto.MemberRequestDto;
-import com.f_log.flog.domain.Allergy;
-import com.f_log.flog.domain.Exercise;
-import com.f_log.flog.domain.Gender;
-import com.f_log.flog.domain.HealthInformation;
-import com.f_log.flog.domain.Inbody;
 import com.f_log.flog.global.domain.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -63,6 +60,10 @@ public class Member extends BaseEntity {
 
     @Column(name = "age", length = 11)
     private int age;
+
+    // diet와의 1:N 관계
+    @OneToMany(mappedBy = "member")
+    private List<Diet> diets = new ArrayList<>();
 
     @Builder
     public Member(String loginId, String password, String name, Gender gender, int age, UUID uuid) {
