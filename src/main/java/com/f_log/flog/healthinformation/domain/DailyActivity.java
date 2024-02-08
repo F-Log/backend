@@ -1,4 +1,4 @@
-package com.f_log.flog.domain;
+package com.f_log.flog.healthinformation.domain;
 
 public enum DailyActivity {
     NO_ACTIVITY("활동이 적거나 운동을 안하는 경우 = 기초대사량 x 0.2kcal"),
