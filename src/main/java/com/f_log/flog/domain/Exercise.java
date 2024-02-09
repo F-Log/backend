@@ -29,7 +29,6 @@ public class Exercise extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ExercisePurpose exercisePurpose;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @OneToOne(mappedBy = "exercise")
     private Member member;
 }

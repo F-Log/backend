@@ -40,7 +40,8 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "health_information_id")
     private HealthInformation healthInformation;
 
-    @OneToOne(mappedBy = "member")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exercise_id")
     private Exercise exercise;
   
     @OneToMany(mappedBy = "member")
