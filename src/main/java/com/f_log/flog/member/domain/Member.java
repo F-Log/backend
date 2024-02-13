@@ -2,7 +2,7 @@ package com.f_log.flog.member.domain;
 
 import com.f_log.flog.member.dto.MemberRequestDto;
 import com.f_log.flog.domain.Allergy;
-import com.f_log.flog.domain.Exercise;
+import com.f_log.flog.exercise.domain.Exercise;
 import com.f_log.flog.domain.Gender;
 import com.f_log.flog.healthinformation.domain.HealthInformation;
 import com.f_log.flog.domain.Inbody;
@@ -40,7 +40,8 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "health_information_id")
     private HealthInformation healthInformation;
 
-    @OneToOne(mappedBy = "member")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exercise_id")
     private Exercise exercise;
   
     @OneToMany(mappedBy = "member")
