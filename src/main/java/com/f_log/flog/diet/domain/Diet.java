@@ -7,6 +7,8 @@ import com.f_log.flog.global.domain.BaseEntity;
 import com.f_log.flog.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Diet extends BaseEntity {
 
@@ -60,73 +63,58 @@ public class Diet extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    // constructor method
-    public static Diet createDiet(Member member,
-                                  MealType mealType,
-                                  LocalDateTime mealDate,
-                                  Food... foods) {
-        Diet diet = new Diet();
-        diet.member = member;
-        diet.mealType = mealType;
-        diet.mealDate = mealDate;
-        for (Food food : foods) {
-            diet.addFoods(food);
-        }
-
-        diet.totalCarbohydrate = diet.getTotalCarbohydrate();
-        diet.totalProtein = diet.getTotalProtein();
-        diet.totalFat = diet.getTotalFat();
-        diet.totalSodium = diet.getTotalSodium();
-        diet.totalCholesterol = diet.getTotalCholesterol();
-
-        return diet;
+    // TODO: add Foods, implement total nutrient calculation method using foods
+    @Builder
+    public Diet(UUID uuid,
+                Member member,
+                int totalCarbohydrate,
+                int totalProtein,
+                int totalFat,
+                int totalSodium,
+                int totalCholesterol,
+                MealType mealType,
+                LocalDateTime mealDate) {
+        this.uuid = uuid;
+        this.member = member;
+        this.totalCarbohydrate = totalCarbohydrate;
+        this.totalProtein = totalProtein;
+        this.totalFat = totalFat;
+        this.totalSodium = totalSodium;
+        this.totalCholesterol = totalCholesterol;
+        this.mealType = mealType;
+        this.mealDate = mealDate;
     }
 
     private void addFoods(Food food) {
         foods.add(food);
     }
 
-    private int getTotalCarbohydrate(){
-        int totalValue = 0;
-        for (Food food : foods) {
-            totalValue += food.getCarbohydrate();
-        }
-        return totalValue;
+    public void updateTotalCarbohydrate(int totalCarbohydrate) {
+        this.totalCarbohydrate = totalCarbohydrate;
     }
 
-    private int getTotalProtein() {
-        int totalValue = 0;
-        for (Food food : foods) {
-            totalValue += food.getProtein();
-        }
-        return totalValue;
+    public void updateTotalProtein(int totalProtein) {
+        this.totalProtein = totalProtein;
     }
 
-    private int getTotalFat() {
-        int totalValue = 0;
-        for (Food food : foods) {
-            totalValue += food.getFat();
-        }
-        return totalValue;
+    public void updateTotalFat(int totalFat) {
+        this.totalFat = totalFat;
     }
 
-    private int getTotalSodium() {
-        int totalValue = 0;
-        for (Food food : foods) {
-            totalValue += food.getSodium();
-        }
-        return totalValue;
+    public void updateTotalSodium(int totalSodium) {
+        this.totalSodium = totalSodium;
     }
 
-    private int getTotalCholesterol() {
-        int totalValue = 0;
-        for (Food food : foods) {
-            totalValue += food.getCholesterol();
-        }
-        return totalValue;
+    public void updateTotalCholesterol(int totalCholesterol) {
+        this.totalCholesterol = totalCholesterol;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void updateMealDate(LocalDateTime mealDate) {
+        this.mealDate = mealDate;
     }
+
+    public void updateMealType(MealType mealType) {
+        this.mealType = mealType;
+    }
+
 }
