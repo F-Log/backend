@@ -2,7 +2,6 @@ package com.f_log.flog.diet.domain;
 
 import com.f_log.flog.domain.DietFeedback;
 import com.f_log.flog.food.domain.Food;
-import com.f_log.flog.domain.MealType;
 import com.f_log.flog.global.domain.BaseEntity;
 import com.f_log.flog.member.domain.Member;
 import jakarta.persistence.*;
