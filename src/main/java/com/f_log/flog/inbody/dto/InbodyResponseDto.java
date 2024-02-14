@@ -2,6 +2,7 @@ package com.f_log.flog.inbody.dto;
 
 import lombok.Getter;
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 @Getter
 public class InbodyResponseDto {
@@ -13,8 +14,10 @@ public class InbodyResponseDto {
     private final float bodyFatPercentage;
     private final float fatMass;
     private final float basalMetabolicRate;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
 
-    public InbodyResponseDto(UUID inbodyUuid, UUID memberUuid, float bodyWeight, float height, float muscleMass, float bodyFatPercentage, float fatMass, float basalMetabolicRate) {
+    public InbodyResponseDto(UUID inbodyUuid, UUID memberUuid, float bodyWeight, float height, float muscleMass, float bodyFatPercentage, float fatMass, float basalMetabolicRate, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.inbodyUuid = inbodyUuid;
         this.memberUuid = memberUuid;
         this.bodyWeight = bodyWeight;
@@ -23,5 +26,7 @@ public class InbodyResponseDto {
         this.bodyFatPercentage = bodyFatPercentage;
         this.fatMass = fatMass;
         this.basalMetabolicRate = basalMetabolicRate;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 }
