@@ -5,7 +5,7 @@ import com.f_log.flog.domain.Allergy;
 import com.f_log.flog.exercise.domain.Exercise;
 import com.f_log.flog.domain.Gender;
 import com.f_log.flog.healthinformation.domain.HealthInformation;
-import com.f_log.flog.domain.Inbody;
+import com.f_log.flog.inbody.domain.Inbody;
 import com.f_log.flog.global.domain.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

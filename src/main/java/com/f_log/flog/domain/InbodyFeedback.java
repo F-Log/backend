@@ -1,6 +1,7 @@
 package com.f_log.flog.domain;
 
 import com.f_log.flog.global.domain.BaseEntity;
+import com.f_log.flog.inbody.domain.Inbody;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
