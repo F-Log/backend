@@ -23,7 +23,7 @@ public class InbodyService {
         this.inbodyMapper = inbodyMapper;
     }
 
-    public InbodyResponseDto createInbody(UUID memberUuid, InbodyRequestDto requestDto) {
+    public InbodyResponseDto createInbody(InbodyRequestDto requestDto) {
         Inbody inbody = inbodyMapper.toEntity(requestDto);
         Inbody savedInbody = inbodyRepository.save(inbody);
         return inbodyMapper.toDto(savedInbody);

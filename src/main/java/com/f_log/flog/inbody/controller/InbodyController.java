@@ -21,9 +21,9 @@ public class InbodyController {
         this.inbodyService = inbodyService;
     }
 
-    @PostMapping("/new/{memberUuid}")
-    public ResponseEntity<InbodyResponseDto> createInbody(@PathVariable UUID memberUuid, @RequestBody InbodyRequestDto requestDto) {
-        InbodyResponseDto createdInbody = inbodyService.createInbody(memberUuid, requestDto);
+    @PostMapping("/new")
+    public ResponseEntity<InbodyResponseDto> createInbody(@RequestBody InbodyRequestDto requestDto) {
+        InbodyResponseDto createdInbody = inbodyService.createInbody(requestDto);
         return new ResponseEntity<>(createdInbody, HttpStatus.CREATED);
     }
 
