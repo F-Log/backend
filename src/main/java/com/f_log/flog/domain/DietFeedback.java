@@ -1,5 +1,6 @@
 package com.f_log.flog.domain;
 
+import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.global.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
