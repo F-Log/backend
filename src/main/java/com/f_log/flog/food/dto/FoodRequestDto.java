@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class CreateFoodRequest {
+public class FoodRequestDto {
     private final String foodName;
     private final int carbohydrate;
     private final int protein;

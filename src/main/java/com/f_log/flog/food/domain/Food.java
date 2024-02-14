@@ -31,4 +31,28 @@ public class Food extends BaseEntity {
     private int fat;
     private int sodium;
     private int cholesterol;
+
+    public void updateCarbohydrate(int carbohydrate) {
+        this.carbohydrate = carbohydrate;
+    }
+
+    public void updateProtein(int protein) {
+        this.protein = protein;
+    }
+
+    public void updateFat(int fat) {
+        this.fat = fat;
+    }
+
+    public void updateSodium(int sodium) {
+        this.sodium = sodium;
+    }
+
+    public void updateCholesterol(int cholesterol) {
+        this.cholesterol = cholesterol;
+    }
+
+    public void updateFoodName(String foodName) {
+        this.foodName = foodName;
+    }
 }
