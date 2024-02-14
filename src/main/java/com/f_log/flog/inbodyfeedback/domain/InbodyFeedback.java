@@ -1,6 +1,7 @@
-package com.f_log.flog.domain;
+package com.f_log.flog.inbodyfeedback.domain;
 
 import com.f_log.flog.global.domain.BaseEntity;
+import com.f_log.flog.inbody.domain.Inbody;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,6 +23,17 @@ public class InbodyFeedback extends BaseEntity {
     private String inbodyFeedback;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "inbody_id")
+    @JoinColumn(name = "inbody_id", columnDefinition = "BINARY(16)")
     private Inbody inbody;
+
+    public InbodyFeedback() {}
+
+    public InbodyFeedback(String inbodyFeedback, Inbody inbody) {
+        this.inbodyFeedback = inbodyFeedback;
+        this.inbody = inbody;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
