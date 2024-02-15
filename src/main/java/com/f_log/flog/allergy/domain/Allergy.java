@@ -1,4 +1,4 @@
-package com.f_log.flog.domain;
+package com.f_log.flog.allergy.domain;
 
 import com.f_log.flog.member.domain.Member;
 import com.f_log.flog.global.domain.BaseEntity;
