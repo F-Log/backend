@@ -1,6 +1,5 @@
 package com.f_log.flog.diet.service;
 
-import com.f_log.flog.diet.controller.DietController;
 import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.diet.dto.CreateDietRequest;
 import com.f_log.flog.diet.dto.DietDto;
@@ -13,6 +12,7 @@ import com.f_log.flog.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.UUID;
 
 @Service

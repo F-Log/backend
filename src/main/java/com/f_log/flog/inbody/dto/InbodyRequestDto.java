@@ -1,6 +1,7 @@
 package com.f_log.flog.inbody.dto;
 
 import lombok.Getter;
+
 import java.util.UUID;
 
 @Getter

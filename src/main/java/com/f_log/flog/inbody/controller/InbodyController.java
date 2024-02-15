@@ -1,12 +1,13 @@
 package com.f_log.flog.inbody.controller;
 
-import com.f_log.flog.inbody.dto.InbodyResponseDto;
 import com.f_log.flog.inbody.dto.InbodyRequestDto;
+import com.f_log.flog.inbody.dto.InbodyResponseDto;
 import com.f_log.flog.inbody.service.InbodyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.UUID;
 

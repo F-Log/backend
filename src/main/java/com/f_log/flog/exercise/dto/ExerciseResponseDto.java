@@ -2,9 +2,10 @@ package com.f_log.flog.exercise.dto;
 
 import com.f_log.flog.exercise.domain.ExerciseIntensity;
 import com.f_log.flog.exercise.domain.ExercisePurpose;
-import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Getter
 @Builder

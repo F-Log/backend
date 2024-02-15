@@ -6,11 +6,12 @@ import com.f_log.flog.member.dto.MemberRequestDto;
 import com.f_log.flog.member.dto.MemberResponseDto;
 import com.f_log.flog.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class MemberService {

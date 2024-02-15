@@ -1,12 +1,13 @@
 package com.f_log.flog.inbody.service;
 
 import com.f_log.flog.inbody.domain.Inbody;
-import com.f_log.flog.inbody.dto.InbodyResponseDto;
 import com.f_log.flog.inbody.dto.InbodyMapper;
 import com.f_log.flog.inbody.dto.InbodyRequestDto;
+import com.f_log.flog.inbody.dto.InbodyResponseDto;
 import com.f_log.flog.inbody.repository.InbodyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;

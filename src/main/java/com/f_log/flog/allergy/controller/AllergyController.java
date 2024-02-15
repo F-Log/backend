@@ -3,7 +3,6 @@ package com.f_log.flog.allergy.controller;
 import com.f_log.flog.allergy.dto.AllergyDto;
 import com.f_log.flog.allergy.dto.AllergyRequest;
 import com.f_log.flog.allergy.service.AllergyService;
-import com.f_log.flog.member.domain.Member;
 import com.f_log.flog.member.dto.MemberResponseDto;
 import com.f_log.flog.member.service.MemberService;
 import lombok.RequiredArgsConstructor;

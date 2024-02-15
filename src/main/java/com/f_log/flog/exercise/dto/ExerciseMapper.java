@@ -2,6 +2,7 @@ package com.f_log.flog.exercise.dto;
 
 import com.f_log.flog.exercise.domain.Exercise;
 import org.springframework.stereotype.Component;
+
 import java.util.UUID;
 
 @Component

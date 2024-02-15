@@ -1,9 +1,10 @@
 package com.f_log.flog.member.dto;
 
 import com.f_log.flog.member.domain.Gender;
-import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Getter
 @Builder
