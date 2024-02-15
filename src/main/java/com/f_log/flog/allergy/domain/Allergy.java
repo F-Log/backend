@@ -10,10 +10,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 public class Allergy extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -24,4 +27,14 @@ public class Allergy extends BaseEntity {
 
     @Column(name = "allergy")
     private String allergy;
+
+    @Builder
+    public Allergy(Member member, String allergy) {
+        this.member = member;
+        this.allergy = allergy;
+    }
+
+    public void setAllergy(String allergy) {
+        this.allergy = allergy;
+    }
 }
