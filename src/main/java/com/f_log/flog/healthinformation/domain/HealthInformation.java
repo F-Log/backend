@@ -1,17 +1,11 @@
 package com.f_log.flog.healthinformation.domain;
 
-import com.f_log.flog.member.domain.Member;
 import com.f_log.flog.global.domain.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import java.util.UUID;
+import com.f_log.flog.member.domain.Member;
+import jakarta.persistence.*;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Entity
 @Getter

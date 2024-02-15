@@ -1,10 +1,11 @@
 package com.f_log.flog.exercise.domain;
 
-import com.f_log.flog.member.domain.Member;
 import com.f_log.flog.global.domain.BaseEntity;
+import com.f_log.flog.member.domain.Member;
 import jakarta.persistence.*;
-import java.util.UUID;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Entity
 @Getter

@@ -1,11 +1,8 @@
 package com.f_log.flog.dietfeedback.controller;
 
-import com.f_log.flog.dietfeedback.domain.DietFeedback;
 import com.f_log.flog.dietfeedback.dto.DietFeedbackDto;
 import com.f_log.flog.dietfeedback.dto.DietFeedbackRequest;
 import com.f_log.flog.dietfeedback.service.DietFeedbackService;
-import com.f_log.flog.inbodyfeedback.dto.InbodyFeedbackRequestDto;
-import com.f_log.flog.inbodyfeedback.dto.InbodyFeedbackResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

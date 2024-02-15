@@ -1,14 +1,15 @@
 package com.f_log.flog.inbodyfeedback.controller;
 
 import com.f_log.flog.inbodyfeedback.domain.InbodyFeedback;
+import com.f_log.flog.inbodyfeedback.dto.InbodyFeedbackMapper;
 import com.f_log.flog.inbodyfeedback.dto.InbodyFeedbackRequestDto;
 import com.f_log.flog.inbodyfeedback.dto.InbodyFeedbackResponseDto;
-import com.f_log.flog.inbodyfeedback.dto.InbodyFeedbackMapper;
 import com.f_log.flog.inbodyfeedback.service.InbodyFeedbackService;
-import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/inbody-feedback")

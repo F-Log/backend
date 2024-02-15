@@ -2,7 +2,6 @@ package com.f_log.flog.dietfeedback.domain;
 
 import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.global.domain.BaseEntity;
-import com.f_log.flog.inbody.domain.Inbody;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,8 +1,9 @@
 package com.f_log.flog.inbody.dto;
 
 import lombok.Getter;
-import java.util.UUID;
+
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 public class InbodyResponseDto {

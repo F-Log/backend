@@ -1,4 +1,4 @@
-package com.f_log.flog.dietfeedback.dto;
+package com.f_log.flog.allergy.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DietFeedbackRequest {
-    private String dietFeedback;
+public class AllergyRequest {
+    private String allergy;
 }
