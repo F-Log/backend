@@ -4,11 +4,15 @@ server:
 spring:
   # H2 Database 설정
   datasource:
-    driver-class-name: org.h2.Driver
-    url: 'jdbc:h2:mem:test'   # H2 DB 연결 주소 (In-Memory Mode)
+#    driver-class-name: org.h2.Driver
+#    url: 'jdbc:h2:mem:test'   # H2 DB 연결 주소 (In-Memory Mode)
 #    url: 'jdbc:h2:~/test'    # H2 DB 연결 주소 (Embedded Mode)
-    username: sa     # H2 DB 접속 ID (사용자 지정)
-    password:       # H2 DB 접속 PW (사용자 지정)
+#    username: sa     # H2 DB 접속 ID (사용자 지정)
+#    password:       # H2 DB 접속 PW (사용자 지정)
+    url: jdbc:mysql://localhost:3306/flog
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   # H2 Console 설정
   h2:
@@ -18,11 +22,11 @@ spring:
 
   # JPA 설정
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: create        # DB 초기화 전략 (none, create, create-drop, update, validate)
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true      # 쿼리 로그 포맷 (정렬)
         show_sql: true        # 쿼리 로그 출력

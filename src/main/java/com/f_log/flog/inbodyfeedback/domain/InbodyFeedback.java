@@ -8,7 +8,7 @@ import lombok.Getter;
 @Entity
 @Getter
 public class InbodyFeedback extends BaseEntity {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "feedback_id")
     private Long id;
 

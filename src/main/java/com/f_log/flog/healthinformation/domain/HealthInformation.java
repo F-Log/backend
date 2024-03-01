@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 @Getter
 public class HealthInformation extends BaseEntity {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "health_information_id")
     private Long id;
 
