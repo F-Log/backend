@@ -15,7 +15,7 @@ public class DietFeedback extends BaseEntity{
     /* TODO: Feedback 인터페이스/추상클래스 구현*/
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "diet_feedback_id")
     private Long id;
 

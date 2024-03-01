@@ -21,7 +21,7 @@ import java.util.UUID;
 public class Diet extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "diet_id")
     private Long id;
 
