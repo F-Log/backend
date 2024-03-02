@@ -1,5 +1,6 @@
 package com.f_log.flog.food.dto;
 
+import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.food.domain.Food;
 import lombok.Builder;
 import lombok.Getter;

@@ -7,6 +7,7 @@ import com.f_log.flog.dietfeedback.dto.DietFeedbackDto;
 import com.f_log.flog.dietfeedback.dto.DietFeedbackMapper;
 import com.f_log.flog.dietfeedback.dto.DietFeedbackRequest;
 import com.f_log.flog.dietfeedback.repository.DietFeedbackRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,8 @@ public class DietFeedbackService {
 
     @Transactional
     public DietFeedbackDto createDietFeedback(UUID dietUuid, DietFeedbackRequest dietFeedbackRequest) {
-        Diet diet = dietRepository.findDietByUuid(dietUuid);
+        Diet diet = dietRepository.findByDietUuidAndIsDeletedFalse(dietUuid)
+                .orElseThrow(() -> new EntityNotFoundException("Diet not found with UUID: " + dietUuid));
 
         if (diet != null) {
             boolean feedbackExists = dietFeedbackRepository.existsByDietAndIsDeletedFalse(diet);

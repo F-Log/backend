@@ -1,6 +1,7 @@
 package com.f_log.flog.diet.domain;
 
 import com.f_log.flog.dietfeedback.domain.DietFeedback;
+import com.f_log.flog.dietfood.domain.DietFood;
 import com.f_log.flog.food.domain.Food;
 import com.f_log.flog.global.domain.BaseEntity;
 import com.f_log.flog.member.domain.Member;
@@ -25,11 +26,6 @@ public class Diet extends BaseEntity {
     @Column(name = "diet_id")
     private Long id;
 
-    /* TODO: s3 url 추가 */
-
-    @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL)
-    private List<Food> foods = new ArrayList<>();
-
     @Column(name = "total_carbohydrate")
     private int totalCarbohydrate;
 
@@ -48,8 +44,8 @@ public class Diet extends BaseEntity {
     @Column(name = "meal_date")
     private LocalDateTime mealDate;
 
-    @Column(name = "uuid", columnDefinition = "BINARY(16)")
-    private UUID uuid;
+    @Column(name = "diet_uuid", columnDefinition = "BINARY(16)")
+    private UUID dietUuid;
 
     @Enumerated(EnumType.STRING)
     private MealType mealType;
@@ -62,9 +58,12 @@ public class Diet extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DietFood> dietFoods = new ArrayList<>();
+
     // TODO: add Foods, implement total nutrient calculation method using foods
     @Builder
-    public Diet(UUID uuid,
+    public Diet(UUID dietUuid,
                 Member member,
                 int totalCarbohydrate,
                 int totalProtein,
@@ -73,7 +72,7 @@ public class Diet extends BaseEntity {
                 int totalCholesterol,
                 MealType mealType,
                 LocalDateTime mealDate) {
-        this.uuid = uuid;
+        this.dietUuid = dietUuid;
         this.member = member;
         this.totalCarbohydrate = totalCarbohydrate;
         this.totalProtein = totalProtein;
@@ -82,10 +81,6 @@ public class Diet extends BaseEntity {
         this.totalCholesterol = totalCholesterol;
         this.mealType = mealType;
         this.mealDate = mealDate;
-    }
-
-    private void addFoods(Food food) {
-        foods.add(food);
     }
 
     public void updateTotalCarbohydrate(int totalCarbohydrate) {

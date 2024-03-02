@@ -20,11 +20,11 @@ public class FoodController {
 
     @PostMapping("/new")
     public ResponseEntity<FoodDto> createFood(@RequestBody @Valid FoodRequestDto foodRequestDto) {
-        Food food = foodRequestDto.toEntity();
-        foodService.saveFood(food);
+        Food food = foodService.saveFood(foodRequestDto);
         FoodDto foodDto = foodMapper.toDto(food);
         return new ResponseEntity<>(foodDto, HttpStatus.CREATED);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<FoodDto> getFoodById(@PathVariable Long id) {

@@ -16,8 +16,9 @@ public class FoodService {
     private final FoodRepository foodRepository;
 
     @Transactional
-    public void saveFood(Food food) {
-        foodRepository.save(food);
+    public Food saveFood(FoodRequestDto foodRequestDto) {
+        Food food = foodRequestDto.toEntity();
+        return foodRepository.save(food);
     }
 
     public Food findFood(Long foodId) {
