@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 @Builder
 public class DietDto {
-    private UUID uuid;
+    private UUID dietUuid;
     private UUID memberUuid;
     private int totalCarbohydrate;
     private int totalProtein;

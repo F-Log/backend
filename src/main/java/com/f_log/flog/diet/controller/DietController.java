@@ -18,36 +18,26 @@ public class DietController {
     private final DietService dietService;
 
     @PostMapping("/new")
-    public ResponseEntity<DietDto> createDiet(@RequestBody CreateDietRequest createDietRequest) {
-        UUID uuid = dietService.saveDiet(createDietRequest);
-        DietDto dietDto = dietService.findDietByUuid(uuid);
+    public ResponseEntity<DietDto> createDiet(@RequestBody CreateDietRequest request) {
+        DietDto dietDto = dietService.createDiet(request);
         return new ResponseEntity<>(dietDto, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{uuid}")
-    public ResponseEntity<DietDto> findDietByUuid(@PathVariable UUID uuid) {
-        DietDto dietDto = dietService.findDietByUuid(uuid);
+    @GetMapping("/{dietUuid}")
+    public ResponseEntity<DietDto> getDiet(@PathVariable UUID dietUuid) {
+        DietDto dietDto = dietService.getDietByUuid(dietUuid);
         return ResponseEntity.ok(dietDto);
     }
 
-    @PutMapping("/{uuid}")
-    public ResponseEntity<DietDto> updateDiet(@PathVariable UUID uuid, @RequestBody UpdateDietRequest updateDietRequest) {
-        boolean updated = dietService.updateDiet(uuid, updateDietRequest);
-        if (updated) {
-            DietDto updatedDiet = dietService.findDietByUuid(uuid);
-            return ResponseEntity.ok(updatedDiet);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PutMapping("/{dietUuid}")
+    public ResponseEntity<DietDto> updateDiet(@PathVariable UUID dietUuid, @RequestBody UpdateDietRequest request) {
+        DietDto dietDto = dietService.updateDiet(dietUuid, request);
+        return ResponseEntity.ok(dietDto);
     }
 
-    @DeleteMapping("/{uuid}")
-    public ResponseEntity<Void> deleteDiet(@PathVariable UUID uuid) {
-        boolean deleted = dietService.deleteDiet(uuid);
-        if (deleted) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @DeleteMapping("/{dietUuid}")
+    public ResponseEntity<Void> deleteDiet(@PathVariable UUID dietUuid) {
+        dietService.deleteDiet(dietUuid);
+        return ResponseEntity.ok().build();
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class DietMapper {
     public DietDto toDto(Diet diet) {
         return DietDto.builder()
-                .uuid(diet.getUuid())
+                .dietUuid(diet.getDietUuid())
                 .memberUuid(diet.getMember().getUuid())
                 .totalCarbohydrate(diet.getTotalCarbohydrate())
                 .totalProtein(diet.getTotalProtein())
