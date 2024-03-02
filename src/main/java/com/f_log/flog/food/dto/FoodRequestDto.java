@@ -14,9 +14,8 @@ public class FoodRequestDto {
     private final int fat;
     private final int sodium;
     private final int cholesterol;
-    private Long dietId;
 
-    public Food toEntity(Diet diet) {
+    public Food toEntity() {
         return Food.builder()
                 .foodName(foodName)
                 .carbohydrate(carbohydrate)
@@ -24,7 +23,6 @@ public class FoodRequestDto {
                 .fat(fat)
                 .sodium(sodium)
                 .cholesterol(cholesterol)
-                .diet(diet)
                 .build();
     }
 }
