@@ -30,6 +30,11 @@ public class InbodyService {
         return inbodyMapper.toDto(savedInbody);
     }
 
+    public InbodyResponseDto getLatestInbodyOfMember(UUID memberUuid) {
+        Inbody inbody = inbodyRepository.findTopByMemberUuidOrderByCreatedAtDesc(memberUuid).orElse(null);
+        return inbodyMapper.toDto(inbody);
+    }
+
     public InbodyResponseDto getInbodyByUuid(UUID inbodyUuid) {
         Inbody inbody = inbodyRepository.findByInbodyUuidAndIsDeletedFalse(inbodyUuid);
         return inbodyMapper.toDto(inbody);

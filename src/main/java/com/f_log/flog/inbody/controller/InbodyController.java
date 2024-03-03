@@ -67,4 +67,14 @@ public class InbodyController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/latest/{memberUuid}")
+    public ResponseEntity<InbodyResponseDto> getLatestInbodyByMemberUuid(@PathVariable UUID memberUuid) {
+        InbodyResponseDto found = inbodyService.getLatestInbodyOfMember(memberUuid);
+        if (found != null) {
+            return new ResponseEntity<>(found, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
