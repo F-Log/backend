@@ -2,6 +2,7 @@ package com.f_log.flog.food.dto;
 
 import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.food.domain.Food;
+import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -14,6 +15,7 @@ public class FoodRequestDto {
     private final int fat;
     private final int sodium;
     private final int cholesterol;
+    private final UUID memberUuid;
 
     public Food toEntity() {
         return Food.builder()
@@ -23,6 +25,7 @@ public class FoodRequestDto {
                 .fat(fat)
                 .sodium(sodium)
                 .cholesterol(cholesterol)
+                .memberUuid(memberUuid)
                 .build();
     }
 }

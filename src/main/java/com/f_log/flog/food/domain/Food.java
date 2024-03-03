@@ -2,6 +2,7 @@ package com.f_log.flog.food.domain;
 
 import com.f_log.flog.global.domain.BaseEntity;
 import jakarta.persistence.*;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +27,9 @@ public class Food extends BaseEntity {
     private int fat;
     private int sodium;
     private int cholesterol;
+
+    @Column(name = "member_uuid")
+    private UUID memberUuid;
 
     public void updateCarbohydrate(int carbohydrate) {
         this.carbohydrate = carbohydrate;
