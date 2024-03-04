@@ -5,9 +5,9 @@ import com.f_log.flog.diet.dto.DietDto;
 import com.f_log.flog.diet.dto.UpdateDietRequest;
 import com.f_log.flog.diet.service.DietService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.UUID;
 
@@ -16,6 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class DietController {
     private final DietService dietService;
+    private final RestTemplate restTemplate;
 
     @PostMapping("/new")
     public ResponseEntity<DietDto> createDiet(@RequestBody CreateDietRequest request) {

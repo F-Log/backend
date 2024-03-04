@@ -5,10 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface InbodyRepository extends JpaRepository<Inbody, UUID> {
     List<Inbody> findAllByMemberUuidAndIsDeletedFalse(UUID memberUuid);
     Inbody findByInbodyUuidAndIsDeletedFalse(UUID inbodyUuid);
+    Optional<Inbody> findTopByMemberUuidOrderByCreatedAtDesc(UUID memberUuid);
 }

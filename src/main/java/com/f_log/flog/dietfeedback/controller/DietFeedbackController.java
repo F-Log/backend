@@ -17,9 +17,9 @@ public class DietFeedbackController {
 
     private final DietFeedbackService dietFeedbackService;
 
-    @PostMapping("/{dietUuid}")
-    public ResponseEntity<DietFeedbackDto> createDietFeedback(@PathVariable UUID dietUuid, @RequestBody DietFeedbackRequest request) {
-        DietFeedbackDto created = dietFeedbackService.createDietFeedback(dietUuid, request);
+    @PostMapping("/new")
+    public ResponseEntity<DietFeedbackDto> createDietFeedback(@RequestBody DietFeedbackRequest request) {
+        DietFeedbackDto created = dietFeedbackService.createDietFeedback(request);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 

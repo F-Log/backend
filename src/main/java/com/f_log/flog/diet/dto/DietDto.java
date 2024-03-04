@@ -3,8 +3,7 @@ package com.f_log.flog.diet.dto;
 import com.f_log.flog.diet.domain.MealType;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -18,5 +17,5 @@ public class DietDto {
     private int totalSodium;
     private int totalCholesterol;
     private MealType mealType;
-    private LocalDateTime mealDate;
+    private LocalDate mealDate;
 }
