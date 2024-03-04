@@ -22,7 +22,8 @@ public class DietFeedbackService {
     private final DietFeedbackMapper dietFeedbackMapper;
 
     @Transactional
-    public DietFeedbackDto createDietFeedback(UUID dietUuid, DietFeedbackRequest dietFeedbackRequest) {
+    public DietFeedbackDto createDietFeedback(DietFeedbackRequest dietFeedbackRequest) {
+        UUID dietUuid = dietFeedbackRequest.getDietUuid();
         Diet diet = dietRepository.findByDietUuidAndIsDeletedFalse(dietUuid)
                 .orElseThrow(() -> new EntityNotFoundException("Diet not found with UUID: " + dietUuid));
 
