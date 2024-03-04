@@ -2,7 +2,6 @@ package com.f_log.flog.diet.domain;
 
 import com.f_log.flog.dietfeedback.domain.DietFeedback;
 import com.f_log.flog.dietfood.domain.DietFood;
-import com.f_log.flog.food.domain.Food;
 import com.f_log.flog.global.domain.BaseEntity;
 import com.f_log.flog.member.domain.Member;
 import jakarta.persistence.*;
@@ -11,7 +10,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -42,7 +41,7 @@ public class Diet extends BaseEntity {
     private int totalCholesterol;
 
     @Column(name = "meal_date")
-    private LocalDateTime mealDate;
+    private LocalDate mealDate;
 
     @Column(name = "diet_uuid", columnDefinition = "BINARY(16)")
     private UUID dietUuid;
@@ -71,7 +70,7 @@ public class Diet extends BaseEntity {
                 int totalSodium,
                 int totalCholesterol,
                 MealType mealType,
-                LocalDateTime mealDate) {
+                LocalDate mealDate) {
         this.dietUuid = dietUuid;
         this.member = member;
         this.totalCarbohydrate = totalCarbohydrate;
@@ -103,7 +102,7 @@ public class Diet extends BaseEntity {
         this.totalCholesterol = totalCholesterol;
     }
 
-    public void updateMealDate(LocalDateTime mealDate) {
+    public void updateMealDate(LocalDate mealDate) {
         this.mealDate = mealDate;
     }
 
