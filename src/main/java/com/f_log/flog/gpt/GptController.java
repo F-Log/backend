@@ -26,7 +26,7 @@ public class GptController {
     private final InbodyService inbodyService;
     private final GptService gptService;
 
-    @PostMapping("/send-data-to-flask")
+    @PostMapping("/diet-feedback")
     public ResponseEntity<DietFeedbackDto> sendDataToFlask(@RequestBody UUID dietUuid) {
         DietDto foundDiet = dietService.getDietByUuid(dietUuid);
         UUID memberUuid = foundDiet.getMemberUuid();
