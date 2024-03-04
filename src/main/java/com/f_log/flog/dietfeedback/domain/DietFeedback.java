@@ -19,7 +19,7 @@ public class DietFeedback extends BaseEntity{
     @Column(name = "diet_feedback_id")
     private Long id;
 
-    @Column(name = "diet_feedback")
+    @Column(name = "diet_feedback", length = 10000)
     private String dietFeedback;
 
     @OneToOne
