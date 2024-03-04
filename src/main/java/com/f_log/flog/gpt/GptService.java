@@ -1,13 +1,11 @@
 package com.f_log.flog.gpt;
 
 import com.f_log.flog.diet.dto.DietDto;
+import com.f_log.flog.dietfeedback.dto.DietFeedbackDto;
 import com.f_log.flog.inbody.dto.InbodyResponseDto;
 import com.f_log.flog.member.dto.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,9 +19,10 @@ public class GptService {
 
     private final RestTemplate restTemplate;
 
-    public void sendDataToFlask(UUID dietUuid, DietDto dietDto, MemberResponseDto memberResponseDto, InbodyResponseDto inbodyResponseDto) {
+    public ResponseEntity<DietFeedbackDto> sendDataToFlask(UUID dietUuid, DietDto dietDto, MemberResponseDto memberResponseDto, InbodyResponseDto inbodyResponseDto) {
         Map<String, Object> dataMap = createDataMap(dietUuid, dietDto, memberResponseDto, inbodyResponseDto);
-        sendToFlaskServer(dataMap);
+        ResponseEntity<DietFeedbackDto> responseEntity = sendToFlaskServer(dataMap);
+        return responseEntity;
     }
 
     private Map<String, Object> createDataMap(UUID dietUuid, DietDto dietDto, MemberResponseDto memberResponseDto, InbodyResponseDto inbodyResponseDto) {
@@ -44,10 +43,12 @@ public class GptService {
         return dataMap;
     }
 
-    private void sendToFlaskServer(Map<String, Object> dataMap) {
+    private ResponseEntity<DietFeedbackDto> sendToFlaskServer(Map<String, Object> dataMap) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(dataMap, headers);
-        restTemplate.exchange("http://127.0.0.1:5000/receive-diet", HttpMethod.POST, requestEntity, Void.class);
+        ResponseEntity<DietFeedbackDto> responseEntity = restTemplate.exchange("http://127.0.0.1:5000/receive-diet", HttpMethod.POST, requestEntity, DietFeedbackDto.class);
+        DietFeedbackDto body = responseEntity.getBody();
+        return new ResponseEntity<>(body, HttpStatus.CREATED);
     }
 }

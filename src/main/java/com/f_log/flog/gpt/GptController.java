@@ -2,6 +2,7 @@ package com.f_log.flog.gpt;
 
 import com.f_log.flog.diet.dto.DietDto;
 import com.f_log.flog.diet.service.DietService;
+import com.f_log.flog.dietfeedback.dto.DietFeedbackDto;
 import com.f_log.flog.inbody.dto.InbodyResponseDto;
 import com.f_log.flog.inbody.service.InbodyService;
 import com.f_log.flog.member.dto.MemberResponseDto;
@@ -26,13 +27,11 @@ public class GptController {
     private final GptService gptService;
 
     @PostMapping("/send-data-to-flask")
-    public ResponseEntity<String> sendDataToFlask(@RequestBody UUID dietUuid) {
+    public ResponseEntity<DietFeedbackDto> sendDataToFlask(@RequestBody UUID dietUuid) {
         DietDto foundDiet = dietService.getDietByUuid(dietUuid);
         UUID memberUuid = foundDiet.getMemberUuid();
         MemberResponseDto foundMember = memberService.getMemberByUuid(memberUuid);
         InbodyResponseDto foundInbody = inbodyService.getLatestInbodyOfMember(memberUuid);
-        gptService.sendDataToFlask(dietUuid, foundDiet, foundMember, foundInbody);
-
-        return ResponseEntity.ok().build();
+        return gptService.sendDataToFlask(dietUuid, foundDiet, foundMember, foundInbody);
     }
 }
