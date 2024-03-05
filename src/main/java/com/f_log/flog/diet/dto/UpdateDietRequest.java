@@ -13,6 +13,8 @@ public class UpdateDietRequest {
     private int totalFat;
     private int totalSodium;
     private int totalCholesterol;
+    private int totalSugars;
+    private int totalCalories;
     private MealType mealType;
     private LocalDate mealDate;
 }

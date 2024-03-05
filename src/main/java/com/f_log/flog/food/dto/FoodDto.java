@@ -13,4 +13,6 @@ public class FoodDto {
     private final int fat;
     private final int sodium;
     private final int cholesterol;
+    private final int sugars;
+    private final int calories;
 }

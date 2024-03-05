@@ -14,6 +14,8 @@ public class DietMapper {
                 .totalFat(diet.getTotalFat())
                 .totalSodium(diet.getTotalSodium())
                 .totalCholesterol(diet.getTotalCholesterol())
+                .totalSugars(diet.getTotalSugars())
+                .totalCalories(diet.getTotalCalories())
                 .mealDate(diet.getMealDate())
                 .mealType(diet.getMealType())
                 .build();

@@ -15,6 +15,8 @@ public class FoodMapper {
                 .fat(food.getFat())
                 .sodium(food.getSodium())
                 .cholesterol(food.getCholesterol())
+                .sugars(food.getSugars())
+                .calories(food.getCalories())
                 .build();
     }
 
@@ -27,6 +29,8 @@ public class FoodMapper {
                 .fat(foodDto.getFat())
                 .sodium(foodDto.getSodium())
                 .cholesterol(foodDto.getCholesterol())
+                .sugars(foodDto.getSugars())
+                .calories(foodDto.getCalories())
                 .build();
     }
 }

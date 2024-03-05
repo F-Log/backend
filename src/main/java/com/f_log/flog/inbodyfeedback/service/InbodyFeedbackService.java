@@ -22,8 +22,9 @@ public class InbodyFeedbackService {
     }
 
     @Transactional
-    public InbodyFeedback createInbodyFeedback(UUID inbodyUuid, InbodyFeedbackRequestDto requestDto) {
+    public InbodyFeedback createInbodyFeedback(InbodyFeedbackRequestDto requestDto) {
         // Inbody 객체 가져오기
+        UUID inbodyUuid = requestDto.getInbodyUuid();
         Inbody inbody = inbodyRepository.findByInbodyUuidAndIsDeletedFalse(inbodyUuid);
 
         if (inbody != null) {

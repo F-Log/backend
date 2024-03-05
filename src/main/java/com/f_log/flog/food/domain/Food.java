@@ -27,6 +27,8 @@ public class Food extends BaseEntity {
     private int fat;
     private int sodium;
     private int cholesterol;
+    private int sugars;
+    private int calories;
 
     @Column(name = "member_uuid")
     private UUID memberUuid;
@@ -49,6 +51,14 @@ public class Food extends BaseEntity {
 
     public void updateCholesterol(int cholesterol) {
         this.cholesterol = cholesterol;
+    }
+
+    public void updateSugars(int sugars) {
+        this.sugars = sugars;
+    }
+
+    public void updateCalories(int calories) {
+        this.calories = calories;
     }
 
     public void updateFoodName(String foodName) {

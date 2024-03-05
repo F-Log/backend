@@ -23,9 +23,9 @@ public class InbodyFeedbackController {
         this.inbodyFeedbackMapper = inbodyFeedbackMapper;
     }
 
-    @PostMapping("/{inbodyUuid}")
-    public ResponseEntity<InbodyFeedbackResponseDto> createInbodyFeedback(@PathVariable UUID inbodyUuid, @RequestBody InbodyFeedbackRequestDto requestDto) {
-        InbodyFeedback createdInbodyFeedback = inbodyFeedbackService.createInbodyFeedback(inbodyUuid, requestDto);
+    @PostMapping("/new")
+    public ResponseEntity<InbodyFeedbackResponseDto> createInbodyFeedback(@RequestBody InbodyFeedbackRequestDto requestDto) {
+        InbodyFeedback createdInbodyFeedback = inbodyFeedbackService.createInbodyFeedback(requestDto);
         InbodyFeedbackResponseDto responseDto = inbodyFeedbackMapper.toDto(createdInbodyFeedback);
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
