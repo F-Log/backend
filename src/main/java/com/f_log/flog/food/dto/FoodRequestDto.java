@@ -15,6 +15,8 @@ public class FoodRequestDto {
     private final int fat;
     private final int sodium;
     private final int cholesterol;
+    private final int sugars;
+    private final int calories;
     private final UUID memberUuid;
 
     public Food toEntity() {
@@ -26,6 +28,8 @@ public class FoodRequestDto {
                 .sodium(sodium)
                 .cholesterol(cholesterol)
                 .memberUuid(memberUuid)
+                .sugars(sugars)
+                .calories(calories)
                 .build();
     }
 }

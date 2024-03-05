@@ -35,6 +35,8 @@ public class FoodService {
             food.updateFat(foodRequestDto.getFat());
             food.updateProtein(foodRequestDto.getProtein());
             food.updateSodium(foodRequestDto.getSodium());
+            food.updateCalories(foodRequestDto.getCalories());
+            food.updateSugars(foodRequestDto.getSugars());
             return true;
         } else {
             return false;

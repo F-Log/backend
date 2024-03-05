@@ -46,6 +46,8 @@ public class DietService {
                 .totalFat(request.getTotalFat())
                 .totalSodium(request.getTotalSodium())
                 .totalCholesterol(request.getTotalCholesterol())
+                .totalSugars(request.getTotalSugars())
+                .totalCalories(request.getTotalCalories())
                 .mealType(request.getMealType())
                 .mealDate(request.getMealDate())
                 .build();
@@ -63,6 +65,8 @@ public class DietService {
             diet.updateTotalProtein(request.getTotalProtein());
             diet.updateTotalFat(request.getTotalFat());
             diet.updateTotalCholesterol(request.getTotalCholesterol());
+            diet.updateTotalSugars(request.getTotalSugars());
+            diet.updateTotalCalories(request.getTotalCalories());
             diet.updateMealDate(request.getMealDate());
             diet.updateMealType(request.getMealType());
         }

@@ -40,6 +40,12 @@ public class Diet extends BaseEntity {
     @Column(name = "total_cholesterol")
     private int totalCholesterol;
 
+    @Column(name = "total_sugars")
+    private int totalSugars;
+
+    @Column(name = "total_calories")
+    private int totalCalories;
+
     @Column(name = "meal_date")
     private LocalDate mealDate;
 
@@ -69,6 +75,8 @@ public class Diet extends BaseEntity {
                 int totalFat,
                 int totalSodium,
                 int totalCholesterol,
+                int totalSugars,
+                int totalCalories,
                 MealType mealType,
                 LocalDate mealDate) {
         this.dietUuid = dietUuid;
@@ -78,6 +86,8 @@ public class Diet extends BaseEntity {
         this.totalFat = totalFat;
         this.totalSodium = totalSodium;
         this.totalCholesterol = totalCholesterol;
+        this.totalSugars = totalSugars;
+        this.totalCalories = totalCalories;
         this.mealType = mealType;
         this.mealDate = mealDate;
     }
@@ -100,6 +110,14 @@ public class Diet extends BaseEntity {
 
     public void updateTotalCholesterol(int totalCholesterol) {
         this.totalCholesterol = totalCholesterol;
+    }
+
+    public void updateTotalSugars(int totalSugars) {
+        this.totalSugars = totalSugars;
+    }
+
+    public void updateTotalCalories(int totalCalories) {
+        this.totalCalories = totalCalories;
     }
 
     public void updateMealDate(LocalDate mealDate) {

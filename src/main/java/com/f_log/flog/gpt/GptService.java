@@ -28,12 +28,17 @@ public class GptService {
 
     private Map<String, Object> createDietDataMap(UUID dietUuid, DietDto dietDto, MemberResponseDto memberResponseDto, InbodyResponseDto inbodyResponseDto) {
         Map<String, Object> dataMap = new HashMap<>();
+        // diet info
         dataMap.put("dietUuid", dietUuid);
         dataMap.put("totalCarbohydrate", dietDto.getTotalCarbohydrate());
         dataMap.put("totalProtein", dietDto.getTotalProtein());
         dataMap.put("totalSodium", dietDto.getTotalSodium());
         dataMap.put("totalFat", dietDto.getTotalFat());
         dataMap.put("totalCholesterol", dietDto.getTotalCholesterol());
+        dataMap.put("totalSugars", dietDto.getTotalSugars());
+        dataMap.put("totalCalories", dietDto.getTotalCalories());
+
+        // member and inbody info
         dataMap.put("gender", memberResponseDto.getGender());
         dataMap.put("height", inbodyResponseDto.getHeight());
         dataMap.put("bodyWeight", inbodyResponseDto.getBodyWeight());
@@ -59,8 +64,10 @@ public class GptService {
         return responseEntity;
     }
 
+    // TODO: Add Exercise info
     private Map<String, Object> createInbodyDataMap(UUID inbodyUuid, InbodyResponseDto inbodyResponseDto, MemberResponseDto memberResponseDto) {
         Map<String, Object> dataMap = new HashMap<>();
+        // member and inbody info
         dataMap.put("inbodyUuid", inbodyUuid);
         dataMap.put("height", inbodyResponseDto.getHeight());
         dataMap.put("bodyWeight", inbodyResponseDto.getBodyWeight());
