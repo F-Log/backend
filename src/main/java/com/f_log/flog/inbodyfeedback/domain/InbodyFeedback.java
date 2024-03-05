@@ -12,7 +12,7 @@ public class InbodyFeedback extends BaseEntity {
     @Column(name = "feedback_id")
     private Long id;
 
-    @Column(name = "inbody_feedback")
+    @Column(name = "inbody_feedback", length = 10000)
     private String inbodyFeedback;
 
     @OneToOne(fetch = FetchType.LAZY)
