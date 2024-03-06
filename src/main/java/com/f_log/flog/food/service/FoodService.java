@@ -66,7 +66,7 @@ public class FoodService {
         List<Food> filteredFoods = new ArrayList<>();
         for (Food food : foods) {
             List<Food> existingFood = foodRepository.findByFoodNameAndIsDeletedFalse(food.getFoodName());
-            if (!existingFood.isEmpty()) {
+            if (existingFood.isEmpty()) {
                 filteredFoods.add(food);
             }
         }
