@@ -15,4 +15,8 @@ public class FoodDto {
     private final int cholesterol;
     private final int sugars;
     private final int calories;
+    private int servingSize;
+    private int servingUnit;
+    private int saturatedFat;
+    private int transFat;
 }

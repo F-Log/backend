@@ -17,6 +17,10 @@ public class FoodMapper {
                 .cholesterol(food.getCholesterol())
                 .sugars(food.getSugars())
                 .calories(food.getCalories())
+                .servingSize(food.getServingSize())
+                .servingUnit(food.getServingUnit())
+                .saturatedFat(food.getSaturatedFat())
+                .transFat(food.getTransFat())
                 .build();
     }
 
@@ -31,6 +35,10 @@ public class FoodMapper {
                 .cholesterol(foodDto.getCholesterol())
                 .sugars(foodDto.getSugars())
                 .calories(foodDto.getCalories())
+                .servingSize(foodDto.getServingSize())
+                .servingUnit(foodDto.getServingUnit())
+                .saturatedFat(foodDto.getSaturatedFat())
+                .transFat(foodDto.getTransFat())
                 .build();
     }
 }

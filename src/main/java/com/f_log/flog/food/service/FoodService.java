@@ -4,6 +4,8 @@ import com.f_log.flog.food.domain.Food;
 import com.f_log.flog.food.dto.FoodRequestDto;
 import com.f_log.flog.food.repository.FoodRepository;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +39,10 @@ public class FoodService {
             food.updateSodium(foodRequestDto.getSodium());
             food.updateCalories(foodRequestDto.getCalories());
             food.updateSugars(foodRequestDto.getSugars());
+            food.updateServingSize(foodRequestDto.getServingSize());
+            food.updateServingUnit(foodRequestDto.getServingUnit());
+            food.updateSaturatedFat(foodRequestDto.getSaturatedFat());
+            food.updateTransFat(foodRequestDto.getTransFat());
             return true;
         } else {
             return false;
@@ -52,6 +58,20 @@ public class FoodService {
             return true;
         } else {
             return false;
+        }
+    }
+
+    @Transactional
+    public void saveAllFoods(List<Food> foods) {
+        List<Food> filteredFoods = new ArrayList<>();
+        for (Food food : foods) {
+            List<Food> existingFood = foodRepository.findByFoodNameAndIsDeletedFalse(food.getFoodName());
+            if (existingFood.isEmpty()) {
+                filteredFoods.add(food);
+            }
+        }
+        if (!filteredFoods.isEmpty()) {
+            foodRepository.saveAll(filteredFoods);
         }
     }
 

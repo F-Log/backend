@@ -10,6 +10,10 @@ import lombok.Getter;
 @Builder
 public class FoodRequestDto {
     private final String foodName;
+    private final int servingSize;
+    private final int servingUnit;
+    private final int saturatedFat;
+    private final int transFat;
     private final int carbohydrate;
     private final int protein;
     private final int fat;
@@ -30,6 +34,10 @@ public class FoodRequestDto {
                 .memberUuid(memberUuid)
                 .sugars(sugars)
                 .calories(calories)
+                .servingSize(servingSize)
+                .servingUnit(servingUnit)
+                .saturatedFat(saturatedFat)
+                .transFat(transFat)
                 .build();
     }
 }

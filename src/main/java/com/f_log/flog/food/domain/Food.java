@@ -22,6 +22,10 @@ public class Food extends BaseEntity {
 
     private String foodName;
 
+    private int servingSize; // 1회 제공량
+    private int servingUnit; // 총 내용량
+    private int saturatedFat; // 포화 지방
+    private int transFat; // 트랜스 지방
     private int carbohydrate;
     private int protein;
     private int fat;
@@ -32,6 +36,22 @@ public class Food extends BaseEntity {
 
     @Column(name = "member_uuid")
     private UUID memberUuid;
+
+    public void updateServingSize(int servingSize) {
+        this.servingSize = servingSize;
+    }
+
+    public void updateServingUnit(int servingUnit) {
+        this.servingUnit = servingUnit;
+    }
+
+    public void updateSaturatedFat(int saturatedFat) {
+        this.saturatedFat = saturatedFat;
+    }
+
+    public void updateTransFat(int transFat) {
+        this.transFat = transFat;
+    }
 
     public void updateCarbohydrate(int carbohydrate) {
         this.carbohydrate = carbohydrate;
