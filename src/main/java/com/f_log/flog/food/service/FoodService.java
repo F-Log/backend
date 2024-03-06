@@ -65,8 +65,8 @@ public class FoodService {
     public void saveAllFoods(List<Food> foods) {
         List<Food> filteredFoods = new ArrayList<>();
         for (Food food : foods) {
-            Optional<Food> existingFood = foodRepository.findByFoodNameAndIsDeletedFalse(food.getFoodName());
-            if (!existingFood.isPresent()) {
+            List<Food> existingFood = foodRepository.findByFoodNameAndIsDeletedFalse(food.getFoodName());
+            if (!existingFood.isEmpty()) {
                 filteredFoods.add(food);
             }
         }
