@@ -37,6 +37,10 @@ public class FoodService {
             food.updateSodium(foodRequestDto.getSodium());
             food.updateCalories(foodRequestDto.getCalories());
             food.updateSugars(foodRequestDto.getSugars());
+            food.updateServingSize(foodRequestDto.getServingSize());
+            food.updateServingUnit(foodRequestDto.getServingUnit());
+            food.updateSaturatedFat(foodRequestDto.getSaturatedFat());
+            food.updateTransFat(foodRequestDto.getTransFat());
             return true;
         } else {
             return false;
