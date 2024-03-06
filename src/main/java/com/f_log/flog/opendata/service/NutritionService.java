@@ -89,6 +89,7 @@ public class NutritionService {
                 for (JsonNode item : items) {
                     Food food = Food.builder()
                             .foodName(item.path("DESC_KOR").asText())
+                            .makerName(item.path("MAKER_NAME").asText())
                             .servingSize(item.path("SERVING_SIZE").asInt())
                             .servingUnit(item.path("SERVING_UNIT").asInt())
                             .calories(item.path("NUTR_CONT1").asInt())

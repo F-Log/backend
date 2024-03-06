@@ -33,9 +33,15 @@ public class Food extends BaseEntity {
     private int cholesterol;
     private int sugars;
     private int calories;
+    private String makerName; // 제조사명
+
 
     @Column(name = "member_uuid")
     private UUID memberUuid;
+
+    public void updateMakerName(String makerName) {
+        this.makerName = makerName;
+    }
 
     public void updateServingSize(int servingSize) {
         this.servingSize = servingSize;

@@ -39,6 +39,7 @@ public class FoodService {
     public boolean updateFood(Long id, FoodRequestDto foodRequestDto) {
         Food food = foodRepository.findByIdAndIsDeletedFalse(id).orElse(null);
         if (food != null) {
+            food.updateMakerName(foodRequestDto.getMakerName());
             food.updateCholesterol(foodRequestDto.getCholesterol());
             food.updateCarbohydrate(foodRequestDto.getCarbohydrate());
             food.updateFoodName(foodRequestDto.getFoodName());
