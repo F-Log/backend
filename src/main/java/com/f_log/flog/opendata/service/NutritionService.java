@@ -37,7 +37,6 @@ public class NutritionService {
                 .build()
                 .encode()
                 .toUri();
-        System.out.println(uri);
         String response = restTemplate.getForObject(uri, String.class);
         saveResponseToFile(response);
         return extractFoodsFromResponse(response);
