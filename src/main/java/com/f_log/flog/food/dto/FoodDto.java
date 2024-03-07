@@ -9,15 +9,17 @@ public class FoodDto {
     private final Long id;
     private final String foodName;
     private final String makerName;
-    private final int carbohydrate;
-    private final int protein;
-    private final int fat;
-    private final int sodium;
-    private final int cholesterol;
-    private final int sugars;
+    private final double carbohydrate;
+    private final double protein;
+    private final double fat;
+    private final double sodium;
+    private final double cholesterol;
+    private final double sugars;
     private final int calories;
+    private final double transFat;
+    private final double saturatedFat;
     private int servingSize;
     private int servingUnit;
-    private int saturatedFat;
-    private int transFat;
+
+
 }

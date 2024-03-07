@@ -13,14 +13,14 @@ public class FoodRequestDto {
     private final String makerName;
     private final int servingSize;
     private final int servingUnit;
-    private final int saturatedFat;
-    private final int transFat;
-    private final int carbohydrate;
-    private final int protein;
-    private final int fat;
-    private final int sodium;
-    private final int cholesterol;
-    private final int sugars;
+    private final double saturatedFat;
+    private final double transFat;
+    private final double carbohydrate;
+    private final double protein;
+    private final double fat;
+    private final double sodium;
+    private final double cholesterol;
+    private final double sugars;
     private final int calories;
     private final UUID memberUuid;
 

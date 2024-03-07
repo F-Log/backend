@@ -24,14 +24,14 @@ public class Food extends BaseEntity {
 
     private int servingSize; // 1회 제공량
     private int servingUnit; // 총 내용량
-    private int saturatedFat; // 포화 지방
-    private int transFat; // 트랜스 지방
-    private int carbohydrate;
-    private int protein;
-    private int fat;
-    private int sodium;
-    private int cholesterol;
-    private int sugars;
+    private double saturatedFat; // 포화 지방
+    private double transFat; // 트랜스 지방
+    private double carbohydrate;
+    private double protein;
+    private double fat;
+    private double sodium;
+    private double cholesterol;
+    private double sugars;
     private int calories;
     private String makerName; // 제조사명
 
@@ -51,35 +51,35 @@ public class Food extends BaseEntity {
         this.servingUnit = servingUnit;
     }
 
-    public void updateSaturatedFat(int saturatedFat) {
+    public void updateSaturatedFat(double saturatedFat) {
         this.saturatedFat = saturatedFat;
     }
 
-    public void updateTransFat(int transFat) {
+    public void updateTransFat(double transFat) {
         this.transFat = transFat;
     }
 
-    public void updateCarbohydrate(int carbohydrate) {
+    public void updateCarbohydrate(double carbohydrate) {
         this.carbohydrate = carbohydrate;
     }
 
-    public void updateProtein(int protein) {
+    public void updateProtein(double protein) {
         this.protein = protein;
     }
 
-    public void updateFat(int fat) {
+    public void updateFat(double fat) {
         this.fat = fat;
     }
 
-    public void updateSodium(int sodium) {
+    public void updateSodium(double sodium) {
         this.sodium = sodium;
     }
 
-    public void updateCholesterol(int cholesterol) {
+    public void updateCholesterol(double cholesterol) {
         this.cholesterol = cholesterol;
     }
 
-    public void updateSugars(int sugars) {
+    public void updateSugars(double sugars) {
         this.sugars = sugars;
     }
 
