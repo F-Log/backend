@@ -70,9 +70,10 @@ public class ExerciseService {
      * @param memberUuid 회원의 UUID
      * @return 운동 정보 DTO
      */
-    public Optional<ExerciseResponseDto> getExercise(UUID memberUuid) {
-        return exerciseRepository.findByMemberUuidAndIsDeletedFalse(memberUuid)
-                .map(exerciseMapper::toDto);
+    public ExerciseResponseDto getExercise(UUID memberUuid) {
+        Exercise exercise = exerciseRepository.findByMemberUuidAndIsDeletedFalse(memberUuid)
+                .orElseThrow(() -> new IllegalArgumentException("Exercise not found for this member."));
+        return exerciseMapper.toDto(exercise);
     }
 
     /**

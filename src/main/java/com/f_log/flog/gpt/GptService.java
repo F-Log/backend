@@ -2,6 +2,7 @@ package com.f_log.flog.gpt;
 
 import com.f_log.flog.diet.dto.DietDto;
 import com.f_log.flog.dietfeedback.dto.DietFeedbackDto;
+import com.f_log.flog.exercise.dto.ExerciseResponseDto;
 import com.f_log.flog.inbody.dto.InbodyResponseDto;
 import com.f_log.flog.inbodyfeedback.dto.InbodyFeedbackResponseDto;
 import com.f_log.flog.member.dto.MemberResponseDto;
@@ -20,13 +21,13 @@ public class GptService {
 
     private final RestTemplate restTemplate;
 
-    public ResponseEntity<DietFeedbackDto> createDietFeedback(UUID dietUuid, DietDto dietDto, MemberResponseDto memberResponseDto, InbodyResponseDto inbodyResponseDto) {
-        Map<String, Object> dataMap = createDietDataMap(dietUuid, dietDto, memberResponseDto, inbodyResponseDto);
+    public ResponseEntity<DietFeedbackDto> createDietFeedback(UUID dietUuid, DietDto dietDto, MemberResponseDto memberResponseDto, InbodyResponseDto inbodyResponseDto, ExerciseResponseDto exerciseResponseDto) {
+        Map<String, Object> dataMap = createDietDataMap(dietUuid, dietDto, memberResponseDto, inbodyResponseDto, exerciseResponseDto);
         ResponseEntity<DietFeedbackDto> responseEntity = exchangeDietData(dataMap);
         return responseEntity;
     }
 
-    private Map<String, Object> createDietDataMap(UUID dietUuid, DietDto dietDto, MemberResponseDto memberResponseDto, InbodyResponseDto inbodyResponseDto) {
+    private Map<String, Object> createDietDataMap(UUID dietUuid, DietDto dietDto, MemberResponseDto memberResponseDto, InbodyResponseDto inbodyResponseDto, ExerciseResponseDto exerciseResponseDto) {
         Map<String, Object> dataMap = new HashMap<>();
         // diet info
         dataMap.put("dietUuid", dietUuid);
@@ -46,6 +47,7 @@ public class GptService {
         dataMap.put("basalMetabolicRate", inbodyResponseDto.getBasalMetabolicRate());
         dataMap.put("bodyFatPercentage", inbodyResponseDto.getBodyFatPercentage());
         dataMap.put("muscleMass", inbodyResponseDto.getMuscleMass());
+        dataMap.put("exercisePurpose", exerciseResponseDto.getExercisePurpose());
         return dataMap;
     }
 
@@ -58,14 +60,13 @@ public class GptService {
         return new ResponseEntity<>(body, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<InbodyFeedbackResponseDto> createInbodyFeedback(UUID inbodyUuid, InbodyResponseDto inbodyResponseDto, MemberResponseDto memberResponseDto) {
-        Map<String, Object> dataMap = createInbodyDataMap(inbodyUuid, inbodyResponseDto, memberResponseDto);
+    public ResponseEntity<InbodyFeedbackResponseDto> createInbodyFeedback(UUID inbodyUuid, InbodyResponseDto inbodyResponseDto, MemberResponseDto memberResponseDto, ExerciseResponseDto exerciseResponseDto) {
+        Map<String, Object> dataMap = createInbodyDataMap(inbodyUuid, inbodyResponseDto, memberResponseDto, exerciseResponseDto);
         ResponseEntity<InbodyFeedbackResponseDto> responseEntity = exchangeInbodyData(dataMap);
         return responseEntity;
     }
 
-    // TODO: Add Exercise info
-    private Map<String, Object> createInbodyDataMap(UUID inbodyUuid, InbodyResponseDto inbodyResponseDto, MemberResponseDto memberResponseDto) {
+    private Map<String, Object> createInbodyDataMap(UUID inbodyUuid, InbodyResponseDto inbodyResponseDto, MemberResponseDto memberResponseDto, ExerciseResponseDto exerciseResponseDto) {
         Map<String, Object> dataMap = new HashMap<>();
         // member and inbody info
         dataMap.put("inbodyUuid", inbodyUuid);
@@ -76,6 +77,7 @@ public class GptService {
         dataMap.put("bodyFatPercentage", inbodyResponseDto.getBodyFatPercentage());
         dataMap.put("muscleMass", inbodyResponseDto.getMuscleMass());
         dataMap.put("gender", memberResponseDto.getGender());
+        dataMap.put(("exercisePurpose"), exerciseResponseDto.getExercisePurpose());
         return dataMap;
     }
 

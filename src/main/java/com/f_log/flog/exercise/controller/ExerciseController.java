@@ -38,9 +38,8 @@ public class ExerciseController {
      */
     @GetMapping("/{memberUuid}")
     public ResponseEntity<ExerciseResponseDto> getExercise(@PathVariable UUID memberUuid) {
-        return exerciseService.getExercise(memberUuid)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        ExerciseResponseDto exercise = exerciseService.getExercise(memberUuid);
+        return ResponseEntity.ok(exercise);
     }
 
     /**
