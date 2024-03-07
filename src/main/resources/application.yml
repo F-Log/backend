@@ -2,6 +2,10 @@ server:
   port: 8080 # 내장 톰캣 포트번호
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 30MB # max-file-size는 단일 파일의 최대 크기
+      max-request-size: 30MB #  max-request-size는 요청당 허용되는 전체 데이터의 최대 크기
   # H2 Database 설정
   datasource:
 #    driver-class-name: org.h2.Driver
