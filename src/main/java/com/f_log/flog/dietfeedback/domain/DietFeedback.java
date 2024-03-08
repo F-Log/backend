@@ -22,14 +22,9 @@ public class DietFeedback extends BaseEntity{
     @Column(name = "diet_feedback", length = 10000)
     private String dietFeedback;
 
-    @OneToOne
-    @JoinColumn(name = "diet_id")
-    private Diet diet;
-
     @Builder
-    public DietFeedback(String dietFeedback, Diet diet) {
+    public DietFeedback(String dietFeedback) {
         this.dietFeedback = dietFeedback;
-        this.diet = diet;
     }
 
     public void setDietFeedback(String dietFeedback) {

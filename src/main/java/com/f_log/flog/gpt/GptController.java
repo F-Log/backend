@@ -1,5 +1,6 @@
 package com.f_log.flog.gpt;
 
+import com.f_log.flog.diet.dto.DailyIntakeDto;
 import com.f_log.flog.diet.dto.DietDto;
 import com.f_log.flog.diet.service.DietService;
 import com.f_log.flog.dietfeedback.dto.DietFeedbackDto;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @RestController
@@ -31,13 +33,12 @@ public class GptController {
     private final ExerciseService exerciseService;
 
     @PostMapping("/diet-feedback")
-    public ResponseEntity<DietFeedbackDto> createDietFeedback(@RequestBody UUID dietUuid) {
-        DietDto foundDiet = dietService.getDietByUuid(dietUuid);
-        UUID memberUuid = foundDiet.getMemberUuid();
+    public ResponseEntity<DietFeedbackDto> createDietFeedback(@RequestBody LocalDate date, UUID memberUuid) {
         MemberResponseDto foundMember = memberService.getMemberByUuid(memberUuid);
+        DailyIntakeDto totalIntakeForDay = dietService.getTotalIntakeForDay(date, foundMember);
         InbodyResponseDto foundInbody = inbodyService.getLatestInbodyOfMember(memberUuid);
         ExerciseResponseDto foundExercise = exerciseService.getExercise(memberUuid);
-        return gptService.createDietFeedback(dietUuid, foundDiet, foundMember, foundInbody, foundExercise);
+        return gptService.createDietFeedback(date, foundMember, totalIntakeForDay, foundInbody, foundExercise);
     }
 
     @PostMapping("/inbody-feedback")

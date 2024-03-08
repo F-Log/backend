@@ -1,6 +1,5 @@
 package com.f_log.flog.diet.domain;
 
-import com.f_log.flog.dietfeedback.domain.DietFeedback;
 import com.f_log.flog.dietfood.domain.DietFood;
 import com.f_log.flog.global.domain.BaseEntity;
 import com.f_log.flog.member.domain.Member;
@@ -54,9 +53,6 @@ public class Diet extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private MealType mealType;
-
-    @OneToOne(mappedBy = "diet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private DietFeedback dietFeedback;
 
     // member와의 N:1 관계
     @ManyToOne(fetch = FetchType.LAZY)

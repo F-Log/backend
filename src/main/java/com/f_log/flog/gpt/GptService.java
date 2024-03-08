@@ -1,5 +1,6 @@
 package com.f_log.flog.gpt;
 
+import com.f_log.flog.diet.dto.DailyIntakeDto;
 import com.f_log.flog.diet.dto.DietDto;
 import com.f_log.flog.dietfeedback.dto.DietFeedbackDto;
 import com.f_log.flog.exercise.dto.ExerciseResponseDto;
@@ -11,6 +12,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -21,25 +23,26 @@ public class GptService {
 
     private final RestTemplate restTemplate;
 
-    public ResponseEntity<DietFeedbackDto> createDietFeedback(UUID dietUuid, DietDto dietDto, MemberResponseDto memberResponseDto, InbodyResponseDto inbodyResponseDto, ExerciseResponseDto exerciseResponseDto) {
-        Map<String, Object> dataMap = createDietDataMap(dietUuid, dietDto, memberResponseDto, inbodyResponseDto, exerciseResponseDto);
+    public ResponseEntity<DietFeedbackDto> createDietFeedback(LocalDate date, MemberResponseDto memberResponseDto, DailyIntakeDto dailyIntakeDto, InbodyResponseDto inbodyResponseDto, ExerciseResponseDto exerciseResponseDto) {
+        Map<String, Object> dataMap = createDietDataMap(date, memberResponseDto, dailyIntakeDto, inbodyResponseDto, exerciseResponseDto);
         ResponseEntity<DietFeedbackDto> responseEntity = exchangeDietData(dataMap);
         return responseEntity;
     }
 
-    private Map<String, Object> createDietDataMap(UUID dietUuid, DietDto dietDto, MemberResponseDto memberResponseDto, InbodyResponseDto inbodyResponseDto, ExerciseResponseDto exerciseResponseDto) {
+    private Map<String, Object> createDietDataMap(LocalDate date, MemberResponseDto memberResponseDto, DailyIntakeDto dailyIntakeDto, InbodyResponseDto inbodyResponseDto, ExerciseResponseDto exerciseResponseDto) {
         Map<String, Object> dataMap = new HashMap<>();
         // diet info
-        dataMap.put("dietUuid", dietUuid);
-        dataMap.put("totalCarbohydrate", dietDto.getTotalCarbohydrate());
-        dataMap.put("totalProtein", dietDto.getTotalProtein());
-        dataMap.put("totalSodium", dietDto.getTotalSodium());
-        dataMap.put("totalFat", dietDto.getTotalFat());
-        dataMap.put("totalCholesterol", dietDto.getTotalCholesterol());
-        dataMap.put("totalSugars", dietDto.getTotalSugars());
-        dataMap.put("totalCalories", dietDto.getTotalCalories());
+        dataMap.put("date", date);
+        dataMap.put("totalCarbohydrate", dailyIntakeDto.getTotalCarbohydrate());
+        dataMap.put("totalProtein", dailyIntakeDto.getTotalProtein());
+        dataMap.put("totalSodium", dailyIntakeDto.getTotalSodium());
+        dataMap.put("totalFat", dailyIntakeDto.getTotalFat());
+        dataMap.put("totalCholesterol", dailyIntakeDto.getTotalCholesterol());
+        dataMap.put("totalSugars", dailyIntakeDto.getTotalSugars());
+        dataMap.put("totalCalories", dailyIntakeDto.getTotalCalories());
 
         // member and inbody info
+        dataMap.put("memberUuid", memberResponseDto.getUuid());
         dataMap.put("gender", memberResponseDto.getGender());
         dataMap.put("height", inbodyResponseDto.getHeight());
         dataMap.put("bodyWeight", inbodyResponseDto.getBodyWeight());

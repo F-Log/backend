@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -12,6 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DietFeedbackRequest {
-    private UUID dietUuid;
+    private UUID memberUuid;
+    private LocalDate date;
     private String dietFeedback;
 }

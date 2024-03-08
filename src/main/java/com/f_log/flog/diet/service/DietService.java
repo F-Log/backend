@@ -82,8 +82,8 @@ public class DietService {
         dietRepository.save(diet);
     }
 
-    public DailyIntakeDto getTotalIntakeForDay(LocalDate day, MemberResponseDto memberDto) {
-        List<Diet> diets = dietRepository.findByMealDateAndMemberUuid(day, memberDto.getUuid());
+    public DailyIntakeDto getTotalIntakeForDay(LocalDate date, MemberResponseDto memberDto) {
+        List<Diet> diets = dietRepository.findByMealDateAndMemberUuid(date, memberDto.getUuid());
 
         int totalCarbohydrate = 0;
         int totalProtein = 0;
