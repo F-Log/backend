@@ -10,7 +10,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +33,12 @@ public class FoodService {
     public Food saveFood(FoodRequestDto foodRequestDto) {
         Food food = foodRequestDto.toEntity();
         return foodRepository.save(food);
+    }
+
+    @Transactional
+    public Page<Food> findFoodsByFoodNameAndUser(String foodName, UUID memberUuid, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return foodRepository.searchByFoodNameAndUser(foodName, memberUuid, pageable);
     }
 
     public Food findFood(Long foodId) {
