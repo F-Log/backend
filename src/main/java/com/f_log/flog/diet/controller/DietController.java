@@ -7,7 +7,6 @@ import com.f_log.flog.diet.dto.UpdateDietRequest;
 import com.f_log.flog.diet.service.DietService;
 import com.f_log.flog.member.dto.MemberResponseDto;
 import com.f_log.flog.member.service.MemberService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.*;
@@ -49,8 +48,8 @@ public class DietController {
 
     @GetMapping("/daily-intake")
     public ResponseEntity<DailyIntakeDto> getTotalIntakeForDay(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-                                                               @RequestParam("memberId") UUID memberId) {
-        MemberResponseDto memberDto = memberService.getMemberByUuid(memberId);
+                                                               @RequestParam("memberUuid") UUID memberUuid) {
+        MemberResponseDto memberDto = memberService.getMemberByUuid(memberUuid);
 
         DailyIntakeDto dailyIntake = dietService.getTotalIntakeForDay(date, memberDto);
         return ResponseEntity.ok(dailyIntake);

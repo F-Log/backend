@@ -11,5 +11,5 @@ import java.util.UUID;
 
 public interface DietRepository extends JpaRepository<Diet, Long> {
     Optional<Diet> findByDietUuidAndIsDeletedFalse(UUID dietUuid);
-    List<Diet> findByMealDateAndMemberUuid(LocalDate mealDate, UUID memberId);
+    List<Diet> findByMealDateAndMemberUuidAndIsDeletedFalse(LocalDate mealDate, UUID memberId);
 }
