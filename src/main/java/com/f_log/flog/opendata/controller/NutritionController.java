@@ -21,19 +21,42 @@ public class NutritionController {
 
     @GetMapping("/api/v1/nutrition")
     public ResponseEntity<List<Food>> getNutritionInfo(
-            @RequestParam(defaultValue = "1") String pageNo,
-            @RequestParam(defaultValue = "1000") String numOfRows,
             @RequestParam(defaultValue = "json") String type,
             @RequestParam(required = false) String foodName) {
 
-        List<Food> foods = nutritionService.getNutritionInfo(pageNo, numOfRows, type, foodName);
-        foodService.saveAllFoods(foods);
+        // pageNo와 numOfRows 파라미터를 제거합니다.
+        List<Food> foods = nutritionService.getNutritionInfo(type, foodName);
 
-        if (foods != null) {
-            foodService.saveAllFoods(foods);
+        // 데이터가 있을 경우에만 배치 처리로 저장합니다.
+        if (foods != null && !foods.isEmpty()) {
+            int batchSize = 50; // 배치 사이즈를 설정합니다.
+            foodService.saveFoodInBatches(foods, batchSize);
             return ResponseEntity.ok().body(foods);
         } else {
             return ResponseEntity.noContent().build();
         }
     }
+
+//    @GetMapping("/api/v1/nutrition")
+//    public ResponseEntity<List<Food>> getNutritionInfo(
+//            @RequestParam(defaultValue = "1") String pageNo,
+//            @RequestParam(defaultValue = "1000") String numOfRows,
+//            @RequestParam(defaultValue = "json") String type,
+//            @RequestParam(required = false) String foodName) {
+//
+//        List<Food> foods = nutritionService.getNutritionInfo(pageNo, numOfRows, type, foodName);
+//        foodService.saveAllFoods(foods);
+//
+//        if (foods != null) {
+//            int batchSize = 100;
+//            foodService.saveFoodInBatches(foods, batchSize);
+//        }
+//        return foods != null && !foods.isEmpty() ? ResponseEntity.ok().body(foods) : ResponseEntity.noContent().build();
+//    }
 }
+
+
+//            foodService.saveAllFoods(foods);
+//            return ResponseEntity.ok().body(foods);
+//        } else {
+//            return ResponseEntity.noContent().build();

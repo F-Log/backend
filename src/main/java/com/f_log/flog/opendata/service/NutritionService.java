@@ -14,7 +14,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Iterator;
 
 import java.net.URI;
 import java.util.List;
@@ -31,22 +30,53 @@ public class NutritionService {
     @Value("${api.key}")
     private String apiKey;
 
-    public List<Food> getNutritionInfo(String pageNo, String numOfRows, String type, String foodName) {
-        URI uri = UriComponentsBuilder
-                .fromHttpUrl(apiUrl + "/" + apiKey + "/I2790/" + type + "/" + pageNo + "/" + numOfRows + "/DESC_KOR=" + foodName)
-                .build()
-                .encode()
-                .toUri();
-        String response = restTemplate.getForObject(uri, String.class);
-        saveResponseToFile(response);
-        return extractFoodsFromResponse(response);
+    public List<Food> getNutritionInfo(String type, String foodName) {
+        List<Food> allFoods = new ArrayList<>();
+        int pageNo = 1;
+        final int rowsPerPage = 1000; // 한 번에 요청할 데이터 수
+        String response = null; // 응답을 저장할 변수 초기화
+        while (true) {
+            // 페이지 번호와 종료 번호를 사용하여 요청 URL 구성
+            URI uri = UriComponentsBuilder
+                    .fromHttpUrl(apiUrl + "/" + apiKey + "/I2790/" + type + "/" + pageNo + "/" + (pageNo + rowsPerPage - 1) + "/DESC_KOR=" + foodName)
+                    .build()
+                    .encode()
+                    .toUri();
+            response = restTemplate.getForObject(uri, String.class); // 응답 저장
+            System.out.println(uri);
+
+            if (response == null || response.contains("\"total_count\":\"0\"")) {
+                break; // 더 이상 데이터가 없으면 반복 종료
+            }
+
+            List<Food> foods = extractFoodsFromResponse(response);
+            if (!foods.isEmpty()) {
+                allFoods.addAll(foods);
+                pageNo += rowsPerPage; // 다음 요청을 위해 페이지 번호를 증가
+            } else {
+                break; // 데이터가 비어있으면 반복 종료
+            }
+        }
+
+        processAndDeleteResponseFile(response);
+        return allFoods;
     }
 
+//    public List<Food> getNutritionInfo(String pageNo, String numOfRows, String type, String foodName) {
+//        URI uri = UriComponentsBuilder
+//                .fromHttpUrl(apiUrl + "/" + apiKey + "/I2790/" + type + "/" + pageNo + "/" + numOfRows + "/DESC_KOR=" + foodName)
+//                .build()
+//                .encode()
+//                .toUri();
+//        String response = restTemplate.getForObject(uri, String.class);
+//        saveResponseToFile(response);
+//        return extractFoodsFromResponse(response);
+//    }
+
     /**
-     * JSON 응답에서 필요한 데이터를 추출하여 Food 객체 리스트로 반환합니다.
+     * JSON 응답을 파일로 저장한 뒤 파일을 삭제합니다.
      *
      * @param response JSON 형태의 응답 문자열
-     * @return 추출된 Food 객체 리스트
      */
     private List<Food> extractFoodsFromResponse(String response) {
         try {
@@ -59,6 +89,7 @@ public class NutritionService {
                 for (JsonNode item : items) {
                     Food food = Food.builder()
                             .foodName(item.path("DESC_KOR").asText())
+                            .makerName(item.path("MAKER_NAME").asText())
                             .servingSize(item.path("SERVING_SIZE").asInt())
                             .servingUnit(item.path("SERVING_UNIT").asInt())
                             .calories(item.path("NUTR_CONT1").asInt())
@@ -86,14 +117,19 @@ public class NutritionService {
      *
      * @param response JSON 형태의 응답 문자열
      */
-    private void saveResponseToFile(String response) {
+    private void processAndDeleteResponseFile(String response) {
         try {
             Path path = Path.of("nutrition_response.json");
-            Files.deleteIfExists(path);
+            if (Files.exists(path)) {
+                Files.delete(path);
+                System.out.println("Response file deleted successfully.");
+            }
             Files.writeString(path, response, StandardOpenOption.CREATE);
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Failed to delete or write response file.");
         }
     }
+
 
 }
