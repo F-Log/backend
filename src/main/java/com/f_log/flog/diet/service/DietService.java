@@ -36,10 +36,7 @@ public class DietService {
             throw new EntityNotFoundException("Member not found");
         }
 
-        UUID dietUuid = UUID.randomUUID();
-
         Diet diet = Diet.builder()
-                .dietUuid(dietUuid)
                 .member(member)
                 .totalCarbohydrate(request.getTotalCarbohydrate())
                 .totalProtein(request.getTotalProtein())

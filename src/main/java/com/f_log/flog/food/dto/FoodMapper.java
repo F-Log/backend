@@ -8,7 +8,7 @@ public class FoodMapper {
 
     public FoodDto toDto(Food food) {
         return FoodDto.builder()
-                .id(food.getId())
+                .foodUuid(food.getFoodUuid())
                 .foodName(food.getFoodName())
                 .makerName(food.getMakerName())
                 .carbohydrate(food.getCarbohydrate())
@@ -27,7 +27,7 @@ public class FoodMapper {
 
     public Food toEntity(FoodDto foodDto) {
         return Food.builder()
-                .id(foodDto.getId())
+                .foodUuid(foodDto.getFoodUuid())
                 .foodName(foodDto.getFoodName())
                 .makerName(foodDto.getMakerName())
                 .carbohydrate(foodDto.getCarbohydrate())
