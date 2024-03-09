@@ -1,18 +1,18 @@
 package com.f_log.flog.diet.service;
 
 import com.f_log.flog.diet.domain.Diet;
-import com.f_log.flog.diet.dto.CreateDietRequest;
-import com.f_log.flog.diet.dto.DietDto;
-import com.f_log.flog.diet.dto.DietMapper;
-import com.f_log.flog.diet.dto.UpdateDietRequest;
+import com.f_log.flog.diet.dto.*;
 import com.f_log.flog.diet.repository.DietRepository;
 import com.f_log.flog.member.domain.Member;
+import com.f_log.flog.member.dto.MemberResponseDto;
 import com.f_log.flog.member.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -80,5 +80,39 @@ public class DietService {
                 .orElseThrow(() -> new EntityNotFoundException("Diet not found"));
         diet.setDeleted();
         dietRepository.save(diet);
+    }
+
+    public DailyIntakeDto getTotalIntakeForDay(LocalDate date, MemberResponseDto memberDto) {
+        List<Diet> diets = dietRepository.findByMealDateAndMemberUuidAndIsDeletedFalse(date, memberDto.getUuid());
+
+        int totalCarbohydrate = 0;
+        int totalProtein = 0;
+        int totalFat = 0;
+        int totalSodium = 0;
+        int totalCholesterol = 0;
+        int totalSugars = 0;
+        int totalCalories = 0;
+
+        for (Diet diet : diets) {
+            totalCarbohydrate += diet.getTotalCarbohydrate();
+            totalProtein += diet.getTotalProtein();
+            totalFat += diet.getTotalFat();
+            totalSodium += diet.getTotalSodium();
+            totalCholesterol += diet.getTotalCholesterol();
+            totalSugars += diet.getTotalSugars();
+            totalCalories += diet.getTotalCalories();
+        }
+
+        DailyIntakeDto dailyIntake = DailyIntakeDto.builder()
+                .totalCarbohydrate(totalCarbohydrate)
+                .totalProtein(totalProtein)
+                .totalFat(totalFat)
+                .totalSodium(totalSodium)
+                .totalCholesterol(totalCholesterol)
+                .totalSugars(totalSugars)
+                .totalCalories(totalCalories)
+                .build();
+
+        return dailyIntake;
     }
 }

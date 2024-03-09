@@ -23,23 +23,9 @@ public class DietFeedbackService {
 
     @Transactional
     public DietFeedbackDto createDietFeedback(DietFeedbackRequest dietFeedbackRequest) {
-        UUID dietUuid = dietFeedbackRequest.getDietUuid();
-        Diet diet = dietRepository.findByDietUuidAndIsDeletedFalse(dietUuid)
-                .orElseThrow(() -> new EntityNotFoundException("Diet not found with UUID: " + dietUuid));
-
-        if (diet != null) {
-            boolean feedbackExists = dietFeedbackRepository.existsByDietAndIsDeletedFalse(diet);
-
-            if (!feedbackExists) {
-                DietFeedback dietFeedback = new DietFeedback(dietFeedbackRequest.getDietFeedback(), diet);
-                dietFeedbackRepository.save(dietFeedback);
-                return dietFeedbackMapper.toDto(dietFeedback);
-            } else {
-                throw new RuntimeException("DietFeedback for Inbody with UUID " + dietUuid + " already exists.");
-            }
-        } else {
-            throw new RuntimeException("Diet with UUID " + dietUuid + " not found or has been deleted.");
-        }
+        DietFeedback dietFeedback = new DietFeedback(dietFeedbackRequest.getDietFeedback());
+        dietFeedbackRepository.save(dietFeedback);
+        return dietFeedbackMapper.toDto(dietFeedback);
     }
 
     @Transactional

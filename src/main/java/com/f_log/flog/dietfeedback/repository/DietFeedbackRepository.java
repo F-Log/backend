@@ -11,5 +11,4 @@ import java.util.Optional;
 public interface DietFeedbackRepository extends JpaRepository<DietFeedback, Long> {
 
     Optional<DietFeedback> findByIdAndIsDeletedFalse(Long id);
-    boolean existsByDietAndIsDeletedFalse(Diet diet);
 }
