@@ -33,11 +33,11 @@ public class Member extends BaseEntity {
     private List<Inbody> inbody = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "health_information_id")
+    @JoinColumn(name = "health_information_uuid")
     private HealthInformation healthInformation;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "exercise_id")
+    @JoinColumn(name = "exercise_uuid")
     private Exercise exercise;
   
     @OneToMany(mappedBy = "member")
