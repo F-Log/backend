@@ -12,9 +12,9 @@ import java.util.UUID;
 public class Exercise extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exercise_id")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "exercise_uuid", columnDefinition = "BINARY(16)")
+    private UUID uuid;
 
     @Column(name = "member_uuid", nullable = false)
     private UUID memberUuid;
