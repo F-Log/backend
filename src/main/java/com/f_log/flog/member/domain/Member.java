@@ -3,6 +3,7 @@ package com.f_log.flog.member.domain;
 import com.f_log.flog.allergy.domain.Allergy;
 import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.exercise.domain.Exercise;
+import com.f_log.flog.exercise.domain.ExerciseIntensity;
 import com.f_log.flog.global.domain.BaseEntity;
 import com.f_log.flog.healthinformation.domain.HealthInformation;
 import com.f_log.flog.inbody.domain.Inbody;
@@ -86,6 +87,14 @@ public class Member extends BaseEntity {
                 .gender(memberRequestDto.getGender())
                 .age(memberRequestDto.getAge())
                 .build();
+    }
+
+    public void setHealthInformation(HealthInformation healthInformation) {
+        this.healthInformation = healthInformation;
+    }
+
+    public void setExercise(Exercise exercise) {
+        this.exercise = exercise;
     }
 
     public void setUuid(UUID uuid) {

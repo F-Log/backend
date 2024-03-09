@@ -45,6 +45,10 @@ public class HealthInformationService {
         healthInformation.changeDailyActivity(requestDto.getDailyActivity());
         HealthInformation savedHealthInformation = healthInformationRepository.save(healthInformation);
 
+        // Update Member's healthInformation field to reference the newly created HealthInformation entity
+        member.setHealthInformation(savedHealthInformation);
+        memberRepository.save(member);
+
         return HealthInformationResponseDto.fromEntity(savedHealthInformation);
     }
 
