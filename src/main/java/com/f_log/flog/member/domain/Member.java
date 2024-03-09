@@ -20,9 +20,11 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 public class Member extends BaseEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
-    private Long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "uuid", columnDefinition = "BINARY(16)")
+    private UUID uuid;
 
     @OneToMany(mappedBy = "member")
     private List<Inbody> inbody = new ArrayList<>();
@@ -37,9 +39,6 @@ public class Member extends BaseEntity {
   
     @OneToMany(mappedBy = "member")
     private List<Allergy> allergies = new ArrayList<>();
-
-    @Column(name = "uuid", columnDefinition = "BINARY(16)")
-    private UUID uuid;
 
     @Column(name = "login_id", length = 45)
     private String loginId;
@@ -61,13 +60,12 @@ public class Member extends BaseEntity {
     private List<Diet> diets = new ArrayList<>();
 
     @Builder
-    public Member(String loginId, String password, String name, Gender gender, int age, UUID uuid) {
+    public Member(String loginId, String password, String name, Gender gender, int age) {
         this.loginId = loginId;
         this.password = password;
         this.name = name;
         this.gender = gender;
         this.age = age;
-        this.uuid = uuid;
     }
 
     public void updateMember(String loginId, String password, String name, Gender gender, int age) {
@@ -85,7 +83,6 @@ public class Member extends BaseEntity {
                 .name(memberRequestDto.getName())
                 .gender(memberRequestDto.getGender())
                 .age(memberRequestDto.getAge())
-                .uuid(UUID.randomUUID())
                 .build();
     }
 

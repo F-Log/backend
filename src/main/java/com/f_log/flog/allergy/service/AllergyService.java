@@ -31,14 +31,14 @@ public class AllergyService {
         return allergyMapper.toDto(allergy);
     }
 
-    public AllergyDto findAllergy(Long allergyId) {
-        Allergy allergy = allergyRepository.findByIdAndIsDeletedFalse(allergyId).orElse(null);
+    public AllergyDto findAllergy(UUID allergyUuid) {
+        Allergy allergy = allergyRepository.findByUuidAndIsDeletedFalse(allergyUuid).orElse(null);
         return allergyMapper.toDto(allergy);
     }
 
     @Transactional
-    public boolean updateAllergy(Long allergyId, AllergyRequest allergyRequest) {
-        Allergy allergy = allergyRepository.findByIdAndIsDeletedFalse(allergyId).orElse(null);
+    public boolean updateAllergy(UUID allergyUuid, AllergyRequest allergyRequest) {
+        Allergy allergy = allergyRepository.findByUuidAndIsDeletedFalse(allergyUuid).orElse(null);
         if (allergy != null) {
             allergy.setAllergy(allergyRequest.getAllergy());
             allergyRepository.save(allergy);
@@ -49,8 +49,8 @@ public class AllergyService {
     }
 
     @Transactional
-    public boolean deleteAllergy(Long allergyId) {
-        Allergy allergy = allergyRepository.findByIdAndIsDeletedFalse(allergyId).orElse(null);
+    public boolean deleteAllergy(UUID allergyUuid) {
+        Allergy allergy = allergyRepository.findByUuidAndIsDeletedFalse(allergyUuid).orElse(null);
         if (allergy != null) {
             allergy.setDeleted();
             allergyRepository.save(allergy);

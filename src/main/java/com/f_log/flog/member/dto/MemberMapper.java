@@ -25,7 +25,6 @@ public class MemberMapper {
                 .name(memberRequestDto.getName())
                 .gender(memberRequestDto.getGender())
                 .age(memberRequestDto.getAge())
-                .uuid(UUID.randomUUID())
                 .build();
     }
 

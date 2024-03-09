@@ -10,9 +10,10 @@ import java.util.UUID;
 @Entity
 @Getter
 public class HealthInformation extends BaseEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "health_information_id")
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "health_information_uuid", columnDefinition = "BINARY(16)")
+    private UUID uuid;
 
     @OneToOne(mappedBy = "healthInformation")
     private Member member;

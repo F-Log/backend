@@ -56,7 +56,7 @@ public class Diet extends BaseEntity {
 
     // member와의 N:1 관계
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_uuid")
     private Member member;
 
     @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL, orphanRemoval = true)

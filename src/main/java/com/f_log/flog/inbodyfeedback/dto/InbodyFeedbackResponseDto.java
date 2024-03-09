@@ -2,13 +2,15 @@ package com.f_log.flog.inbodyfeedback.dto;
 
 import lombok.Getter;
 
+import java.util.UUID;
+
 @Getter
 public class InbodyFeedbackResponseDto {
-    private final Long id;
+    private final UUID uuid;
     private final String inbodyFeedback;
 
-    public InbodyFeedbackResponseDto(Long id, String inbodyFeedback) {
-        this.id = id;
+    public InbodyFeedbackResponseDto(UUID uuid, String inbodyFeedback) {
+        this.uuid = uuid;
         this.inbodyFeedback = inbodyFeedback;
     }
 }

@@ -25,25 +25,24 @@ public class HealthInformationController {
     /**
      * 건강 정보를 생성합니다.
      *
-     * @param uuid       회원 UUID
      * @param requestDto 요청 DTO
      * @return 생성된 건강 정보 응답 DTO
      */
-    @PostMapping("/{uuid}")
-    public ResponseEntity<HealthInformationResponseDto> createHealthInformation(@PathVariable UUID uuid, @RequestBody HealthInformationRequestDto requestDto) {
-        HealthInformationResponseDto createdHealthInformation = healthInformationService.createHealthInformation(uuid, requestDto);
+    @PostMapping("/new")
+    public ResponseEntity<HealthInformationResponseDto> createHealthInformation(@RequestBody HealthInformationRequestDto requestDto) {
+        HealthInformationResponseDto createdHealthInformation = healthInformationService.createHealthInformation(requestDto);
         return new ResponseEntity<>(createdHealthInformation, HttpStatus.CREATED);
     }
 
     /**
      * 멤버의 건강 정보를 조회합니다.
      *
-     * @param uuid 멤버 UUID
+     * @param memberUuid 멤버 UUID
      * @return 건강 정보 응답 DTO
      */
-    @GetMapping("/{uuid}")
-    public ResponseEntity<HealthInformationResponseDto> getHealthInformationByMemberUuid(@PathVariable UUID uuid) {
-        return healthInformationService.getHealthInformationByMemberUuid(uuid)
+    @GetMapping("/{memberUuid}")
+    public ResponseEntity<HealthInformationResponseDto> getHealthInformationByMemberUuid(@PathVariable UUID memberUuid) {
+        return healthInformationService.getHealthInformationByMemberUuid(memberUuid)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -51,25 +50,25 @@ public class HealthInformationController {
     /**
      * 멤버의 건강 정보를 업데이트합니다.
      *
-     * @param uuid       멤버 UUID
+     * @param memberUuid       멤버 UUID
      * @param requestDto 요청 DTO
      * @return 업데이트된 건강 정보 응답 DTO
      */
-    @PutMapping("/{uuid}")
-    public ResponseEntity<HealthInformationResponseDto> updateHealthInformationByMemberUuid(@PathVariable UUID uuid, @RequestBody HealthInformationRequestDto requestDto) {
-        HealthInformationResponseDto updatedHealthInformation = healthInformationService.updateHealthInformationByMemberUuid(uuid, requestDto);
+    @PutMapping("/edit")
+    public ResponseEntity<HealthInformationResponseDto> updateHealthInformationByMemberUuid(@RequestBody HealthInformationRequestDto requestDto) {
+        HealthInformationResponseDto updatedHealthInformation = healthInformationService.updateHealthInformationByMemberUuid(requestDto);
         return ResponseEntity.ok(updatedHealthInformation);
     }
 
     /**
      * 멤버의 건강 정보를 삭제합니다.
      *
-     * @param uuid 멤버 UUID
+     * @param memberUuid 멤버 UUID
      * @return 삭제 결과 응답
      */
-    @DeleteMapping("/{uuid}")
-    public ResponseEntity<Void> deleteHealthInformationByMemberUuid(@PathVariable UUID uuid) {
-        boolean deleted = healthInformationService.deleteHealthInformationByMemberUuid(uuid);
+    @DeleteMapping("/{memberUuid}")
+    public ResponseEntity<Void> deleteHealthInformationByMemberUuid(@PathVariable UUID memberUuid) {
+        boolean deleted = healthInformationService.deleteHealthInformationByMemberUuid(memberUuid);
         if (deleted) {
             return ResponseEntity.ok().build();
         } else {

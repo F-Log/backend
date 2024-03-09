@@ -21,6 +21,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    // ISSUE: RESPONSE ENTITY SHOWN
     @PostMapping("/new")
     public ResponseEntity<MemberResponseDto> createMember(@RequestBody MemberRequestDto memberRequestDto) {
         UUID uuid = memberService.saveMember(memberRequestDto);

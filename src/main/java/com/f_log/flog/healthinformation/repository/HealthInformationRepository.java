@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface HealthInformationRepository extends JpaRepository<HealthInformation, Long> {
+public interface HealthInformationRepository extends JpaRepository<HealthInformation, UUID> {
     Optional<HealthInformation> findByMemberUuidAndIsDeletedFalse(UUID uuid);
 }

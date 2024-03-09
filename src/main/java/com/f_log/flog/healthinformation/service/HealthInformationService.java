@@ -32,7 +32,8 @@ public class HealthInformationService {
      * @return 생성된 건강 정보 DTO
      */
     @Transactional
-    public HealthInformationResponseDto createHealthInformation(UUID memberUuid, HealthInformationRequestDto requestDto) {
+    public HealthInformationResponseDto createHealthInformation(HealthInformationRequestDto requestDto) {
+        UUID memberUuid = requestDto.getMemberUuid();
         Optional<HealthInformation> existingHealthInformation = healthInformationRepository.findByMemberUuidAndIsDeletedFalse(memberUuid);
         if (existingHealthInformation.isPresent()) {
             throw new IllegalArgumentException("Health information for member with UUID " + memberUuid + " already exists.");
@@ -50,26 +51,26 @@ public class HealthInformationService {
     /**
      * 멤버의 건강 정보를 조회합니다.
      *
-     * @param uuid 멤버 UUID
+     * @param memberUuid 멤버 UUID
      * @return 건강 정보 DTO
      */
     @Transactional
-    public Optional<HealthInformationResponseDto> getHealthInformationByMemberUuid(UUID uuid) {
-        return healthInformationRepository.findByMemberUuidAndIsDeletedFalse(uuid)
+    public Optional<HealthInformationResponseDto> getHealthInformationByMemberUuid(UUID memberUuid) {
+        return healthInformationRepository.findByMemberUuidAndIsDeletedFalse(memberUuid)
                 .map(HealthInformationResponseDto::fromEntity);
     }
 
     /**
      * 멤버의 건강 정보를 업데이트합니다.
      *
-     * @param uuid       멤버 UUID
      * @param requestDto 요청 DTO
      * @return 업데이트된 건강 정보 DTO
      */
     @Transactional
-    public HealthInformationResponseDto updateHealthInformationByMemberUuid(UUID uuid, HealthInformationRequestDto requestDto) {
-        HealthInformation healthInformation = healthInformationRepository.findByMemberUuidAndIsDeletedFalse(uuid)
-                .orElseThrow(() -> new IllegalArgumentException("Health information for member with UUID " + uuid + " not found."));
+    public HealthInformationResponseDto updateHealthInformationByMemberUuid(HealthInformationRequestDto requestDto) {
+        UUID memberUuid = requestDto.getMemberUuid();
+        HealthInformation healthInformation = healthInformationRepository.findByMemberUuidAndIsDeletedFalse(memberUuid)
+                .orElseThrow(() -> new IllegalArgumentException("Health information for member with UUID " + memberUuid + " not found."));
 
         healthInformation.changeDailyActivity(requestDto.getDailyActivity());
         HealthInformation updatedHealthInformation = healthInformationRepository.save(healthInformation);
@@ -80,12 +81,12 @@ public class HealthInformationService {
     /**
      * 멤버의 건강 정보를 삭제합니다.
      *
-     * @param uuid 멤버 UUID
+     * @param memberUuid 멤버 UUID
      * @return 삭제 여부
      */
     @Transactional
-    public boolean deleteHealthInformationByMemberUuid(UUID uuid) {
-        return healthInformationRepository.findByMemberUuidAndIsDeletedFalse(uuid)
+    public boolean deleteHealthInformationByMemberUuid(UUID memberUuid) {
+        return healthInformationRepository.findByMemberUuidAndIsDeletedFalse(memberUuid)
                 .map(healthInformation -> {
                     healthInformation.setDeleted();
                     healthInformationRepository.save(healthInformation);
