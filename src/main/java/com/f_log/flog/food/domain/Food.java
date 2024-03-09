@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Getter
@@ -16,9 +17,10 @@ import lombok.NoArgsConstructor;
 public class Food extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "food_id")
-    private Long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "food_uuid", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
+    private UUID foodUuid;
 
     private String foodName;
 
@@ -34,7 +36,6 @@ public class Food extends BaseEntity {
     private double sugars;
     private int calories;
     private String makerName; // 제조사명
-
 
     @Column(name = "member_uuid")
     private UUID memberUuid;

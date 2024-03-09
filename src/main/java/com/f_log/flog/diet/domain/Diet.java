@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Getter
@@ -20,9 +21,10 @@ import java.util.UUID;
 public class Diet extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "diet_id")
-    private Long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "diet_uuid", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
+    private UUID dietUuid;
 
     @Column(name = "total_carbohydrate")
     private int totalCarbohydrate;
@@ -47,9 +49,6 @@ public class Diet extends BaseEntity {
 
     @Column(name = "meal_date")
     private LocalDate mealDate;
-
-    @Column(name = "diet_uuid", columnDefinition = "BINARY(16)")
-    private UUID dietUuid;
 
     @Enumerated(EnumType.STRING)
     private MealType mealType;

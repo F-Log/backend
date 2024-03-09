@@ -41,13 +41,13 @@ public class FoodService {
         return foodRepository.searchByFoodNameAndUser(foodName, memberUuid, pageable);
     }
 
-    public Food findFood(Long foodId) {
-        return foodRepository.findByIdAndIsDeletedFalse(foodId).orElse(null);
+    public Food findFood(UUID foodUuid) {
+        return foodRepository.findByFoodUuidAndIsDeletedFalse(foodUuid).orElse(null);
     }
 
     @Transactional
-    public boolean updateFood(Long id, FoodRequestDto foodRequestDto) {
-        Food food = foodRepository.findByIdAndIsDeletedFalse(id).orElse(null);
+    public boolean updateFood(UUID foodUuid, FoodRequestDto foodRequestDto) {
+        Food food = foodRepository.findByFoodUuidAndIsDeletedFalse(foodUuid).orElse(null);
         if (food != null) {
             food.updateMakerName(foodRequestDto.getMakerName());
             food.updateCholesterol(foodRequestDto.getCholesterol());
@@ -69,8 +69,8 @@ public class FoodService {
     }
 
     @Transactional
-    public boolean deleteFood(Long id) {
-        Food food = foodRepository.findByIdAndIsDeletedFalse(id).orElse(null);
+    public boolean deleteFood(UUID foodUuid) {
+        Food food = foodRepository.findByFoodUuidAndIsDeletedFalse(foodUuid).orElse(null);
         if (food != null) {
             food.setDeleted();
             foodRepository.save(food);
@@ -108,7 +108,7 @@ public class FoodService {
         stopWatch.start();
 
         for (int i = 0; i < foods.size(); i++) {
-            if (foods.get(i).getId() == null) {
+            if (foods.get(i).getFoodUuid() == null) {
                 entityManager.persist(foods.get(i));
             } else {
                 entityManager.merge(foods.get(i));

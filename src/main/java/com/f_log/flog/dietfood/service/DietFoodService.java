@@ -10,6 +10,7 @@ import com.f_log.flog.food.domain.Food;
 import com.f_log.flog.food.repository.FoodRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +23,10 @@ public class DietFoodService {
 
     @Transactional
     public DietFoodResponseDTO createDietFood(DietFoodRequestDTO requestDTO) {
-        Diet diet = dietRepository.findById(requestDTO.getDietId())
-                .orElseThrow(() -> new EntityNotFoundException("Diet not found with id: " + requestDTO.getDietId()));
-        Food food = foodRepository.findById(requestDTO.getFoodId())
-                .orElseThrow(() -> new EntityNotFoundException("Food not found with id: " + requestDTO.getFoodId()));
+        Diet diet = dietRepository.findByDietUuidAndIsDeletedFalse(requestDTO.getDietUuid())
+                .orElseThrow(() -> new EntityNotFoundException("Diet not found with id: " + requestDTO.getDietUuid()));
+        Food food = foodRepository.findByFoodUuidAndIsDeletedFalse(requestDTO.getFoodUuid())
+                .orElseThrow(() -> new EntityNotFoundException("Food not found with id: " + requestDTO.getFoodUuid()));
 
         DietFood dietFood = DietFood.builder()
                 .diet(diet)
@@ -36,32 +37,32 @@ public class DietFoodService {
         DietFood savedDietFood = dietFoodRepository.save(dietFood);
 
         return DietFoodResponseDTO.builder()
-                .id(savedDietFood.getId())
-                .dietId(savedDietFood.getDiet().getId())
-                .foodId(savedDietFood.getFood().getId())
+                .dietfoodUuid(savedDietFood.getDietfoodUuid())
+                .dietUuid(savedDietFood.getDiet().getDietUuid())
+                .foodUuid(savedDietFood.getFood().getFoodUuid())
                 .quantity(savedDietFood.getQuantity())
                 .notes(savedDietFood.getNotes())
                 .build();
     }
 
     @Transactional
-    public DietFoodResponseDTO findDietFood(Long id) {
-        DietFood dietFood = dietFoodRepository.findByIdAndIsDeletedFalse(id)
-                .orElseThrow(() -> new EntityNotFoundException("DietFood not found with id: " + id));
+    public DietFoodResponseDTO findDietFood(UUID dietfoodUuid) {
+        DietFood dietFood = dietFoodRepository.findByDietfoodUuidAndIsDeletedFalse(dietfoodUuid)
+                .orElseThrow(() -> new EntityNotFoundException("DietFood not found with id: " + dietfoodUuid));
 
         return DietFoodResponseDTO.builder()
-                .id(dietFood.getId())
-                .dietId(dietFood.getDiet().getId())
-                .foodId(dietFood.getFood().getId())
+                .dietfoodUuid(dietFood.getDietfoodUuid())
+                .dietUuid(dietFood.getDiet().getDietUuid())
+                .foodUuid(dietFood.getFood().getFoodUuid())
                 .quantity(dietFood.getQuantity())
                 .notes(dietFood.getNotes())
                 .build();
     }
 
     @Transactional
-    public DietFoodResponseDTO updateDietFood(Long id, DietFoodRequestDTO requestDTO) {
-        DietFood dietFood = dietFoodRepository.findByIdAndIsDeletedFalse(id)
-                .orElseThrow(() -> new EntityNotFoundException("DietFood not found with id: " + id));
+    public DietFoodResponseDTO updateDietFood(UUID dietfoodUuid, DietFoodRequestDTO requestDTO) {
+        DietFood dietFood = dietFoodRepository.findByDietfoodUuidAndIsDeletedFalse(dietfoodUuid)
+                .orElseThrow(() -> new EntityNotFoundException("DietFood not found with id: " + dietfoodUuid));
 
         dietFood.updateQuantity(requestDTO.getQuantity());
         dietFood.updateNotes(requestDTO.getNotes());
@@ -69,9 +70,9 @@ public class DietFoodService {
         dietFood = dietFoodRepository.save(dietFood);
 
         return DietFoodResponseDTO.builder()
-                .id(dietFood.getId())
-                .dietId(dietFood.getDiet().getId())
-                .foodId(dietFood.getFood().getId())
+                .dietfoodUuid(dietFood.getDietfoodUuid())
+                .dietUuid(dietFood.getDiet().getDietUuid())
+                .foodUuid(dietFood.getFood().getFoodUuid())
                 .quantity(dietFood.getQuantity())
                 .notes(dietFood.getNotes())
                 .build();
@@ -79,9 +80,9 @@ public class DietFoodService {
 
 
     @Transactional
-    public void deleteDietFood(Long id) {
-        DietFood dietFood = dietFoodRepository.findByIdAndIsDeletedFalse(id)
-                .orElseThrow(() -> new EntityNotFoundException("DietFood not found with id: " + id));
+    public void deleteDietFood(UUID dietfoodUuid) {
+        DietFood dietFood = dietFoodRepository.findByDietfoodUuidAndIsDeletedFalse(dietfoodUuid)
+                .orElseThrow(() -> new EntityNotFoundException("DietFood not found with id: " + dietfoodUuid));
         dietFood.setDeleted();
         dietFoodRepository.save(dietFood);
     }

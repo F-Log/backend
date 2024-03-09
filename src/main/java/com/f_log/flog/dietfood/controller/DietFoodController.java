@@ -3,6 +3,7 @@ package com.f_log.flog.dietfood.controller;
 import com.f_log.flog.dietfood.dto.DietFoodRequestDTO;
 import com.f_log.flog.dietfood.dto.DietFoodResponseDTO;
 import com.f_log.flog.dietfood.service.DietFoodService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,21 +21,21 @@ public class DietFoodController {
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DietFoodResponseDTO> getDietFood(@PathVariable Long id) {
-        DietFoodResponseDTO responseDTO = dietFoodService.findDietFood(id);
+    @GetMapping("/{dietfoodUuid}")
+    public ResponseEntity<DietFoodResponseDTO> getDietFood(@PathVariable UUID dietfoodUuid) {
+        DietFoodResponseDTO responseDTO = dietFoodService.findDietFood(dietfoodUuid);
         return ResponseEntity.ok(responseDTO);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<DietFoodResponseDTO> updateDietFood(@PathVariable Long id, @RequestBody DietFoodRequestDTO requestDTO) {
-        DietFoodResponseDTO responseDTO = dietFoodService.updateDietFood(id, requestDTO);
+    @PutMapping("/{dietfoodUuid}")
+    public ResponseEntity<DietFoodResponseDTO> updateDietFood(@PathVariable UUID dietfoodUuid, @RequestBody DietFoodRequestDTO requestDTO) {
+        DietFoodResponseDTO responseDTO = dietFoodService.updateDietFood(dietfoodUuid, requestDTO);
         return ResponseEntity.ok(responseDTO);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDietFood(@PathVariable Long id) {
-        dietFoodService.deleteDietFood(id);
+    @DeleteMapping("/{dietfoodUuid}")
+    public ResponseEntity<Void> deleteDietFood(@PathVariable UUID dietfoodUuid) {
+        dietFoodService.deleteDietFood(dietfoodUuid);
         return ResponseEntity.ok().build();
     }
 }

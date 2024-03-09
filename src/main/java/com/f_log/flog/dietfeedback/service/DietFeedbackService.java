@@ -29,8 +29,8 @@ public class DietFeedbackService {
     }
 
     @Transactional
-    public boolean updateDietFeedback(Long feedbackId, DietFeedbackRequest dietFeedbackRequest) {
-        DietFeedback dietFeedback = dietFeedbackRepository.findByIdAndIsDeletedFalse(feedbackId).orElse(null);
+    public boolean updateDietFeedback(UUID dietfeedbackUuid, DietFeedbackRequest dietFeedbackRequest) {
+        DietFeedback dietFeedback = dietFeedbackRepository.findByDietfeedbackUuidAndIsDeletedFalse(dietfeedbackUuid).orElse(null);
         if (dietFeedback != null) {
             dietFeedback.setDietFeedback(dietFeedbackRequest.getDietFeedback());
             return true;
@@ -39,14 +39,14 @@ public class DietFeedbackService {
         }
     }
 
-    public DietFeedbackDto getDietFeedback(Long feedbackid) {
-        DietFeedback dietFeedback = dietFeedbackRepository.findByIdAndIsDeletedFalse(feedbackid).orElse(null);
+    public DietFeedbackDto getDietFeedback(UUID dietfeedbackUuid) {
+        DietFeedback dietFeedback = dietFeedbackRepository.findByDietfeedbackUuidAndIsDeletedFalse(dietfeedbackUuid).orElse(null);
         return dietFeedbackMapper.toDto(dietFeedback);
     }
 
     @Transactional
-    public boolean deleteDietFeedback(Long feedbackId) {
-        DietFeedback dietFeedback = dietFeedbackRepository.findByIdAndIsDeletedFalse(feedbackId).orElse(null);
+    public boolean deleteDietFeedback(UUID dietfeedbackUuid) {
+        DietFeedback dietFeedback = dietFeedbackRepository.findByDietfeedbackUuidAndIsDeletedFalse(dietfeedbackUuid).orElse(null);
         if (dietFeedback != null) {
             dietFeedback.setDeleted();
             dietFeedbackRepository.save(dietFeedback);

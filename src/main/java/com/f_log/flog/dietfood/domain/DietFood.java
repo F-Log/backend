@@ -3,32 +3,37 @@ package com.f_log.flog.dietfood.domain;
 import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.food.domain.Food;
 import com.f_log.flog.global.domain.BaseEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DietFood extends BaseEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "dietfood_uuid", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
+    private UUID dietfoodUuid;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "diet_id")
+    @JoinColumn(name = "diet_uuid")
     private Diet diet;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "food_id")
+    @JoinColumn(name = "food_uuid")
     private Food food;
 
     private int quantity; // 수량

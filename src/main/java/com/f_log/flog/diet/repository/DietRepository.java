@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface DietRepository extends JpaRepository<Diet, Long> {
+public interface DietRepository extends JpaRepository<Diet, UUID> {
     Optional<Diet> findByDietUuidAndIsDeletedFalse(UUID dietUuid);
     List<Diet> findByMealDateAndMemberUuidAndIsDeletedFalse(LocalDate mealDate, UUID memberId);
 }
