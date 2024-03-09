@@ -19,7 +19,7 @@ public class Inbody extends BaseEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name="uuid2", strategy = "uuid2")
-    @Column(name = "inbody_id", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
+    @Column(name = "inbody_uuid", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
     private UUID inbodyUuid;
 
     @Column(name = "member_uuid", columnDefinition = "BINARY(16)")

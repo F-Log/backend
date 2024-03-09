@@ -4,6 +4,7 @@ import com.f_log.flog.global.domain.BaseEntity;
 import com.f_log.flog.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -12,9 +13,10 @@ import java.util.UUID;
 public class Exercise extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exercise_id")
-    private Long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "exercise_uuid", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
+    private UUID uuid;
 
     @Column(name = "member_uuid", nullable = false)
     private UUID memberUuid;

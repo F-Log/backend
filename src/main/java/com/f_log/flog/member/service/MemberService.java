@@ -27,10 +27,8 @@ public class MemberService {
     @Transactional
     public UUID saveMember(MemberRequestDto memberRequestDto) {
         Member member = memberMapper.fromDto(memberRequestDto);
-        UUID uuid = UUID.randomUUID();
-        member.setUuid(uuid);
         memberRepository.save(member);
-        return uuid;
+        return member.getUuid();
     }
 
     @Transactional

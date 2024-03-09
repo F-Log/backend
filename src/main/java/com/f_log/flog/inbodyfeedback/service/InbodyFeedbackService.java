@@ -44,23 +44,23 @@ public class InbodyFeedbackService {
     }
 
     @Transactional
-    public InbodyFeedback updateInbodyFeedback(Long feedbackId, InbodyFeedbackRequestDto requestDto) {
-        InbodyFeedback inbodyFeedback = getInbodyFeedback(feedbackId);
+    public InbodyFeedback updateInbodyFeedback(UUID feedbackUuid, InbodyFeedbackRequestDto requestDto) {
+        InbodyFeedback inbodyFeedback = getInbodyFeedback(feedbackUuid);
         InbodyFeedback updatedInbodyFeedback = new InbodyFeedback(requestDto.getInbodyFeedback(), inbodyFeedback.getInbody());
-        updatedInbodyFeedback.setId(inbodyFeedback.getId());
+        updatedInbodyFeedback.setId(inbodyFeedback.getUuid());
         return inbodyFeedbackRepository.save(updatedInbodyFeedback);
     }
 
 
     @Transactional(readOnly = true)
-    public InbodyFeedback getInbodyFeedback(Long feedbackId) {
-        return inbodyFeedbackRepository.findByIdAndIsDeletedFalse(feedbackId)
-                .orElseThrow(() -> new RuntimeException("InbodyFeedback with ID " + feedbackId + " not found or has been deleted."));
+    public InbodyFeedback getInbodyFeedback(UUID feedbackUuid) {
+        return inbodyFeedbackRepository.findByUuidAndIsDeletedFalse(feedbackUuid)
+                .orElseThrow(() -> new RuntimeException("InbodyFeedback with ID " + feedbackUuid + " not found or has been deleted."));
     }
 
     @Transactional
-    public void softDeleteInbodyFeedback(Long feedbackId) {
-        InbodyFeedback inbodyFeedback = getInbodyFeedback(feedbackId);
+    public void softDeleteInbodyFeedback(UUID feedbackUuid) {
+        InbodyFeedback inbodyFeedback = getInbodyFeedback(feedbackUuid);
         inbodyFeedback.setDeleted();
         inbodyFeedbackRepository.save(inbodyFeedback);
     }

@@ -9,7 +9,7 @@ public class InbodyFeedbackMapper {
 
     public InbodyFeedbackResponseDto toDto(InbodyFeedback inbodyFeedback) {
         return new InbodyFeedbackResponseDto(
-                inbodyFeedback.getId(),
+                inbodyFeedback.getUuid(),
                 inbodyFeedback.getInbodyFeedback()
         );
     }

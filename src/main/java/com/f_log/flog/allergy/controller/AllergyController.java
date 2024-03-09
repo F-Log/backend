@@ -30,26 +30,26 @@ public class AllergyController {
         }
     }
 
-    @GetMapping("/{allergyId}")
-    public ResponseEntity<AllergyDto> getAllergy(@PathVariable Long allergyId) {
-        AllergyDto found = allergyService.findAllergy(allergyId);
+    @GetMapping("/{allergyUuid}")
+    public ResponseEntity<AllergyDto> getAllergy(@PathVariable UUID allergyUuid) {
+        AllergyDto found = allergyService.findAllergy(allergyUuid);
         return new ResponseEntity<>(found, HttpStatus.OK);
     }
 
-    @PutMapping("/{allergyId}")
-    public ResponseEntity<AllergyDto> updateAllergy(@PathVariable Long allergyId, @RequestBody AllergyRequest request) {
-        boolean updated = allergyService.updateAllergy(allergyId, request);
+    @PutMapping("/{allergyUuid}")
+    public ResponseEntity<AllergyDto> updateAllergy(@PathVariable UUID allergyUuid, @RequestBody AllergyRequest request) {
+        boolean updated = allergyService.updateAllergy(allergyUuid, request);
         if (updated) {
-            AllergyDto updatedAllergy = allergyService.findAllergy(allergyId);
+            AllergyDto updatedAllergy = allergyService.findAllergy(allergyUuid);
             return ResponseEntity.ok(updatedAllergy);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/{allergyId}")
-    public ResponseEntity<Void> deleteAllergy(@PathVariable Long allergyId) {
-        boolean deleted = allergyService.deleteAllergy(allergyId);
+    @DeleteMapping("/{allergyUuid}")
+    public ResponseEntity<Void> deleteAllergy(@PathVariable UUID allergyUuid) {
+        boolean deleted = allergyService.deleteAllergy(allergyUuid);
         if (deleted) {
             return ResponseEntity.ok().build();
         } else {

@@ -8,7 +8,7 @@ public class AllergyMapper {
 
     public AllergyDto toDto(Allergy allergy) {
         return AllergyDto.builder()
-                .id(allergy.getId())
+                .uuid(allergy.getUuid())
                 .allergy(allergy.getAllergy())
                 .build();
     }

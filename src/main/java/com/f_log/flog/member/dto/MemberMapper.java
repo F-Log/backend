@@ -3,8 +3,6 @@ package com.f_log.flog.member.dto;
 import com.f_log.flog.member.domain.Member;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 public class MemberMapper {
     public MemberResponseDto toDto(Member member) {
@@ -25,7 +23,6 @@ public class MemberMapper {
                 .name(memberRequestDto.getName())
                 .gender(memberRequestDto.getGender())
                 .age(memberRequestDto.getAge())
-                .uuid(UUID.randomUUID())
                 .build();
     }
 

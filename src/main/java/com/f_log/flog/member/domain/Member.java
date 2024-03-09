@@ -3,6 +3,7 @@ package com.f_log.flog.member.domain;
 import com.f_log.flog.allergy.domain.Allergy;
 import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.exercise.domain.Exercise;
+import com.f_log.flog.exercise.domain.ExerciseIntensity;
 import com.f_log.flog.global.domain.BaseEntity;
 import com.f_log.flog.healthinformation.domain.HealthInformation;
 import com.f_log.flog.inbody.domain.Inbody;
@@ -11,6 +12,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,26 +22,26 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 public class Member extends BaseEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
-    private Long id;
+
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "member_uuid", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
+    private UUID uuid;
 
     @OneToMany(mappedBy = "member")
     private List<Inbody> inbody = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "health_information_id")
+    @JoinColumn(name = "health_information_uuid")
     private HealthInformation healthInformation;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "exercise_id")
+    @JoinColumn(name = "exercise_uuid")
     private Exercise exercise;
   
     @OneToMany(mappedBy = "member")
     private List<Allergy> allergies = new ArrayList<>();
-
-    @Column(name = "uuid", columnDefinition = "BINARY(16)")
-    private UUID uuid;
 
     @Column(name = "login_id", length = 45)
     private String loginId;
@@ -61,13 +63,12 @@ public class Member extends BaseEntity {
     private List<Diet> diets = new ArrayList<>();
 
     @Builder
-    public Member(String loginId, String password, String name, Gender gender, int age, UUID uuid) {
+    public Member(String loginId, String password, String name, Gender gender, int age) {
         this.loginId = loginId;
         this.password = password;
         this.name = name;
         this.gender = gender;
         this.age = age;
-        this.uuid = uuid;
     }
 
     public void updateMember(String loginId, String password, String name, Gender gender, int age) {
@@ -85,8 +86,15 @@ public class Member extends BaseEntity {
                 .name(memberRequestDto.getName())
                 .gender(memberRequestDto.getGender())
                 .age(memberRequestDto.getAge())
-                .uuid(UUID.randomUUID())
                 .build();
+    }
+
+    public void setHealthInformation(HealthInformation healthInformation) {
+        this.healthInformation = healthInformation;
+    }
+
+    public void setExercise(Exercise exercise) {
+        this.exercise = exercise;
     }
 
     public void setUuid(UUID uuid) {

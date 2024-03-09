@@ -30,23 +30,23 @@ public class InbodyFeedbackController {
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{feedbackId}")
-    public ResponseEntity<InbodyFeedbackResponseDto> updateInbodyFeedback(@PathVariable Long feedbackId, @RequestBody InbodyFeedbackRequestDto requestDto) {
-        InbodyFeedback updatedInbodyFeedback = inbodyFeedbackService.updateInbodyFeedback(feedbackId, requestDto);
+    @PutMapping("/{feedbackUuid}")
+    public ResponseEntity<InbodyFeedbackResponseDto> updateInbodyFeedback(@PathVariable UUID feedbackUuid, @RequestBody InbodyFeedbackRequestDto requestDto) {
+        InbodyFeedback updatedInbodyFeedback = inbodyFeedbackService.updateInbodyFeedback(feedbackUuid, requestDto);
         InbodyFeedbackResponseDto responseDto = inbodyFeedbackMapper.toDto(updatedInbodyFeedback);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
-    @GetMapping("/{feedbackId}")
-    public ResponseEntity<InbodyFeedbackResponseDto> getInbodyFeedback(@PathVariable Long feedbackId) {
-        InbodyFeedback inbodyFeedback = inbodyFeedbackService.getInbodyFeedback(feedbackId);
+    @GetMapping("/{feedbackUuid}")
+    public ResponseEntity<InbodyFeedbackResponseDto> getInbodyFeedback(@PathVariable UUID feedbackUuid) {
+        InbodyFeedback inbodyFeedback = inbodyFeedbackService.getInbodyFeedback(feedbackUuid);
         InbodyFeedbackResponseDto responseDto = inbodyFeedbackMapper.toDto(inbodyFeedback);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{feedbackId}")
-    public ResponseEntity<Void> deleteInbodyFeedback(@PathVariable Long feedbackId) {
-        inbodyFeedbackService.softDeleteInbodyFeedback(feedbackId);
+    @DeleteMapping("/{feedbackUuid}")
+    public ResponseEntity<Void> deleteInbodyFeedback(@PathVariable UUID feedbackUuid) {
+        inbodyFeedbackService.softDeleteInbodyFeedback(feedbackUuid);
         return ResponseEntity.noContent().build();
     }
 }

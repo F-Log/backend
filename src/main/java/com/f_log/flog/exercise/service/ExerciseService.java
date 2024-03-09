@@ -44,6 +44,11 @@ public class ExerciseService {
         }
         Exercise newExercise = exerciseMapper.toEntity(newExerciseDto, memberUuid);
         Exercise savedExercise = exerciseRepository.save(newExercise);
+
+        // Update Member's exercise field to reference the newly created Exercise entity
+        member.setExercise(savedExercise);
+        memberRepository.save(member);
+
         return exerciseMapper.toDto(savedExercise);
     }
 

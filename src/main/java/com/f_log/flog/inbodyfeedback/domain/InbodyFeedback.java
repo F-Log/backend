@@ -4,13 +4,18 @@ import com.f_log.flog.global.domain.BaseEntity;
 import com.f_log.flog.inbody.domain.Inbody;
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.hibernate.annotations.GenericGenerator;
+
+import java.util.UUID;
 
 @Entity
 @Getter
 public class InbodyFeedback extends BaseEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "feedback_id")
-    private Long id;
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "inbody_feedback_uuid", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
+    private UUID uuid;
 
     @Column(name = "inbody_feedback", length = 10000)
     private String inbodyFeedback;
@@ -26,7 +31,7 @@ public class InbodyFeedback extends BaseEntity {
         this.inbody = inbody;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(UUID uuid) {
+        this.uuid = uuid;
     }
 }
