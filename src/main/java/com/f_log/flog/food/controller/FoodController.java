@@ -28,9 +28,9 @@ public class FoodController {
     }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<FoodDto> getFoodById(@PathVariable Long id) {
-        Food food = foodService.findFood(id);
+    @GetMapping("/{foodUuid}")
+    public ResponseEntity<FoodDto> getFoodById(@PathVariable UUID foodUuid) {
+        Food food = foodService.findFood(foodUuid);
         if (food == null) {
             return ResponseEntity.notFound().build();
         }
@@ -49,11 +49,11 @@ public class FoodController {
         return ResponseEntity.ok(foodDtoPage);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<FoodDto> updateFood(@PathVariable Long id, @RequestBody FoodRequestDto foodRequestDto) {
-        boolean updated = foodService.updateFood(id, foodRequestDto);
+    @PutMapping("/{foodUuid}")
+    public ResponseEntity<FoodDto> updateFood(@PathVariable UUID foodUuid, @RequestBody FoodRequestDto foodRequestDto) {
+        boolean updated = foodService.updateFood(foodUuid, foodRequestDto);
         if (updated) {
-            Food food = foodService.findFood(id);
+            Food food = foodService.findFood(foodUuid);
             FoodDto updatedFood = foodMapper.toDto(food);
             return ResponseEntity.ok(updatedFood);
         } else {
@@ -61,9 +61,9 @@ public class FoodController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFood(@PathVariable Long id) {
-        boolean deleted = foodService.deleteFood(id);
+    @DeleteMapping("/{foodUuid}")
+    public ResponseEntity<Void> deleteFood(@PathVariable UUID foodUuid) {
+        boolean deleted = foodService.deleteFood(foodUuid);
         if (deleted) {
             return ResponseEntity.ok().build();
         } else {

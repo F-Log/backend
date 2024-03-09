@@ -9,7 +9,7 @@ public class DietFeedbackMapper {
     public DietFeedbackDto toDto(DietFeedback dietFeedback) {
         return DietFeedbackDto.builder()
                 .dietFeedback(dietFeedback.getDietFeedback())
-                .id(dietFeedback.getId())
+                .dietfeedbackUuid(dietFeedback.getDietfeedbackUuid())
                 .build();
     }
 

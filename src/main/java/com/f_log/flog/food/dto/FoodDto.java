@@ -1,12 +1,13 @@
 package com.f_log.flog.food.dto;
 
+import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
 public class FoodDto {
-    private final Long id;
+    private final UUID foodUuid;
     private final String foodName;
     private final String makerName;
     private final double carbohydrate;

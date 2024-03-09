@@ -3,6 +3,7 @@ package com.f_log.flog.dietfeedback.controller;
 import com.f_log.flog.dietfeedback.dto.DietFeedbackDto;
 import com.f_log.flog.dietfeedback.dto.DietFeedbackRequest;
 import com.f_log.flog.dietfeedback.service.DietFeedbackService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,26 +22,26 @@ public class DietFeedbackController {
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{feedbackId}")
-    public ResponseEntity<DietFeedbackDto> getDietFeedback(@PathVariable Long feedbackId) {
-        DietFeedbackDto found = dietFeedbackService.getDietFeedback(feedbackId);
+    @GetMapping("/{dietfeedbackUuid}")
+    public ResponseEntity<DietFeedbackDto> getDietFeedback(@PathVariable UUID dietfeedbackUuid) {
+        DietFeedbackDto found = dietFeedbackService.getDietFeedback(dietfeedbackUuid);
         return new ResponseEntity<>(found, HttpStatus.OK);
     }
 
-    @PutMapping("/{feedbackId}")
-    public ResponseEntity<DietFeedbackDto> updateDietFeedback(@PathVariable Long feedbackId, @RequestBody DietFeedbackRequest request) {
-        boolean updated = dietFeedbackService.updateDietFeedback(feedbackId, request);
+    @PutMapping("/{dietfeedbackUuid}")
+    public ResponseEntity<DietFeedbackDto> updateDietFeedback(@PathVariable UUID dietfeedbackUuid, @RequestBody DietFeedbackRequest request) {
+        boolean updated = dietFeedbackService.updateDietFeedback(dietfeedbackUuid, request);
         if (updated) {
-            DietFeedbackDto updatedFeedback = dietFeedbackService.getDietFeedback(feedbackId);
+            DietFeedbackDto updatedFeedback = dietFeedbackService.getDietFeedback(dietfeedbackUuid);
             return ResponseEntity.ok(updatedFeedback);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/{feedbackId}")
-    public ResponseEntity<Void> deleteDietFeedback(@PathVariable Long feedbackId) {
-        boolean deleted = dietFeedbackService.deleteDietFeedback(feedbackId);
+    @DeleteMapping("/{dietfeedbackUuid}")
+    public ResponseEntity<Void> deleteDietFeedback(@PathVariable UUID dietfeedbackUuid) {
+        boolean deleted = dietFeedbackService.deleteDietFeedback(dietfeedbackUuid);
         if (deleted) {
             return ResponseEntity.ok().build();
         } else {
