@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -14,12 +15,13 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Allergy extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "allergy_uuid", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
     private UUID uuid;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_uuid")
     private Member member;
 
     @Column(name = "allergy")

@@ -4,6 +4,7 @@ import com.f_log.flog.global.domain.BaseEntity;
 import com.f_log.flog.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -11,8 +12,9 @@ import java.util.UUID;
 @Getter
 public class HealthInformation extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "health_information_uuid", columnDefinition = "BINARY(16)")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "health_information_uuid", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
     private UUID uuid;
 
     @OneToOne(mappedBy = "healthInformation")
