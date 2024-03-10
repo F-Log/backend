@@ -12,18 +12,20 @@ public class InbodyResponseDto {
     private final float bodyWeight;
     private final float height;
     private final float muscleMass;
+    private final float fatFreeMass;
     private final float bodyFatPercentage;
     private final float fatMass;
     private final float basalMetabolicRate;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
 
-    public InbodyResponseDto(UUID inbodyUuid, UUID memberUuid, float bodyWeight, float height, float muscleMass, float bodyFatPercentage, float fatMass, float basalMetabolicRate, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public InbodyResponseDto(UUID inbodyUuid, UUID memberUuid, float bodyWeight, float height, float muscleMass, float fatFreeMass,float bodyFatPercentage, float fatMass, float basalMetabolicRate, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.inbodyUuid = inbodyUuid;
         this.memberUuid = memberUuid;
         this.bodyWeight = bodyWeight;
         this.height = height;
         this.muscleMass = muscleMass;
+        this.fatFreeMass = fatFreeMass;
         this.bodyFatPercentage = bodyFatPercentage;
         this.fatMass = fatMass;
         this.basalMetabolicRate = basalMetabolicRate;
