@@ -4,6 +4,9 @@ import com.f_log.flog.diet.dto.DailyIntakeDto;
 import com.f_log.flog.diet.dto.DietDto;
 import com.f_log.flog.dietfeedback.dto.DietFeedbackDto;
 import com.f_log.flog.exercise.dto.ExerciseResponseDto;
+import com.f_log.flog.healthinformation.domain.DailyActivity;
+import com.f_log.flog.healthinformation.dto.HealthInformationRequestDto;
+import com.f_log.flog.healthinformation.dto.HealthInformationResponseDto;
 import com.f_log.flog.inbody.dto.InbodyResponseDto;
 import com.f_log.flog.inbodyfeedback.dto.InbodyFeedbackResponseDto;
 import com.f_log.flog.member.dto.MemberResponseDto;
@@ -15,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -63,13 +67,15 @@ public class GptService {
         return new ResponseEntity<>(body, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<InbodyFeedbackResponseDto> createInbodyFeedback(UUID inbodyUuid, InbodyResponseDto inbodyResponseDto, MemberResponseDto memberResponseDto, ExerciseResponseDto exerciseResponseDto) {
-        Map<String, Object> dataMap = createInbodyDataMap(inbodyUuid, inbodyResponseDto, memberResponseDto, exerciseResponseDto);
+    public ResponseEntity<InbodyFeedbackResponseDto> createInbodyFeedback(UUID inbodyUuid, InbodyResponseDto inbodyResponseDto, MemberResponseDto memberResponseDto, ExerciseResponseDto exerciseResponseDto, Optional<HealthInformationResponseDto> healthInformationResponseDto) {
+        Map<String, Object> dataMap = createInbodyDataMap(inbodyUuid, inbodyResponseDto, memberResponseDto, exerciseResponseDto, healthInformationResponseDto);
         ResponseEntity<InbodyFeedbackResponseDto> responseEntity = exchangeInbodyData(dataMap);
         return responseEntity;
     }
 
-    private Map<String, Object> createInbodyDataMap(UUID inbodyUuid, InbodyResponseDto inbodyResponseDto, MemberResponseDto memberResponseDto, ExerciseResponseDto exerciseResponseDto) {
+    private Map<String, Object> createInbodyDataMap(UUID inbodyUuid, InbodyResponseDto inbodyResponseDto, MemberResponseDto memberResponseDto, ExerciseResponseDto exerciseResponseDto, Optional<HealthInformationResponseDto> healthInformationResponseDto) {
+        DailyActivity activity = healthInformationResponseDto.map(HealthInformationResponseDto::getDailyActivity)
+                .orElse(DailyActivity.NO_INFORMATION);
         Map<String, Object> dataMap = new HashMap<>();
         // member and inbody info
         dataMap.put("inbodyUuid", inbodyUuid);
@@ -80,7 +86,8 @@ public class GptService {
         dataMap.put("bodyFatPercentage", inbodyResponseDto.getBodyFatPercentage());
         dataMap.put("muscleMass", inbodyResponseDto.getMuscleMass());
         dataMap.put("gender", memberResponseDto.getGender());
-        dataMap.put(("exercisePurpose"), exerciseResponseDto.getExercisePurpose());
+        dataMap.put("exercisePurpose", exerciseResponseDto.getExercisePurpose());
+        dataMap.put("healthInformation", activity);
         return dataMap;
     }
 
