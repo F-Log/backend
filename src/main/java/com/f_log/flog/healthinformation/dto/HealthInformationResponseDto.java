@@ -5,12 +5,9 @@ import com.f_log.flog.healthinformation.domain.HealthInformation;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.UUID;
-
 @Getter
 @Builder
 public class HealthInformationResponseDto {
-    private UUID memberUuid;
     private DailyActivity dailyActivity;
 
     /**
@@ -21,7 +18,6 @@ public class HealthInformationResponseDto {
      */
     public static HealthInformationResponseDto fromEntity(HealthInformation healthInformation) {
         return HealthInformationResponseDto.builder()
-                .memberUuid(healthInformation.getMemberUuid())
                 .dailyActivity(healthInformation.getDailyActivity())
                 .build();
     }

@@ -18,9 +18,6 @@ public class Exercise extends BaseEntity {
     @Column(name = "exercise_uuid", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
     private UUID uuid;
 
-    @Column(name = "member_uuid", nullable = false)
-    private UUID memberUuid;
-
     @Column(name = "exercise_type")
     private String exerciseType;
 
@@ -39,26 +36,7 @@ public class Exercise extends BaseEntity {
     @OneToOne(mappedBy = "exercise")
     private Member member;
 
-    /**
-     * 멤버의 UUID를 설정합니다.
-     *
-     * @param memberUuid 멤버의 UUID
-     */
-    public void setMemberUuid(UUID memberUuid) {
-        this.memberUuid = memberUuid;
-    }
-
-    /**
-     * 멤버의 UUID를 반환합니다.
-     *
-     * @return 멤버 UUID
-     */
-    public UUID getMemberUuid() {
-        return this.memberUuid;
-    }
-
-    public Exercise(UUID memberUuid, String exerciseType, float targetWeight, float exerciseFrequency, ExerciseIntensity exerciseIntensity, ExercisePurpose exercisePurpose) {
-        this.memberUuid = memberUuid;
+    public Exercise(String exerciseType, float targetWeight, float exerciseFrequency, ExerciseIntensity exerciseIntensity, ExercisePurpose exercisePurpose) {
         this.exerciseType = exerciseType;
         this.targetWeight = targetWeight;
         this.exerciseFrequency = exerciseFrequency;
@@ -76,5 +54,10 @@ public class Exercise extends BaseEntity {
         this.exerciseFrequency = exerciseFrequency;
         this.exerciseIntensity = exerciseIntensity;
         this.exercisePurpose = exercisePurpose;
+    }
+
+    // Set the member for the exercise
+    public void setMember(Member member) {
+        this.member = member;
     }
 }

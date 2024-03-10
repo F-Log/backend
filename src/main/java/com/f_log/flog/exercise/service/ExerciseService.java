@@ -10,7 +10,6 @@ import com.f_log.flog.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -42,7 +41,8 @@ public class ExerciseService {
         if (exerciseRepository.findByMemberUuidAndIsDeletedFalse(memberUuid).isPresent()) {
             throw new IllegalStateException("Exercise already exists for this member.");
         }
-        Exercise newExercise = exerciseMapper.toEntity(newExerciseDto, memberUuid);
+        Exercise newExercise = exerciseMapper.toEntity(newExerciseDto);
+        newExercise.setMember(member); // Set the member for the exercise
         Exercise savedExercise = exerciseRepository.save(newExercise);
 
         // Update Member's exercise field to reference the newly created Exercise entity

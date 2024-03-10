@@ -5,28 +5,24 @@ import com.f_log.flog.inbodyfeedback.domain.InbodyFeedback;
 import com.f_log.flog.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 public class Inbody extends BaseEntity {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "inbody_id")
-//    private Long id;
+
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name="uuid2", strategy = "uuid2")
     @Column(name = "inbody_uuid", updatable = false, nullable = false, columnDefinition = "BINARY(16)")
     private UUID inbodyUuid;
 
-    @Column(name = "member_uuid", columnDefinition = "BINARY(16)")
-    private UUID memberUuid;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_uuid")
     private Member member;
 
     @OneToOne(mappedBy = "inbody")
@@ -53,8 +49,8 @@ public class Inbody extends BaseEntity {
     public Inbody() {
     }
 
-    public Inbody(UUID memberUuid, float bodyWeight, float height, float muscleMass, float bodyFatPercentage, float fatMass, float basalMetabolicRate) {
-        this.memberUuid = memberUuid;
+    public Inbody(Member member, float bodyWeight, float height, float muscleMass, float bodyFatPercentage, float fatMass, float basalMetabolicRate) {
+        this.member = member;
         this.bodyWeight = bodyWeight;
         this.height = height;
         this.muscleMass = muscleMass;
