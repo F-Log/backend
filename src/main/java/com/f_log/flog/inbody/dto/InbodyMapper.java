@@ -13,6 +13,7 @@ public class InbodyMapper {
                 inbody.getBodyWeight(),
                 inbody.getHeight(),
                 inbody.getMuscleMass(),
+                inbody.getFatFreeMass(),
                 inbody.getBodyFatPercentage(),
                 inbody.getFatMass(),
                 inbody.getBasalMetabolicRate(),
@@ -27,6 +28,7 @@ public class InbodyMapper {
                 requestDto.getBodyWeight(),
                 requestDto.getHeight(),
                 requestDto.getMuscleMass(),
+                requestDto.getFatFreeMass(),
                 requestDto.getBodyFatPercentage(),
                 requestDto.getFatMass(),
                 requestDto.getBasalMetabolicRate()
