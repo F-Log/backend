@@ -37,6 +37,9 @@ public class Inbody extends BaseEntity {
     @Column(name = "muscle_mass")
     private float muscleMass;
 
+    @Column(name = "fat_free_mass")
+    private float fatFreeMass;
+
     @Column(name = "body_fat_percentage")
     private float bodyFatPercentage;
 
@@ -54,6 +57,7 @@ public class Inbody extends BaseEntity {
         this.bodyWeight = bodyWeight;
         this.height = height;
         this.muscleMass = muscleMass;
+        this.fatFreeMass = fatFreeMass;
         this.bodyFatPercentage = bodyFatPercentage;
         this.fatMass = fatMass;
         this.basalMetabolicRate = basalMetabolicRate;

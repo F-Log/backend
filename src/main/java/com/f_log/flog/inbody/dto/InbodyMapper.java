@@ -17,6 +17,7 @@ public class InbodyMapper {
                 inbody.getBodyWeight(),
                 inbody.getHeight(),
                 inbody.getMuscleMass(),
+                inbody.getFatFreeMass(),
                 inbody.getBodyFatPercentage(),
                 inbody.getFatMass(),
                 inbody.getBasalMetabolicRate(),
