@@ -3,7 +3,6 @@ package com.f_log.flog.member.domain;
 import com.f_log.flog.allergy.domain.Allergy;
 import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.exercise.domain.Exercise;
-import com.f_log.flog.exercise.domain.ExerciseIntensity;
 import com.f_log.flog.global.domain.BaseEntity;
 import com.f_log.flog.healthinformation.domain.HealthInformation;
 import com.f_log.flog.inbody.domain.Inbody;
@@ -61,6 +60,10 @@ public class Member extends BaseEntity {
     // diet와의 1:N 관계
     @OneToMany(mappedBy = "member")
     private List<Diet> diets = new ArrayList<>();
+
+    public Member(UUID uuid) {
+        this.uuid = uuid;
+    }
 
     @Builder
     public Member(String loginId, String password, String name, Gender gender, int age) {

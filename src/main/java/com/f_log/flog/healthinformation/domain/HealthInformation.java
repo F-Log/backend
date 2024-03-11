@@ -23,9 +23,6 @@ public class HealthInformation extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private DailyActivity dailyActivity;
 
-    @Column(name = "member_uuid")
-    private UUID memberUuid;
-
     /**
      * DailyActivity를 업데이트하는 메서드.
      *
@@ -42,8 +39,5 @@ public class HealthInformation extends BaseEntity {
      */
     public void setMember(Member member) {
         this.member = member;
-        if (member != null) {
-            this.memberUuid = member.getUuid();
-        }
     }
 }
