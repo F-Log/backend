@@ -1,5 +1,6 @@
 package com.f_log.flog.member.service;
 
+import com.f_log.flog.global.exception.MemberNotFoundException;
 import com.f_log.flog.member.domain.Member;
 import com.f_log.flog.member.dto.MemberMapper;
 import com.f_log.flog.member.dto.MemberRequestDto;
@@ -37,7 +38,7 @@ public class MemberService {
         if (member != null) {
             return memberMapper.toDto(member);
         } else {
-            return null;
+            throw new MemberNotFoundException("Member not found with UUID: " + uuid);
         }
     }
 

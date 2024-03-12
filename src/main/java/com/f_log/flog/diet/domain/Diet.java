@@ -123,4 +123,36 @@ public class Diet extends BaseEntity {
         this.mealType = mealType;
     }
 
+    public void addNutrients(double carbohydrate, double protein, double fat, double sodium, double cholesterol, double sugars, double calories) {
+        this.totalCarbohydrate += carbohydrate;
+        this.totalProtein += protein;
+        this.totalFat += fat;
+        this.totalSodium += sodium;
+        this.totalCholesterol += cholesterol;
+        this.totalSugars += sugars;
+        this.totalCalories += calories;
+    }
+
+    public void subtractNutrients(double carbohydrate, double protein, double fat, double sodium, double cholesterol, double sugars, double calories) {
+        this.totalCarbohydrate -= carbohydrate;
+        this.totalProtein -= protein;
+        this.totalFat -= fat;
+        this.totalSodium -= sodium;
+        this.totalCholesterol -= cholesterol;
+        this.totalSugars -= sugars;
+        this.totalCalories -= calories;
+    }
+
+    public void removeDietFood(DietFood dietFood) {
+        this.dietFoods.remove(dietFood);
+        subtractNutrients(
+                dietFood.getFood().getCarbohydrate() * dietFood.getQuantity(),
+                dietFood.getFood().getProtein() * dietFood.getQuantity(),
+                dietFood.getFood().getFat() * dietFood.getQuantity(),
+                dietFood.getFood().getSodium() * dietFood.getQuantity(),
+                dietFood.getFood().getCholesterol() * dietFood.getQuantity(),
+                dietFood.getFood().getSugars() * dietFood.getQuantity(),
+                dietFood.getFood().getCalories() * dietFood.getQuantity()
+        );
+    }
 }

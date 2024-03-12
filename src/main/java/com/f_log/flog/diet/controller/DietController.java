@@ -1,9 +1,6 @@
 package com.f_log.flog.diet.controller;
 
-import com.f_log.flog.diet.dto.CreateDietRequest;
-import com.f_log.flog.diet.dto.DailyIntakeDto;
-import com.f_log.flog.diet.dto.DietDto;
-import com.f_log.flog.diet.dto.UpdateDietRequest;
+import com.f_log.flog.diet.dto.*;
 import com.f_log.flog.diet.service.DietService;
 import com.f_log.flog.member.dto.MemberResponseDto;
 import com.f_log.flog.member.service.MemberService;
@@ -53,5 +50,11 @@ public class DietController {
 
         DailyIntakeDto dailyIntake = dietService.getTotalIntakeForDay(date, memberDto);
         return ResponseEntity.ok(dailyIntake);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<DietDto> registerDiet(@RequestBody RegisterDietRequest request) {
+        DietDto dietDto = dietService.registerDiet(request);
+        return new ResponseEntity<>(dietDto, HttpStatus.CREATED);
     }
 }

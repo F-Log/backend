@@ -112,4 +112,30 @@ public class DietService {
 
         return dailyIntake;
     }
+
+    /**
+     * 사용자가 최초 Diet를 등록하고자 하는 경우 호출되는 메서드
+     * @param RegisterDietRequest
+     * @return DietDto
+     */
+    @Transactional
+    public DietDto registerDiet(RegisterDietRequest request) {
+        Member member = memberRepository.findByUuidAndIsDeletedFalse(request.getMemberUuid());
+
+        Diet diet = Diet.builder()
+                .member(member)
+                .totalCarbohydrate(0)
+                .totalProtein(0)
+                .totalFat(0)
+                .totalSodium(0)
+                .totalCholesterol(0)
+                .totalSugars(0)
+                .totalCalories(0)
+                .mealType(request.getMealType())
+                .mealDate(request.getMealDate())
+                .build();
+
+        dietRepository.save(diet);
+        return dietMapper.toDto(diet);
+    }
 }
