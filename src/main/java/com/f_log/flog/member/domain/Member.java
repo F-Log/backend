@@ -61,6 +61,10 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member")
     private List<Diet> diets = new ArrayList<>();
 
+    public Member(UUID uuid) {
+        this.uuid = uuid;
+    }
+
     @Builder
     public Member(String loginId, String password, String name, Gender gender, int age) {
         this.loginId = loginId;
