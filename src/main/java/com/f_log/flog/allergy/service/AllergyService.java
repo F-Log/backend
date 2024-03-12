@@ -5,13 +5,16 @@ import com.f_log.flog.allergy.dto.AllergyDto;
 import com.f_log.flog.allergy.dto.AllergyMapper;
 import com.f_log.flog.allergy.dto.AllergyRequest;
 import com.f_log.flog.allergy.repository.AllergyRepository;
+import com.f_log.flog.global.exception.MemberNotFoundException;
 import com.f_log.flog.member.domain.Member;
 import com.f_log.flog.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -57,6 +60,18 @@ public class AllergyService {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public List<AllergyDto> findAllergiesByMemberUuid(UUID memberUuid) {
+        Member member = memberRepository.findByUuidAndIsDeletedFalse(memberUuid);
+        if (member != null) {
+            List<Allergy> allergies = member.getAllergies();
+            return allergies.stream()
+                    .map(allergyMapper::toDto)
+                    .collect(Collectors.toList());
+        } else {
+            throw new MemberNotFoundException("Member not found with UUID: " + memberUuid);
         }
     }
 
