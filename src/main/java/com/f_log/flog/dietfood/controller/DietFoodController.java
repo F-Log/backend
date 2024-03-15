@@ -4,11 +4,12 @@ import com.f_log.flog.dietfood.dto.CreateDietFoodRequest;
 import com.f_log.flog.dietfood.dto.DietFoodResponseDto;
 import com.f_log.flog.dietfood.dto.UpdateDietFoodRequest;
 import com.f_log.flog.dietfood.service.DietFoodService;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/dietfoods")

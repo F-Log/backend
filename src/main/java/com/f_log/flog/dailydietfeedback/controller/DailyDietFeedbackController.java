@@ -3,11 +3,12 @@ package com.f_log.flog.dailydietfeedback.controller;
 import com.f_log.flog.dailydietfeedback.dto.DailyDietFeedbackDto;
 import com.f_log.flog.dailydietfeedback.dto.DailyDietFeedbackRequest;
 import com.f_log.flog.dailydietfeedback.service.DailyDietFeedbackService;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/daily-diet-feedback")

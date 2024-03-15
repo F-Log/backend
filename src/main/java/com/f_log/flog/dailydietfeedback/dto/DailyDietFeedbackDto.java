@@ -1,8 +1,9 @@
 package com.f_log.flog.dailydietfeedback.dto;
 
-import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Getter
 @Builder

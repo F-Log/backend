@@ -1,11 +1,11 @@
 package com.f_log.flog.dailydietfeedback.service;
 
-import com.f_log.flog.diet.repository.DietRepository;
 import com.f_log.flog.dailydietfeedback.domain.DailyDietFeedback;
 import com.f_log.flog.dailydietfeedback.dto.DailyDietFeedbackDto;
 import com.f_log.flog.dailydietfeedback.dto.DailyDietFeedbackMapper;
 import com.f_log.flog.dailydietfeedback.dto.DailyDietFeedbackRequest;
 import com.f_log.flog.dailydietfeedback.repository.DailyDietFeedbackRepository;
+import com.f_log.flog.diet.repository.DietRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

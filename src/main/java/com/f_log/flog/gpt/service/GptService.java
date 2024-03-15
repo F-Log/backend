@@ -1,9 +1,9 @@
 package com.f_log.flog.gpt.service;
 
 import com.f_log.flog.allergy.dto.AllergyDto;
+import com.f_log.flog.dailydietfeedback.dto.DailyDietFeedbackDto;
 import com.f_log.flog.diet.dto.DailyIntakeDto;
 import com.f_log.flog.diet.dto.DietDto;
-import com.f_log.flog.dailydietfeedback.dto.DailyDietFeedbackDto;
 import com.f_log.flog.dietfeedback.dto.DietFeedbackDto;
 import com.f_log.flog.dietfood.dto.DietFoodResponseDto;
 import com.f_log.flog.exercise.dto.ExerciseResponseDto;

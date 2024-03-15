@@ -1,9 +1,9 @@
 package com.f_log.flog.dietfood.dto;
 
-import java.util.UUID;
-
 import lombok.Data;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Data
 @Getter
