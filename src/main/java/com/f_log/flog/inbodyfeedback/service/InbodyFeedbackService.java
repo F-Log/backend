@@ -33,7 +33,7 @@ public class InbodyFeedbackService {
 
             if (!feedbackExists) {
                 // 새로운 InbodyFeedback 생성 및 저장
-                InbodyFeedback inbodyFeedback = new InbodyFeedback(requestDto.getInbodyFeedback(), inbody);
+                InbodyFeedback inbodyFeedback = new InbodyFeedback(requestDto.getContent(), inbody);
                 return inbodyFeedbackRepository.save(inbodyFeedback);
             } else {
                 throw new RuntimeException("InbodyFeedback for Inbody with UUID " + inbodyUuid + " already exists.");
@@ -46,7 +46,7 @@ public class InbodyFeedbackService {
     @Transactional
     public InbodyFeedback updateInbodyFeedback(UUID feedbackUuid, InbodyFeedbackRequestDto requestDto) {
         InbodyFeedback inbodyFeedback = getInbodyFeedback(feedbackUuid);
-        InbodyFeedback updatedInbodyFeedback = new InbodyFeedback(requestDto.getInbodyFeedback(), inbodyFeedback.getInbody());
+        InbodyFeedback updatedInbodyFeedback = new InbodyFeedback(requestDto.getContent(), inbodyFeedback.getInbody());
         updatedInbodyFeedback.setId(inbodyFeedback.getUuid());
         return inbodyFeedbackRepository.save(updatedInbodyFeedback);
     }

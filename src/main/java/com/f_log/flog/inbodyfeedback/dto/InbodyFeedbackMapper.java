@@ -15,6 +15,6 @@ public class InbodyFeedbackMapper {
     }
 
     public InbodyFeedback toEntity(InbodyFeedbackRequestDto requestDto, Inbody inbody) {
-        return new InbodyFeedback(requestDto.getInbodyFeedback(), inbody);
+        return new InbodyFeedback(requestDto.getContent(), inbody);
     }
 }
