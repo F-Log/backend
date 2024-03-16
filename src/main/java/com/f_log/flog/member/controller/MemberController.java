@@ -1,8 +1,10 @@
 package com.f_log.flog.member.controller;
 
+import com.f_log.flog.member.dto.MemberLoginResponseDto;
 import com.f_log.flog.member.dto.MemberRequestDto;
 import com.f_log.flog.member.dto.MemberResponseDto;
 import com.f_log.flog.member.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,13 @@ public class MemberController {
         UUID uuid = memberService.saveMember(memberRequestDto);
         MemberResponseDto memberResponseDto = memberService.getMemberByUuid(uuid);
         return new ResponseEntity<>(memberResponseDto, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<MemberLoginResponseDto> login(@RequestBody MemberRequestDto memberRequestDto, HttpSession session) {
+        MemberLoginResponseDto memberLoginResponseDto = memberService.login(
+                memberRequestDto.getLoginId(), memberRequestDto.getPassword(), session);
+        return ResponseEntity.ok(memberLoginResponseDto);
     }
 
     @GetMapping("/{uuid}")
