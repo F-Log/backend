@@ -3,19 +3,14 @@ package com.f_log.flog.dietfood.domain;
 import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.food.domain.Food;
 import com.f_log.flog.global.domain.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import java.util.UUID;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -36,20 +31,23 @@ public class DietFood extends BaseEntity {
     @JoinColumn(name = "food_uuid")
     private Food food;
 
-    private int quantity; // 수량
+    private String foodName;
+
+    private float quantity; // 수량
 
     private String notes; // 비고
 
     @Builder
-    public DietFood(Diet diet, Food food, int quantity, String notes) {
+    public DietFood(Diet diet, Food food, float quantity, String foodName, String notes) {
         this.diet = diet;
         this.food = food;
         this.quantity = quantity;
+        this.foodName = foodName;
         this.notes = notes;
     }
 
     // 수량 업데이트 메소드
-    public void updateQuantity(int quantity) {
+    public void updateQuantity(float quantity) {
         this.quantity = quantity;
     }
 

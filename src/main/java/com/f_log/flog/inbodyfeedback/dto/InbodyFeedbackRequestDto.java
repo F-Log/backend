@@ -9,18 +9,18 @@ import java.util.UUID;
 @NoArgsConstructor
 public class InbodyFeedbackRequestDto {
     private UUID inbodyUuid;
-    private String inbodyFeedback;
+    private String content;
 
-    public InbodyFeedbackRequestDto(String inbodyFeedback) {
-        this.inbodyFeedback = inbodyFeedback;
+    public InbodyFeedbackRequestDto(String content) {
+        this.content = content;
     }
 
-    public String getInbodyFeedback() {
-        return inbodyFeedback;
+    public String getContent() {
+        return content;
     }
 
-    public void setInbodyFeedback(String inbodyFeedback) {
-        this.inbodyFeedback = inbodyFeedback;
+    public void setContent(String content) {
+        this.content = content;
     }
 }
 

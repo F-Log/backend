@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -56,5 +57,16 @@ public class AllergyController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/{memberUuid}")
+    public ResponseEntity<List<AllergyDto>> getAllergiesByMemberUuid(@PathVariable UUID memberUuid) {
+        List<AllergyDto> allergies = allergyService.findAllergiesByMemberUuid(memberUuid);
+        if (allergies != null && !allergies.isEmpty()) {
+            return ResponseEntity.ok(allergies);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }

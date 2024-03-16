@@ -1,6 +1,7 @@
 package com.f_log.flog.healthinformation.domain;
 
 public enum DailyActivity {
+    NO_INFORMATION("활동량 정보 미정"),
     NO_ACTIVITY("활동이 적거나 운동을 안하는 경우 = 기초대사량 x 0.2kcal"),
     LIGHT_ACTIVITY("가벼운 활동 및 운동을 하는 경우(1~3일/1주) = 기초대사량 x 0.375kcal"),
     MODERATE_ACTIVITY("보통의 활동 및 운동을 하는 경우(3~5일/1주) = 기초대사량 x 0.555kcal"),

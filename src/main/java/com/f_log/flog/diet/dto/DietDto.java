@@ -1,9 +1,12 @@
 package com.f_log.flog.diet.dto;
 
 import com.f_log.flog.diet.domain.MealType;
+import com.f_log.flog.dietfood.dto.DietFoodResponseDto;
 import lombok.Builder;
 import lombok.Getter;
+
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -20,4 +23,5 @@ public class DietDto {
     private int totalCalories;
     private MealType mealType;
     private LocalDate mealDate;
+    private List<DietFoodResponseDto> dietFoods;
 }

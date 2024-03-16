@@ -23,7 +23,7 @@ public class DietFeedbackService {
 
     @Transactional
     public DietFeedbackDto createDietFeedback(DietFeedbackRequest dietFeedbackRequest) {
-        DietFeedback dietFeedback = new DietFeedback(dietFeedbackRequest.getDietFeedback());
+        DietFeedback dietFeedback = new DietFeedback(dietFeedbackRequest.getContent());
         dietFeedbackRepository.save(dietFeedback);
         return dietFeedbackMapper.toDto(dietFeedback);
     }
@@ -32,7 +32,7 @@ public class DietFeedbackService {
     public boolean updateDietFeedback(UUID dietfeedbackUuid, DietFeedbackRequest dietFeedbackRequest) {
         DietFeedback dietFeedback = dietFeedbackRepository.findByDietfeedbackUuidAndIsDeletedFalse(dietfeedbackUuid).orElse(null);
         if (dietFeedback != null) {
-            dietFeedback.setDietFeedback(dietFeedbackRequest.getDietFeedback());
+            dietFeedback.setDietFeedback(dietFeedbackRequest.getContent());
             return true;
         } else {
             return false;
@@ -55,4 +55,10 @@ public class DietFeedbackService {
             return false;
         }
     }
+
+    private Diet getDietByUuid(UUID dietUuid) {
+        return dietRepository.findByDietUuidAndIsDeletedFalse(dietUuid)
+                .orElseThrow(() -> new EntityNotFoundException("Diet not found with uuid: " + dietUuid));
+    }
+
 }

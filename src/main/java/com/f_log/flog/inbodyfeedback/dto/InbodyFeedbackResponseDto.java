@@ -7,10 +7,10 @@ import java.util.UUID;
 @Getter
 public class InbodyFeedbackResponseDto {
     private final UUID uuid;
-    private final String inbodyFeedback;
+    private final String content;
 
-    public InbodyFeedbackResponseDto(UUID uuid, String inbodyFeedback) {
+    public InbodyFeedbackResponseDto(UUID uuid, String content) {
         this.uuid = uuid;
-        this.inbodyFeedback = inbodyFeedback;
+        this.content = content;
     }
 }

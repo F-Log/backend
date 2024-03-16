@@ -1,12 +1,6 @@
 package com.f_log.flog.csvdata.csvprocessing;
 
 import com.f_log.flog.csvdata.service.CsvImportService;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths; 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.io.FileSystemResource;
@@ -14,6 +8,13 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 // 데이터 삽입 원하지 않으면 @Component 주석처리로 CsvImportRunner 로드하지 않으므로 실행되지 않음.
 @Component
