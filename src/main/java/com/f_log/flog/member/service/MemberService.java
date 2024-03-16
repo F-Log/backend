@@ -2,11 +2,16 @@ package com.f_log.flog.member.service;
 
 import com.f_log.flog.global.exception.MemberNotFoundException;
 import com.f_log.flog.member.domain.Member;
+import com.f_log.flog.member.dto.MemberLoginResponseDto;
 import com.f_log.flog.member.dto.MemberMapper;
 import com.f_log.flog.member.dto.MemberRequestDto;
 import com.f_log.flog.member.dto.MemberResponseDto;
 import com.f_log.flog.member.repository.MemberRepository;
+import com.f_log.flog.member.util.PasswordUtils;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +32,32 @@ public class MemberService {
 
     @Transactional
     public UUID saveMember(MemberRequestDto memberRequestDto) {
-        Member member = memberMapper.fromDto(memberRequestDto);
-        memberRepository.save(member);
-        return member.getUuid();
+        try {
+            Member member = memberMapper.fromDto(memberRequestDto);
+            String hashedPassword = PasswordUtils.hashPassword(memberRequestDto.getPassword());
+            member.setPassword(hashedPassword);
+            memberRepository.save(member);
+            return member.getUuid();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error hashing password", e);
+        }
+    }
+
+    public MemberLoginResponseDto login(String loginId, String password, HttpSession session) {
+        Member member = memberRepository.findByLoginIdAndIsDeletedFalse(loginId)
+                .orElseThrow(() -> new MemberNotFoundException("Member not found with login ID: " + loginId));
+
+        try {
+            String hashedPassword = PasswordUtils.hashPassword(password);
+            if(hashedPassword.equals(member.getPassword())) {
+                session.setAttribute("member", member);
+                return new MemberLoginResponseDto(member.getUuid(), member.getLoginId());
+            } else {
+                throw new IllegalArgumentException("Invalid password");
+            }
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error hashing password", e);
+        }
     }
 
     @Transactional

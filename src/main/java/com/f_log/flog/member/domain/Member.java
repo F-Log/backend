@@ -45,7 +45,7 @@ public class Member extends BaseEntity {
     @Column(name = "login_id", length = 45)
     private String loginId;
 
-    @Column(name = "password", length = 45)
+    @Column(name = "password", length = 64)
     private String password;
 
     @Column(name = "name")
@@ -102,5 +102,9 @@ public class Member extends BaseEntity {
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
