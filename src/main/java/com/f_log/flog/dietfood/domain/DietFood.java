@@ -27,7 +27,7 @@ public class DietFood extends BaseEntity {
     @JoinColumn(name = "diet_uuid")
     private Diet diet;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_uuid")
     private Food food;
 
