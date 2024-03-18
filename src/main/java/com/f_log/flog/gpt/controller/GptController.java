@@ -11,6 +11,7 @@ import com.f_log.flog.exercise.dto.ExerciseResponseDto;
 import com.f_log.flog.exercise.service.ExerciseService;
 import com.f_log.flog.gpt.dto.CreateDailyDietFeedbackRequest;
 import com.f_log.flog.gpt.dto.CreateDietFeedbackRequest;
+import com.f_log.flog.gpt.dto.InbodyUuidRequest;
 import com.f_log.flog.gpt.service.GptService;
 import com.f_log.flog.healthinformation.dto.HealthInformationResponseDto;
 import com.f_log.flog.healthinformation.service.HealthInformationService;
@@ -66,7 +67,8 @@ public class GptController {
     }
 
     @PostMapping("/inbody-feedback")
-    public ResponseEntity<InbodyFeedbackResponseDto> createInbodyFeedback(@RequestBody UUID inbodyUuid) {
+    public ResponseEntity<InbodyFeedbackResponseDto> createInbodyFeedback(@RequestBody InbodyUuidRequest request) {
+        UUID inbodyUuid = request.getInbodyUuid();
         InbodyResponseDto foundInbody = inbodyService.getInbodyByUuid(inbodyUuid);
         MemberResponseDto foundMember = memberService.getMemberByUuid(foundInbody.getMemberUuid());
         ExerciseResponseDto foundExercise = exerciseService.getExercise(foundMember.getUuid());
