@@ -1,6 +1,7 @@
 package com.f_log.flog.diet.service;
 
 import com.f_log.flog.diet.domain.Diet;
+import com.f_log.flog.diet.domain.MealType;
 import com.f_log.flog.diet.dto.*;
 import com.f_log.flog.diet.repository.DietRepository;
 import com.f_log.flog.member.domain.Member;
@@ -29,8 +30,8 @@ public class DietService {
         return dietMapper.toDto(diet);
     }
 
-    public List<Diet> findDietsByDateAndMemberUuid(LocalDate date, UUID memberUuid) {
-        return dietRepository.findByMealDateAndMemberUuidAndIsDeletedFalse(date, memberUuid);
+    public List<Diet> findDietsByDateAndMemberUuidAndMealType(LocalDate date, UUID memberUuid, MealType mealType) {
+        return dietRepository.findByMealDateAndMemberUuidAndMealTypeAndIsDeletedFalse(date, memberUuid, mealType);
     }
 
     @Transactional

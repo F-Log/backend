@@ -1,6 +1,7 @@
 package com.f_log.flog.diet.controller;
 
 import com.f_log.flog.diet.domain.Diet;
+import com.f_log.flog.diet.domain.MealType;
 import com.f_log.flog.diet.dto.*;
 import com.f_log.flog.dietfood.dto.DietFoodResponseDto;
 
@@ -34,9 +35,10 @@ public class DietController {
     @GetMapping("/date-memberUuid")
     public ResponseEntity<List<DietDetailDto>> getDietDetails(
             @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-            @RequestParam("memberUuid") UUID memberUuid) {
+            @RequestParam("memberUuid") UUID memberUuid,
+            @RequestParam("mealType") MealType mealType) {
 
-        List<Diet> diets = dietService.findDietsByDateAndMemberUuid(date, memberUuid);
+        List<Diet> diets = dietService.findDietsByDateAndMemberUuidAndMealType(date, memberUuid, mealType);
 
         List<DietDetailDto> dietDetails = diets.stream().map(diet -> {
             List<DietFoodResponseDto> dietFoodDtos = diet.getDietFoods().stream()
