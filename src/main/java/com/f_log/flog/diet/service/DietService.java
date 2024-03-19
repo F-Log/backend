@@ -29,6 +29,10 @@ public class DietService {
         return dietMapper.toDto(diet);
     }
 
+    public List<Diet> findDietsByDateAndMemberUuid(LocalDate date, UUID memberUuid) {
+        return dietRepository.findByMealDateAndMemberUuidAndIsDeletedFalse(date, memberUuid);
+    }
+
     @Transactional
     public DietDto createDiet(CreateDietRequest request) {
         Member member = memberRepository.findByUuidAndIsDeletedFalse(request.getMemberUuid());

@@ -1,9 +1,14 @@
 package com.f_log.flog.diet.controller;
 
+import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.diet.dto.*;
+import com.f_log.flog.dietfood.dto.DietFoodResponseDto;
+
 import com.f_log.flog.diet.service.DietService;
 import com.f_log.flog.member.dto.MemberResponseDto;
 import com.f_log.flog.member.service.MemberService;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -25,6 +30,43 @@ public class DietController {
         DietDto dietDto = dietService.createDiet(request);
         return new ResponseEntity<>(dietDto, HttpStatus.CREATED);
     }
+
+    @GetMapping("/date-memberUuid")
+    public ResponseEntity<List<DietDetailDto>> getDietDetails(
+            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+            @RequestParam("memberUuid") UUID memberUuid) {
+
+        List<Diet> diets = dietService.findDietsByDateAndMemberUuid(date, memberUuid);
+
+        List<DietDetailDto> dietDetails = diets.stream().map(diet -> {
+            List<DietFoodResponseDto> dietFoodDtos = diet.getDietFoods().stream()
+                    .map(dietFood -> DietFoodResponseDto.builder()
+                            .dietfoodUuid(dietFood.getDietfoodUuid())
+                            .dietUuid(dietFood.getDiet().getDietUuid())
+                            .foodUuid(dietFood.getFood().getFoodUuid())
+                            .quantity(dietFood.getQuantity())
+                            .foodName(dietFood.getFoodName())
+                            .notes(dietFood.getNotes())
+                            .build())
+                    .collect(Collectors.toList());
+
+            // DietDetailDto를 빌드합니다.
+            return DietDetailDto.builder()
+                    .dietUuid(diet.getDietUuid())
+                    .memberUuid(diet.getMember().getUuid())
+                    .mealDate(diet.getMealDate())
+                    .mealType(diet.getMealType())
+                    .totalCalories(diet.getTotalCalories())
+                    .totalCarbohydrate(diet.getTotalCarbohydrate())
+                    .totalProtein(diet.getTotalProtein())
+                    .totalFat(diet.getTotalFat())
+                    .dietFoods(dietFoodDtos)
+                    .build();
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(dietDetails);
+    }
+
 
     @GetMapping("/{dietUuid}")
     public ResponseEntity<DietDto> getDiet(@PathVariable UUID dietUuid) {
