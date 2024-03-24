@@ -2,6 +2,10 @@ server:
   port: 8080 # 내장 톰캣 포트번호
 
 spring:
+  profiles:
+    include:
+      - aws
+      - credentials
   servlet:
     multipart:
       max-file-size: 30MB # max-file-size는 단일 파일의 최대 크기
