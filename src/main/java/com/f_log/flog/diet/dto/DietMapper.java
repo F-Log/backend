@@ -34,7 +34,7 @@ public class DietMapper {
                 .totalCalories(diet.getTotalCalories())
                 .mealDate(diet.getMealDate())
                 .mealType(diet.getMealType())
-                .dietFoods(dietFoodDtos) // Set the list of DietFoodDto objects
+                .dietFoods(dietFoodDtos)
                 .build();
     }
 }

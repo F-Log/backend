@@ -61,6 +61,9 @@ public class Diet extends BaseEntity {
     @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DietFood> dietFoods = new ArrayList<>();
 
+    @Column(name = "s3_url")
+    private String s3Url;
+
     // TODO: add Foods, implement total nutrient calculation method using foods
     @Builder
     public Diet(UUID dietUuid,
@@ -85,6 +88,10 @@ public class Diet extends BaseEntity {
         this.totalCalories = totalCalories;
         this.mealType = mealType;
         this.mealDate = mealDate;
+        this.s3Url = s3Url;
+    }
+    public void setS3Url(String s3Url) {
+        this.s3Url = s3Url;
     }
 
     public void updateTotalCarbohydrate(int totalCarbohydrate) {

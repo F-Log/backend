@@ -8,9 +8,14 @@ import com.f_log.flog.dietfood.dto.DietFoodResponseDto;
 import com.f_log.flog.diet.service.DietService;
 import com.f_log.flog.member.dto.MemberResponseDto;
 import com.f_log.flog.member.service.MemberService;
+import com.f_log.flog.s3bucket.dto.FileUploadResponse;
+import com.f_log.flog.s3bucket.service.S3Uploader;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +23,51 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/diet")
 @RequiredArgsConstructor
+@Slf4j
 public class DietController {
     private final DietService dietService;
     private final MemberService memberService;
+    private final S3Uploader s3Uploader;
 
     @PostMapping("/new")
     public ResponseEntity<DietDto> createDiet(@RequestBody CreateDietRequest request) {
         DietDto dietDto = dietService.createDiet(request);
         return new ResponseEntity<>(dietDto, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/imageUrl/{dietUuid}")
+    public ResponseEntity<?> uploadDietImage(
+            @PathVariable("dietUuid") UUID dietUuid,
+            @RequestParam("image") MultipartFile multipartFile) {
+        try {
+            FileUploadResponse response = s3Uploader.uploadFiles(dietUuid, multipartFile, "diet");
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            log.error("Error uploading file to S3", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (IOException e) {
+            log.error("IO Exception while uploading file to S3", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/updateImageUrl/{dietUuid}")
+    public ResponseEntity<?> updateDietImageUrl(@PathVariable UUID dietUuid, @RequestParam("image") MultipartFile image, @RequestParam("dirName") String dirName) {
+        try {
+            FileUploadResponse response = s3Uploader.updateDietImageUrl(dietUuid, image, dirName);
+            return ResponseEntity.ok(response);
+        } catch (IOException e) {
+            log.error("Error updating diet image URL: ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating diet image URL: " + e.getMessage());
+        } catch (IllegalStateException | IllegalArgumentException e) {
+            log.error("Error updating diet image URL: ", e);
+            return ResponseEntity.badRequest().body("Error updating diet image URL: " + e.getMessage());
+        }
     }
 
     @GetMapping("/date-memberUuid")
