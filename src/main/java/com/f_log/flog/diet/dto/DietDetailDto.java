@@ -16,9 +16,9 @@ public class DietDetailDto {
     private UUID memberUuid;
     private LocalDate mealDate;
     private MealType mealType;
-    private int totalCalories;
-    private int totalCarbohydrate;
-    private int totalProtein;
-    private int totalFat;
+    private double totalCalories;
+    private double totalCarbohydrate;
+    private double totalProtein;
+    private double totalFat;
     private List<DietFoodResponseDto> dietFoods;
 }
