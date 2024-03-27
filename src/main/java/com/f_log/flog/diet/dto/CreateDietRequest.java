@@ -11,13 +11,13 @@ import java.util.UUID;
 @Builder
 public class CreateDietRequest {
     private UUID memberUuid;
-    private int totalCarbohydrate;
-    private int totalProtein;
-    private int totalFat;
-    private int totalSodium;
-    private int totalCholesterol;
-    private int totalSugars;
-    private int totalCalories;
+    private double totalCarbohydrate;
+    private double totalProtein;
+    private double totalFat;
+    private double totalSodium;
+    private double totalCholesterol;
+    private double totalSugars;
+    private double totalCalories;
     private MealType mealType;
     private LocalDate mealDate;
 }

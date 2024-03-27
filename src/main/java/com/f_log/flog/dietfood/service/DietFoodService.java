@@ -1,6 +1,7 @@
 package com.f_log.flog.dietfood.service;
 
 import com.f_log.flog.diet.domain.Diet;
+import com.f_log.flog.dietfood.util.roundUtil;
 import com.f_log.flog.diet.repository.DietRepository;
 import com.f_log.flog.dietfood.domain.DietFood;
 import com.f_log.flog.dietfood.dto.CreateDietFoodRequest;
@@ -49,13 +50,13 @@ public class DietFoodService {
 
         // Calculate nutritional values based on quantity
         double quantity = createDietFoodRequest.getQuantity();
-        double newCarbohydrates = food.getCarbohydrate() * quantity;
-        double newProtein = food.getProtein() * quantity;
-        double newFat = food.getFat() * quantity;
-        double newSodium = food.getSodium() * quantity;
-        double newCholesterol = food.getCholesterol() * quantity;
-        double newSugars = food.getSugars() * quantity;
-        double newCalories = food.getCalories() * quantity;
+        double newCarbohydrates = roundUtil.roundToTwoDecimals(food.getCarbohydrate() * quantity);
+        double newProtein = roundUtil.roundToTwoDecimals(food.getProtein() * quantity);
+        double newFat = roundUtil.roundToTwoDecimals(food.getFat() * quantity);
+        double newSodium = roundUtil.roundToTwoDecimals(food.getSodium() * quantity);
+        double newCholesterol = roundUtil.roundToTwoDecimals(food.getCholesterol() * quantity);
+        double newSugars = roundUtil.roundToTwoDecimals(food.getSugars() * quantity);
+        double newCalories = roundUtil.roundToTwoDecimals(food.getCalories() * quantity);
 
         // Update Diet's nutritional information
         diet.addNutrients(newCarbohydrates, newProtein, newFat, newSodium, newCholesterol, newSugars, newCalories);
@@ -112,13 +113,13 @@ public class DietFoodService {
 
         // Calculate new nutritional values based on updated quantity
         double newQuantity = updateDietFoodRequest.getQuantity();
-        double newCarbohydrates = food.getCarbohydrate() * newQuantity;
-        double newProtein = food.getProtein() * newQuantity;
-        double newFat = food.getFat() * newQuantity;
-        double newSodium = food.getSodium() * newQuantity;
-        double newCholesterol = food.getCholesterol() * newQuantity;
-        double newSugars = food.getSugars() * newQuantity;
-        double newCalories = food.getCalories() * newQuantity;
+        double newCarbohydrates = roundUtil.roundToTwoDecimals(food.getCarbohydrate() * newQuantity);
+        double newProtein = roundUtil.roundToTwoDecimals(food.getProtein() * newQuantity);
+        double newFat = roundUtil.roundToTwoDecimals(food.getFat() * newQuantity);
+        double newSodium = roundUtil.roundToTwoDecimals(food.getSodium() * newQuantity);
+        double newCholesterol = roundUtil.roundToTwoDecimals(food.getCholesterol() * newQuantity);
+        double newSugars = roundUtil.roundToTwoDecimals(food.getSugars() * newQuantity);
+        double newCalories = roundUtil.roundToTwoDecimals(food.getCalories() * newQuantity);
 
         // Update Diet's nutritional information
         // Subtract old nutritional values

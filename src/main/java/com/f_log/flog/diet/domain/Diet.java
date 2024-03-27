@@ -27,25 +27,25 @@ public class Diet extends BaseEntity {
     private UUID dietUuid;
 
     @Column(name = "total_carbohydrate")
-    private int totalCarbohydrate;
+    private double totalCarbohydrate;
 
     @Column(name = "total_protein")
-    private int totalProtein;
+    private double totalProtein;
 
     @Column(name = "total_fat")
-    private int totalFat;
+    private double totalFat;
 
     @Column(name = "total_sodium")
-    private int totalSodium;
+    private double totalSodium;
 
     @Column(name = "total_cholesterol")
-    private int totalCholesterol;
+    private double totalCholesterol;
 
     @Column(name = "total_sugars")
-    private int totalSugars;
+    private double totalSugars;
 
     @Column(name = "total_calories")
-    private int totalCalories;
+    private double totalCalories;
 
     @Column(name = "meal_date")
     private LocalDate mealDate;
@@ -61,17 +61,20 @@ public class Diet extends BaseEntity {
     @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DietFood> dietFoods = new ArrayList<>();
 
+    @Column(name = "s3_url")
+    private String s3Url;
+
     // TODO: add Foods, implement total nutrient calculation method using foods
     @Builder
     public Diet(UUID dietUuid,
                 Member member,
-                int totalCarbohydrate,
-                int totalProtein,
-                int totalFat,
-                int totalSodium,
-                int totalCholesterol,
-                int totalSugars,
-                int totalCalories,
+                double totalCarbohydrate,
+                double totalProtein,
+                double totalFat,
+                double totalSodium,
+                double totalCholesterol,
+                double totalSugars,
+                double totalCalories,
                 MealType mealType,
                 LocalDate mealDate) {
         this.dietUuid = dietUuid;
@@ -85,33 +88,37 @@ public class Diet extends BaseEntity {
         this.totalCalories = totalCalories;
         this.mealType = mealType;
         this.mealDate = mealDate;
+        this.s3Url = s3Url;
+    }
+    public void setS3Url(String s3Url) {
+        this.s3Url = s3Url;
     }
 
-    public void updateTotalCarbohydrate(int totalCarbohydrate) {
+    public void updateTotalCarbohydrate(double totalCarbohydrate) {
         this.totalCarbohydrate = totalCarbohydrate;
     }
 
-    public void updateTotalProtein(int totalProtein) {
+    public void updateTotalProtein(double totalProtein) {
         this.totalProtein = totalProtein;
     }
 
-    public void updateTotalFat(int totalFat) {
+    public void updateTotalFat(double totalFat) {
         this.totalFat = totalFat;
     }
 
-    public void updateTotalSodium(int totalSodium) {
+    public void updateTotalSodium(double totalSodium) {
         this.totalSodium = totalSodium;
     }
 
-    public void updateTotalCholesterol(int totalCholesterol) {
+    public void updateTotalCholesterol(double totalCholesterol) {
         this.totalCholesterol = totalCholesterol;
     }
 
-    public void updateTotalSugars(int totalSugars) {
+    public void updateTotalSugars(double totalSugars) {
         this.totalSugars = totalSugars;
     }
 
-    public void updateTotalCalories(int totalCalories) {
+    public void updateTotalCalories(double totalCalories) {
         this.totalCalories = totalCalories;
     }
 
