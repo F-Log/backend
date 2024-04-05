@@ -10,6 +10,8 @@ import com.f_log.flog.member.domain.Member;
 import com.f_log.flog.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,6 +75,15 @@ public class AllergyService {
         } else {
             throw new MemberNotFoundException("Member not found with UUID: " + memberUuid);
         }
+    }
+
+    public AllergyDto findLatestAllergyByMemberUuid(UUID memberUuid) {
+        Page<Allergy> page = allergyRepository.findTopByMemberUuidOrderByCreatedAtDesc(memberUuid, PageRequest.of(0, 1));
+        return page.getContent()
+                .stream()
+                .findFirst()
+                .map(allergyMapper::toDto)
+                .orElseThrow(() -> new MemberNotFoundException("No allergies found for member with UUID: " + memberUuid));
     }
 
 }

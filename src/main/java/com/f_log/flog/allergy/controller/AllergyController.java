@@ -58,7 +58,7 @@ public class AllergyController {
         }
     }
 
-    @GetMapping("/{memberUuid}")
+    @GetMapping("/members/{memberUuid}")
     public ResponseEntity<List<AllergyDto>> getAllergiesByMemberUuid(@PathVariable UUID memberUuid) {
         List<AllergyDto> allergies = allergyService.findAllergiesByMemberUuid(memberUuid);
         if (allergies != null && !allergies.isEmpty()) {
@@ -68,5 +68,9 @@ public class AllergyController {
         }
     }
 
-
+    @GetMapping("/latest/{memberUuid}")
+    public ResponseEntity<AllergyDto> getLatestAllergyByMemberUuid(@PathVariable UUID memberUuid) {
+        AllergyDto latestAllergy = allergyService.findLatestAllergyByMemberUuid(memberUuid);
+        return ResponseEntity.ok(latestAllergy);
+    }
 }
