@@ -6,6 +6,7 @@ spring:
     include:
       - aws
       - credentials
+      - datasource
   servlet:
     multipart:
       max-file-size: 30MB # max-file-size는 단일 파일의 최대 크기

@@ -3,13 +3,13 @@ FROM openjdk:17-slim as build
 WORKDIR /app
 
 # build first
-COPY ../docker/backend/gradlew gradlew
-COPY ../docker/backend/build.gradle build.gradle
+COPY gradlew gradlew
+COPY build.gradle build.gradle
 
 # Grant execution rights on the Gradle Wrapper script
 RUN chmod +x ./gradlew
 
-COPY ../docker/backend .
+COPY . .
 
 # build the application without running tests and without starting the Gradle Daemon
 RUN ./gradlew build --no-daemon -x test
