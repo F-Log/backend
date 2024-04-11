@@ -68,6 +68,9 @@ public class GptService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(dataMap, headers);
+        // local에서 테스트할 시 주석 해제
+//        ResponseEntity<DietFeedbackDto> responseEntity = restTemplate.exchange(
+//                "http://127.0.0.1:5000/receive-diet", HttpMethod.POST, requestEntity, DietFeedbackDto.class);
         ResponseEntity<DietFeedbackDto> responseEntity = restTemplate.exchange(
                 "http://ai:5000/receive-diet", HttpMethod.POST, requestEntity, DietFeedbackDto.class);
         DietFeedbackDto body = responseEntity.getBody();
@@ -111,6 +114,8 @@ public class GptService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(dataMap, headers);
+        // local에서 테스트할 시 주석 해제
+//        ResponseEntity<DailyDietFeedbackDto> responseEntity = restTemplate.exchange("http://127.0.0.1:5000/receive-daily-diet", HttpMethod.POST, requestEntity, DailyDietFeedbackDto.class);
         ResponseEntity<DailyDietFeedbackDto> responseEntity = restTemplate.exchange("http://ai:5000/receive-daily-diet", HttpMethod.POST, requestEntity, DailyDietFeedbackDto.class);
         DailyDietFeedbackDto body = responseEntity.getBody();
         return new ResponseEntity<>(body, HttpStatus.CREATED);
@@ -144,6 +149,8 @@ public class GptService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(dataMap, headers);
+        // local에서 테스트할 시 주석 해제
+//        ResponseEntity<InbodyFeedbackResponseDto> responseEntity = restTemplate.exchange("http://127.0.0.1:5000/receive-inbody", HttpMethod.POST, requestEntity, InbodyFeedbackResponseDto.class);
         ResponseEntity<InbodyFeedbackResponseDto> responseEntity = restTemplate.exchange("http://ai:5000/receive-inbody", HttpMethod.POST, requestEntity, InbodyFeedbackResponseDto.class);
         InbodyFeedbackResponseDto body = responseEntity.getBody();
         return new ResponseEntity<>(body, HttpStatus.CREATED);
