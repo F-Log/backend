@@ -12,7 +12,6 @@ import com.f_log.flog.s3bucket.dto.FileUploadResponse;
 import com.f_log.flog.s3bucket.service.S3Uploader;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -110,7 +109,7 @@ public class DietController {
 
     @GetMapping("/{dietUuid}")
     public ResponseEntity<DietDto> getDiet(@PathVariable UUID dietUuid) {
-        DietDto dietDto = dietService.getDietByUuid(dietUuid);
+        DietDto dietDto = dietService.getDietDtoWithNonDeletedDietFoods(dietUuid);
         return ResponseEntity.ok(dietDto);
     }
 

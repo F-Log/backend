@@ -4,6 +4,7 @@ import com.f_log.flog.diet.domain.Diet;
 import com.f_log.flog.diet.domain.MealType;
 import com.f_log.flog.diet.dto.*;
 import com.f_log.flog.diet.repository.DietRepository;
+import com.f_log.flog.dietfood.dto.DietFoodResponseDto;
 import com.f_log.flog.member.domain.Member;
 import com.f_log.flog.member.dto.MemberResponseDto;
 import com.f_log.flog.member.repository.MemberRepository;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -143,4 +145,40 @@ public class DietService {
         dietRepository.save(diet);
         return dietMapper.toDto(diet);
     }
+
+    // DietFood 중에서 soft-delete되지 않은 것들로 구성
+    @Transactional(readOnly = true)
+    public DietDto getDietDtoWithNonDeletedDietFoods(UUID dietUuid) {
+        Diet diet = dietRepository.findByDietUuidAndIsDeletedFalse(dietUuid)
+                .orElseThrow(() -> new EntityNotFoundException("Diet not found"));
+
+        // get non-deleted DietFoods
+        List<DietFoodResponseDto> nonDeletedDietFoods = diet.getDietFoods().stream()
+                .filter(dietFood -> !dietFood.isDeleted())
+                .map(dietFood -> DietFoodResponseDto.builder()
+                        .dietfoodUuid(dietFood.getDietfoodUuid())
+                        .dietUuid(dietFood.getDiet().getDietUuid())
+                        .foodUuid(dietFood.getFood().getFoodUuid())
+                        .foodName(dietFood.getFoodName())
+                        .quantity(dietFood.getQuantity())
+                        .notes(dietFood.getNotes())
+                        .build())
+                .collect(Collectors.toList());
+
+        return DietDto.builder()
+                .dietUuid(diet.getDietUuid())
+                .memberUuid(diet.getMember().getUuid())
+                .totalCarbohydrate(diet.getTotalCarbohydrate())
+                .totalProtein(diet.getTotalProtein())
+                .totalFat(diet.getTotalFat())
+                .totalSodium(diet.getTotalSodium())
+                .totalCholesterol(diet.getTotalCholesterol())
+                .totalSugars(diet.getTotalSugars())
+                .totalCalories(diet.getTotalCalories())
+                .mealType(diet.getMealType())
+                .mealDate(diet.getMealDate())
+                .dietFoods(nonDeletedDietFoods)
+                .build();
+    }
+
 }

@@ -83,6 +83,7 @@ public class DietFoodService {
                 .dietUuid(dietFood.getDiet().getDietUuid())
                 .foodUuid(dietFood.getFood().getFoodUuid())
                 .quantity(dietFood.getQuantity())
+                .foodName(dietFood.getFoodName())
                 .notes(dietFood.getNotes())
                 .build();
     }
@@ -147,13 +148,11 @@ public class DietFoodService {
 
         // Soft delete the DietFood
         dietFood.setDeleted();
-        dietFoodRepository.save(dietFood); // Note: This assumes your repository respects the soft delete in fetch operations
 
         // Retrieve and update the associated Diet
         Diet diet = dietFood.getDiet();
-        if (diet != null) { // Check if DietFood had an associated Diet
-            diet.removeDietFood(dietFood); // This method updates the diet's nutritional info and removes the DietFood from the list
-            dietRepository.save(diet);
+        if (diet != null) {
+            diet.removeDietFood(dietFood);
         }
     }
 }

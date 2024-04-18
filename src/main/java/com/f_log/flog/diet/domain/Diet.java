@@ -151,7 +151,7 @@ public class Diet extends BaseEntity {
     }
 
     public void removeDietFood(DietFood dietFood) {
-        this.dietFoods.remove(dietFood);
+        dietFood.setDeleted();
         subtractNutrients(
                 dietFood.getFood().getCarbohydrate() * dietFood.getQuantity(),
                 dietFood.getFood().getProtein() * dietFood.getQuantity(),
@@ -162,4 +162,14 @@ public class Diet extends BaseEntity {
                 dietFood.getFood().getCalories() * dietFood.getQuantity()
         );
     }
+
+    // override BaseEntity's setDeleted
+    @Override
+    public void setDeleted(){
+        super.setDeleted();
+        for (DietFood dietFood : this.dietFoods) {
+            removeDietFood(dietFood);
+        }
+    }
+
 }
