@@ -35,6 +35,7 @@ public class DietMapper {
                 .mealDate(diet.getMealDate())
                 .mealType(diet.getMealType())
                 .dietFoods(dietFoodDtos)
+                .s3Url(diet.getS3Url())
                 .build();
     }
 }

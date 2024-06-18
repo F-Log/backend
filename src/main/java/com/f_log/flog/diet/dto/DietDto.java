@@ -24,4 +24,5 @@ public class DietDto {
     private MealType mealType;
     private LocalDate mealDate;
     private List<DietFoodResponseDto> dietFoods;
+    private String s3Url;
 }

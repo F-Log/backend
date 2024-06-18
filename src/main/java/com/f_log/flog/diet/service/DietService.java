@@ -178,6 +178,7 @@ public class DietService {
                 .mealType(diet.getMealType())
                 .mealDate(diet.getMealDate())
                 .dietFoods(nonDeletedDietFoods)
+                .s3Url(diet.getS3Url())
                 .build();
     }
 
