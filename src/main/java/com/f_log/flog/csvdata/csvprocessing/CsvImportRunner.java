@@ -28,9 +28,12 @@ public class CsvImportRunner implements ApplicationRunner {
     @Override
     @Async
     public void run(ApplicationArguments args) throws Exception {
-        String filePath = "com/f_log/flog/csvdata/nutritiondata.csv";
-        String absolutePath = Paths.get("src/main/java", filePath).toAbsolutePath().toString();
-        MultipartFile multipartFile = createMultipartFile(absolutePath);
+        // local에서 테스트할 시 주석 해제 및 하단 코드 주석처리
+//        String filePath = "com/f_log/flog/csvdata/nutritiondata.csv";
+//        String absolutePath = Paths.get("src/main/java", filePath).toAbsolutePath().toString();
+//        MultipartFile multipartFile = createMultipartFile(absolutePath);
+        String filePath = "/app/nutritiondata.csv";
+        MultipartFile multipartFile = createMultipartFile(filePath);
         csvImportService.importCsv(multipartFile);
     }
 
