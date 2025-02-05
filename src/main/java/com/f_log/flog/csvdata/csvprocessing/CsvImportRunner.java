@@ -17,7 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 // 데이터 삽입 원하지 않으면 @Component 주석처리로 CsvImportRunner 로드하지 않으므로 실행되지 않음.
-@Component
+//@Component
 public class CsvImportRunner implements ApplicationRunner {
     private final CsvImportService csvImportService;
 
